@@ -1,0 +1,17 @@
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.AssemblyInfo.cs
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\bin\Debug\net6.0\Music.Data.deps.json
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\bin\Debug\net6.0\Music.Data.runtimeconfig.json
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\bin\Debug\net6.0\Music.Data.dll
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\bin\Debug\net6.0\Music.Data.pdb
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\bin\Debug\net6.0\Music.Core.dll
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\bin\Debug\net6.0\Music.Core.pdb
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.csproj.CopyComplete
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.dll
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\refint\Music.Data.dll
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.pdb
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\Music.Data.genruntimeconfig.cache
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Data\obj\Debug\net6.0\ref\Music.Data.dll
