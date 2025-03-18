@@ -37,7 +37,35 @@ namespace Music.Service
             return await _userRepository.UpdateAsync(id,userMap);
         }
         public async Task DeleteAsync(int id) => await _userRepository.DeleteAsync(id);
+        public User Authenticate(string userName, string userPassword)
+        {
+            // אם שם המשתמש והסיסמה הם ruty → המשתמש מנהל
+            if (userName == "ruty" && userPassword == "rha1828!")
+            {
+                return new User
+                {
+                    Name = userName,
+                    Password = userPassword,
+                    Role = "manager"
+                };
+            }
+
+            // בדיקה אם המשתמש קיים במאגר הנתונים
+            var user = _userRepository.GetUserByCredentials(userName, userPassword);
+            if (user != null)
+            {
+                user.Role = "user"; // משתמש רגיל
+                return user;
+            }
+
+            // אם המשתמש לא נמצא במערכת → הוא "צופה"
+            return new User
+            {
+                Name = userName,
+                Password = userPassword,
+                Role = "viewer" // תפקיד "צופה"
+            };
+        }
+
     }
-
 }
-

@@ -14,5 +14,6 @@ namespace Music.Core.Repositories
         public  Task<User> AddAsync(User user);
         public Task<User> UpdateAsync(int id,User user);
         public  Task DeleteAsync(int id);
+        public User GetUserByCredentials(string userName, string userPassword);
     }
 }

@@ -3,6 +3,7 @@ using Music.Core.Models;
 using Music.Core.Services;
 using Music.Service;
 using Music.Core.Dtos;
+using Microsoft.AspNetCore.Authorization;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Music.Api.Controllers
@@ -17,7 +18,7 @@ namespace Music.Api.Controllers
             _userService = userService;
         }
 
-
+        [Authorize(policy: "AdminOnly")]
         [HttpGet]
         public async Task<IEnumerable<User>> GetAll()
         {
@@ -49,7 +50,7 @@ namespace Music.Api.Controllers
             }
             return Ok(u);
         }
-
+        [Authorize(policy: "EditorOrAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

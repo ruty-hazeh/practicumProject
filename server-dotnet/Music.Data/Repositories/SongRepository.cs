@@ -15,20 +15,20 @@ namespace Music.Data.Repositories
         private readonly DataContext _context;
         public SongRepository(DataContext context) { _context = context; }
 
-        public async Task<IEnumerable<Song>> GetAllAsync() => await _context.songs.Include(s=>s.Singer).Include(s=>s.Users).ToListAsync();
+        public async Task<IEnumerable<Song>> GetAllAsync() => await _context.Songs.Include(s=>s.Singer).Include(s=>s.Users).ToListAsync();
 
-        public async Task<Song> GetByIdAsync(int id) => await _context.songs.FindAsync(id);
+        public async Task<Song> GetByIdAsync(int id) => await _context.Songs.FindAsync(id);
 
-        public async Task<IEnumerable<Song>> GetSongsByGenreAsync(string genre) => await _context.songs.Where(s => s.Genre == genre).ToListAsync();
+        public async Task<IEnumerable<Song>> GetSongsByGenreAsync(string genre) => await _context.Songs.Where(s => s.Genre == genre).ToListAsync();
 
         public async Task<Song> AddAsync(Song song) {
-            await _context.songs.AddAsync(song); 
+            await _context.Songs.AddAsync(song); 
             await _context.SaveChangesAsync();
             return song;
         }
 
         public async Task<Song> UpdateAsync(int id,Song song) {
-            Song s = await _context.songs.SingleOrDefaultAsync(act => act.Id == id);
+            Song s = await _context.Songs.SingleOrDefaultAsync(act => act.Id == id);
             if (s == null) return null;
             else
             {
@@ -48,7 +48,7 @@ namespace Music.Data.Repositories
 
          }
 
-        public async Task DeleteAsync(int id) { var entity = await _context.songs.FindAsync(id); if (entity != null) { _context.songs.Remove(entity); await _context.SaveChangesAsync(); } }
+        public async Task DeleteAsync(int id) { var entity = await _context.Songs.FindAsync(id); if (entity != null) { _context.Songs.Remove(entity); await _context.SaveChangesAsync(); } }
     }
 }
 

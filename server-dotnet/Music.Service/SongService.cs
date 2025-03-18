@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Music.Core.Repositories;
 using Music.Data.Repositories;
-using Music.Core.Models;
 using Music.Core.Services;
 using Music.Core.Dtos;
 using System.Reflection;
