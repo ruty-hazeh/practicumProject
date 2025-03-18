@@ -1,6 +1,4 @@
-import { User, userReducer } from "./user";
-import { useReducer } from "react";
-import { UserContext } from "./userContext";
+
 import Login from "./Login";
 import { useState } from "react";
 import Username_avatar from "./UserAvatar";
@@ -8,15 +6,6 @@ import { Box, Button } from "@mui/material";
 
 const HomePage = () => {
 
-    const initialUser: User = {
-        id: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        address: '',
-        phone: ''
-    }
     const [isLogin, setIsLogin] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [type, setType] = useState('Login');

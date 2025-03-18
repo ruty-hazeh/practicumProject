@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router"
-import HomePage from "./components/HomePage"
 import AppLayout from "./components/AppLayout"
 
 
