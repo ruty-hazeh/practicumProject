@@ -3,6 +3,8 @@ using Music.Core.Models;
 using Music.Core.Services;
 using Music.Service;
 using Music.Core.Dtos;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Music.Api.Controllers
@@ -31,6 +33,8 @@ namespace Music.Api.Controllers
             if (song == null) return NotFound();
             return song;
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Song>> Add([FromBody] SongDTO song)
         {
@@ -38,7 +42,7 @@ namespace Music.Api.Controllers
             return Ok(s);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] SongDTO song)
         {
@@ -50,6 +54,7 @@ namespace Music.Api.Controllers
             return Ok(s);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
