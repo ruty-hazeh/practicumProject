@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import {  useRef } from "react";
 import { useContext } from "react";
 import { UserContext } from "./userContext";
 import { useState } from "react";
@@ -44,6 +44,7 @@ const Update = ({ setUpdate }: { setUpdate: Function }) => {
         }
         , { headers: { "user-id": context?.user.id, }, }
       )
+      console.log(res);
       context?.userDispatch({
         type: 'UPDATE',
         data: {

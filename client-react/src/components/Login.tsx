@@ -19,7 +19,7 @@ const Login = ({ successLogin, typeAction, close }: { successLogin: Function; ty
   const firstNameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(true)
-  const [userID, setUserId] = useState<string>();
+  const [, setUserId] = useState<string>();
   const handleSubmitLogin = async (e: FormEvent) => {
     e.preventDefault();
 
