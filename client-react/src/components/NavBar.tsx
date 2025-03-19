@@ -9,7 +9,7 @@ const NavBar = () => {
             <nav style={{ position: "fixed", top: "5px", right: "50px", display: "flex", gap: "30px" }}>
                 <Link to='/'>Home</Link>
                
-                {context?.user && context.user.id && (<Link to='/addRecipe'>Add-Recipe</Link>)}
+                {context?.user && context.user.id && (<Link to='/addRe    cipe'>Add-Recipe</Link>)}
             </nav>
         </>
     )
