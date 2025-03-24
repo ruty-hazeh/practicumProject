@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Music.Core.Models;
 using Music.Service;
-
+using Music.Core.Dtos;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Music.Api.Controllers
@@ -18,17 +18,30 @@ namespace Music.Api.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var token = _authService.GenerateJwtToken(model.Name, model.Password);
+            var token = await _authService.GenerateJwtToken(model.Name, model.Password);
 
-            if (string.IsNullOrEmpty(token))
+            if (token == null)
             {
-                return Unauthorized();
+                return Unauthorized(new { message = "Invalid credentials" });  // שיפור של הודעת השגיאה
             }
 
-            return Ok(new { Token = token });
+            return Ok(new { token });  // החזרת ה-token במקום במבנה עם שם המפתח Token
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserDTO userDto)
+        {
+            var result = await _authService.RegisterUserAsync(userDto);
+            if (!result.Success)
+            {
+                return BadRequest(new { message = result.Message });
+            }
+
+            var token = await _authService.GenerateJwtToken(userDto.Name, userDto.Password);
+
+            return Ok(new { message = "Registration successful!", token }); // החזרת token עם הודעת הצלחה
         }
     }
 }
-

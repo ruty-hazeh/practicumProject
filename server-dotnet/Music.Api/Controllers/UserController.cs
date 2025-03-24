@@ -13,12 +13,13 @@ namespace Music.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
-        [Authorize(policy: "AdminOnly")]
+        //[Authorize(policy: "AdminOnly")]
         [HttpGet]
         public async Task<IEnumerable<User>> GetAll()
         {
@@ -32,6 +33,7 @@ namespace Music.Api.Controllers
             if (user == null) return NotFound();
             return user;
         }
+
         [HttpPost]
         public async Task<ActionResult<Singer>> Add([FromBody] UserDTO user)
         {
@@ -57,5 +59,6 @@ namespace Music.Api.Controllers
             await _userService.DeleteAsync(id);
             return NoContent();
         }
+
     }
 }

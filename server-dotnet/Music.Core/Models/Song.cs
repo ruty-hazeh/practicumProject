@@ -15,8 +15,7 @@ namespace Music.Core.Models
         public TimeSpan Duration { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string SongUrl { get; set; }
-       
-
+      
         public int SingerId { get; set; }
         public Singer Singer { get; set; }
         public List<User> Users { get; set; }

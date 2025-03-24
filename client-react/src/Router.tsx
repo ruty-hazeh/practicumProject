@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router"
 import AppLayout from "./components/AppLayout"
+import SongsList from "./components/SongsList";
+import SongsPage from "./components/SongsPage";
 
 
 
@@ -11,7 +13,7 @@ export const myRouter = createBrowserRouter([
         errorElement: <>main error</>,
         children:
             [
-               
+                { path: 'songs', element: <SongsPage /> },  // מסך הבית
 
             ]
     }
