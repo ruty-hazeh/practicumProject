@@ -15,6 +15,6 @@ namespace Music.Core.Services
         public  Task<User> AddAsync(UserDTO user);
         public Task<User> UpdateAsync(int id,UserDTO user);
         public Task DeleteAsync(int id);
-        public User Authenticate(string userName, string userPassword);
+        public Task<User> Authenticate(string userName, string userPassword);
     }
 }

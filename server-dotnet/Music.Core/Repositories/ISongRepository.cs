@@ -11,6 +11,7 @@ namespace Music.Core.Repositories
     {
         public Task<IEnumerable<Song>> GetAllAsync();
         public Task<Song> GetByIdAsync(int id);
+        public Task<Song> GetByGenreAsync(string genre);
         public Task<Song> AddAsync(Song song);
         public Task<Song> UpdateAsync(int id,Song song);
         public Task DeleteAsync(int id);

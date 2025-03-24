@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Music.Core.Models;
 using Music.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Music.Core.Dtos;
+
 
 namespace Music.Service
 {
@@ -22,20 +25,20 @@ namespace Music.Service
             _userRepository = userRepository;
         }
 
-        public string GenerateJwtToken(string username, string password)
+        public async Task<string> GenerateJwtToken(string username, string password)
         {
             if (username == "ruty" && password == "rha1828!")
             {
                 return GenerateToken(username, new[] { "Admin" });
             }
 
-            var user = _userRepository.GetUserByCredentials(username, password);
+            var user = await _userRepository.GetUserByCredentials(username, password);
             if (user != null)
             {
                 return GenerateToken(username, new[] { "User" });
             }
 
-            return GenerateToken(username, new[] { "Viewer" });
+            return null;
         }
         private string GenerateToken(string username, string[] roles)
         {
@@ -63,6 +66,35 @@ namespace Music.Service
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
+
+
+
+
+        public async Task<(bool Success, string Message)> RegisterUserAsync(UserDTO userDto)
+        {
+            // בדיקה אם המשתמש כבר קיים
+            var existingUser = await _userRepository.GetUserByCredentials(userDto.Name, userDto.Password);
+            if (existingUser != null)
+            {
+                return (false, "User already exists.");
+            }
+
+            // יצירת משתמש חדש
+            var newUser = new User
+            {
+                Name = userDto.Name,
+                Password = userDto.Password, // הצפנת סיסמה
+                Email = userDto.Email,
+                Role = "User" // ברירת מחדל
+            };
+
+            await _userRepository.AddAsync(newUser);
+
+            return (true, "User registered successfully.");
+        }
+
 
     }
 }

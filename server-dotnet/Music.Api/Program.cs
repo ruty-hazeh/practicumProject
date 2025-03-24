@@ -116,6 +116,9 @@ app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.Use(async (context, next) =>
 {
     await next();
@@ -132,8 +135,7 @@ app.Use(async (context, next) =>
     }
 });
 
-app.UseAuthentication();
-app.UseAuthorization();
+
 
 app.MapControllers();
 

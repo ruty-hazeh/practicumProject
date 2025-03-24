@@ -33,6 +33,13 @@ namespace Music.Api.Controllers
             if (song == null) return NotFound();
             return song;
         }
+        [HttpGet("{genre}")]
+        public async Task<ActionResult<Song>> GetByGenre(string genre)
+        {
+            var song = await _songService.GetByGenreAsync(genre);
+            if (song == null) return NotFound();
+            return song;
+        }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]

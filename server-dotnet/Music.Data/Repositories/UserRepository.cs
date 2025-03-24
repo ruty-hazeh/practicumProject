@@ -51,9 +51,9 @@ namespace Music.Data.Repositories
         public async Task DeleteAsync(int id) { var entity = await _context.Users.FindAsync(id); if (entity != null) { _context.Users.Remove(entity); await _context.SaveChangesAsync(); } }
 
 
-        public User GetUserByCredentials(string userName, string userPassword)
+        public async Task<User> GetUserByCredentials(string userName, string userPassword)
         {
-            return _context.Users.FirstOrDefault(user => user.Name == userName && user.Password == userPassword);
+            return await _context.Users.FirstOrDefaultAsync(user => user.Name == userName && user.Password == userPassword);
         }
     }
 }

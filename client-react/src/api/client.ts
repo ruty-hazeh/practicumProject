@@ -57,6 +57,44 @@ export class ApiClient {
     }
 
     /**
+     * @param body (optional) 
+     * @return Success
+     */
+    register(body: UserDTO | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/api/Auth/register";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processRegister(_response);
+        });
+    }
+
+    protected processRegister(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    /**
      * @return Success
      */
     singerAll(): Promise<Singer[]> {
@@ -262,6 +300,46 @@ export class ApiClient {
     /**
      * @return Success
      */
+    singerGET2(name: string): Promise<Singer> {
+        let url_ = this.baseUrl + "/api/Singer/{name}";
+        if (name === undefined || name === null)
+            throw new Error("The parameter 'name' must be defined.");
+        url_ = url_.replace("{name}", encodeURIComponent("" + name));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processSingerGET2(_response);
+        });
+    }
+
+    protected processSingerGET2(response: Response): Promise<Singer> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Singer.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Singer>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
     songAll(): Promise<Song[]> {
         let url_ = this.baseUrl + "/api/Song";
         url_ = url_.replace(/[?&]$/, "");
@@ -460,6 +538,46 @@ export class ApiClient {
             });
         }
         return Promise.resolve<void>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    songGET2(genre: string): Promise<Song> {
+        let url_ = this.baseUrl + "/api/Song/{genre}";
+        if (genre === undefined || genre === null)
+            throw new Error("The parameter 'genre' must be defined.");
+        url_ = url_.replace("{genre}", encodeURIComponent("" + genre));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processSongGET2(_response);
+        });
+    }
+
+    protected processSongGET2(response: Response): Promise<Song> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Song.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Song>(null as any);
     }
 
     /**
@@ -1086,7 +1204,6 @@ export class UserDTO implements IUserDTO {
     name?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    role?: string | undefined;
 
     constructor(data?: IUserDTO) {
         if (data) {
@@ -1102,7 +1219,6 @@ export class UserDTO implements IUserDTO {
             this.name = _data["name"];
             this.email = _data["email"];
             this.password = _data["password"];
-            this.role = _data["role"];
         }
     }
 
@@ -1118,7 +1234,6 @@ export class UserDTO implements IUserDTO {
         data["name"] = this.name;
         data["email"] = this.email;
         data["password"] = this.password;
-        data["role"] = this.role;
         return data;
     }
 }
@@ -1127,7 +1242,6 @@ export interface IUserDTO {
     name?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    role?: string | undefined;
 }
 
 export class SwaggerException extends Error {

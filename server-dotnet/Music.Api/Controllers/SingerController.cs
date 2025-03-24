@@ -33,10 +33,19 @@ namespace Music.Api.Controllers
             return singer;
         }
 
+
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Singer>> GetByName(string name)
+        {
+            var singer = await _singerService.GetByNameAsync(name);
+            if (singer == null) return NotFound();
+            return singer;
+        }
+
         [HttpPost]
         public async Task<ActionResult<Singer>> Add([FromBody] SingerDTO singer)
         {
-        
+
 
             Singer s = await _singerService.AddAsync(singer);
             return Ok(s);
@@ -46,7 +55,7 @@ namespace Music.Api.Controllers
         public async Task<IActionResult> Update(int id, [FromBody] SingerDTO singer)
         {
 
-            Singer s = await _singerService.UpdateAsync(id,singer);
+            Singer s = await _singerService.UpdateAsync(id, singer);
             if (s == null)
             {
                 return NotFound();
