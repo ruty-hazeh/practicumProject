@@ -11,11 +11,10 @@
     <ProjectReference Include="..\Music.Data\Music.Data.csproj" />
   </ItemGroup>
 
-<<<<<<< HEAD
+
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.7.415.23" />
   </ItemGroup>
 
-=======
->>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
+
 </Project>
