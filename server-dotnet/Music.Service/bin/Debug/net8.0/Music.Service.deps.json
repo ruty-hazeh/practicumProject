@@ -8,7 +8,10 @@
     ".NETCoreApp,Version=v8.0": {
       "Music.Service/1.0.0": {
         "dependencies": {
+<<<<<<< HEAD
           "AWSSDK.S3": "3.7.415.23",
+=======
+>>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
           "Music.Core": "1.0.0",
           "Music.Data": "1.0.0"
         },
@@ -27,6 +30,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "AWSSDK.Core/3.7.402.24": {
         "runtime": {
           "lib/net8.0/AWSSDK.Core.dll": {
@@ -46,6 +50,8 @@
           }
         }
       },
+=======
+>>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
       "Azure.Core/1.38.0": {
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
@@ -637,6 +643,7 @@
       "path": "automapper/14.0.0",
       "hashPath": "automapper.14.0.0.nupkg.sha512"
     },
+<<<<<<< HEAD
     "AWSSDK.Core/3.7.402.24": {
       "type": "package",
       "serviceable": true,
@@ -651,6 +658,8 @@
       "path": "awssdk.s3/3.7.415.23",
       "hashPath": "awssdk.s3.3.7.415.23.nupkg.sha512"
     },
+=======
+>>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
     "Azure.Core/1.38.0": {
       "type": "package",
       "serviceable": true,

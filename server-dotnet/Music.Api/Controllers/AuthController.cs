@@ -17,6 +17,7 @@ namespace Music.Api.Controllers
             _authService = authService;
         }
 
+<<<<<<< HEAD
         //        [HttpPost("login")]
         //        public async Task<IActionResult> Login([FromBody] LoginModel model)
         //        {
@@ -63,16 +64,32 @@ namespace Music.Api.Controllers
             }
 
             return Ok(new { token });
+=======
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        {
+            var token = await _authService.GenerateJwtToken(model.Name, model.Password);
+
+            if (token == null)
+            {
+                return Unauthorized(new { message = "Invalid credentials" });  // שיפור של הודעת השגיאה
+            }
+
+            return Ok(new { token });  // החזרת ה-token במקום במבנה עם שם המפתח Token
+>>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserDTO userDto)
         {
+<<<<<<< HEAD
             if (userDto == null || string.IsNullOrWhiteSpace(userDto.Name) || string.IsNullOrWhiteSpace(userDto.Password) || string.IsNullOrWhiteSpace(userDto.Email))
             {
                 return BadRequest(new { message = "All fields are required" });
             }
 
+=======
+>>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
             var result = await _authService.RegisterUserAsync(userDto);
             if (!result.Success)
             {
@@ -81,7 +98,14 @@ namespace Music.Api.Controllers
 
             var token = await _authService.GenerateJwtToken(userDto.Name, userDto.Password);
 
+<<<<<<< HEAD
             return Ok(new { message = "Registration successful!", token });
         }
     }
 }
+=======
+            return Ok(new { message = "Registration successful!", token }); // החזרת token עם הודעת הצלחה
+        }
+    }
+}
+>>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2

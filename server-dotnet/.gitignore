@@ -1,22 +1,27 @@
-appsettings.json
-appsettings.Development.json
-appsettings.Production.json
-secrets.json
-
-# Folders
+# .NET
 bin/
 obj/
 *.pdb
 *.exe
 *.dll
 
-# Visual Studio files
-.vs/
+# User-specific files
 *.suo
 *.user
-*.csproj.user
+*.userosscache
 *.sln.docstates
-*.ide
+*.csproj.user
+
+# Visual Studio
+.vs/
+.idea/
+.vscode/
+
+# Secrets and configuration
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+secrets.json
 
 # NuGet
 packages/
@@ -30,4 +35,13 @@ logs/
 
 # Test results
 TestResults/
+
+# Node.js (if applicable)
 node_modules/
+
+# Temporary files
+*.tmp
+
+# Windows Installer files
+Thumbs.db
+Desktop.ini

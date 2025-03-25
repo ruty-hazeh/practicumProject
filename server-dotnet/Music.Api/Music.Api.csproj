@@ -8,7 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
+<<<<<<< HEAD
     <PackageReference Include="AWSSDK.S3" Version="3.7.415.23" />
+=======
+>>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.14">
       <PrivateAssets>all</PrivateAssets>
