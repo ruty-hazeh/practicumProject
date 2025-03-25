@@ -11,11 +11,11 @@ using Music.Data;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
-<<<<<<< HEAD
+
 using Amazon.S3;
 using Amazon;
-=======
->>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,11 +25,11 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         options.JsonSerializerOptions.WriteIndented = true;
     });
-<<<<<<< HEAD
+
 builder.Services.AddSingleton<S3Service>();
 builder.Services.AddSingleton<IAmazonS3>(new AmazonS3Client(RegionEndpoint.USEast1));
-=======
->>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
+
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
