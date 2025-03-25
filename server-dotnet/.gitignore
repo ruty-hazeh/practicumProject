@@ -1,17 +1,16 @@
-# 🔒 קבצי הגדרות עם מידע רגיש
 appsettings.json
 appsettings.Development.json
 appsettings.Production.json
 secrets.json
 
-# 🔧 קבצים שנוצרים ע"י קומפילציה
+# Folders
 bin/
 obj/
 *.pdb
 *.exe
 *.dll
 
-# 🛠️ קבצים של VS והגדרות משתמש מקומיות
+# Visual Studio files
 .vs/
 *.suo
 *.user
@@ -19,16 +18,16 @@ obj/
 *.sln.docstates
 *.ide
 
-# 📦 חבילות NuGet
+# NuGet
 packages/
 project.lock.json
 *.nupkg
 *.snupkg
 
-# 📝 קבצי לוגים
+# Logs
 *.log
 logs/
 
-# 🔍 קבצים נוספים שכדאי להימנע מהם
+# Test results
 TestResults/
 node_modules/
