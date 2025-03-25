@@ -7,6 +7,8 @@ C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\Music.Api.dll
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\Music.Api.pdb
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\AWSSDK.Core.dll
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\AWSSDK.S3.dll
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Api\bin\Debug\net8.0\Humanizer.dll
