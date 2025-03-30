@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router"
 import AppLayout from "./components/AppLayout"
-import SongsList from "./components/SongsList";
 import SongsPage from "./components/SongsPage";
 
 

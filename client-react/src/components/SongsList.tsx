@@ -62,7 +62,7 @@ const SongsList = ({ songs, onPlay }: { songs: Song[], onPlay: (url: string) => 
     // הפונקציה שתהיה אחראית להורדה בלבד של השיר
     const handleDownload = async (fileName: string) => {
         try {
-            const encodedFileName = encodeURIComponent(fileName);
+          
             setLoading(true);
             await apiClient.download(fileName);  // קורא לפונקציה שמורידה את השיר
         } catch (error) {
