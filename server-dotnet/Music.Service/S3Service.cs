@@ -7,19 +7,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-
-public class S3Service
+using Music.Core.Services;
+public class S3Service: IS3Service
 {
-    private readonly IAmazonS3 _s3Client;
+    private readonly AmazonS3Client _s3Client;
     private readonly string _bucketName;
 
-    public S3Service(IAmazonS3 s3Client, IConfiguration configuration)
+    public S3Service(IConfiguration configuration)
     {
-        _s3Client = s3Client;
         _bucketName = configuration["AWS:S3:BucketName"];
+        string accessKey = configuration["AWS:AccessKey"];
+        string secretKey = configuration["AWS:SecretKey"];
+        string region = configuration["AWS:Region"];
+
+        _s3Client = new AmazonS3Client(accessKey, secretKey, RegionEndpoint.GetBySystemName(region));
     }
 
-    // ✅ פונקציה להעלאת קובץ ל-S3
     public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
     {
         var request = new TransferUtilityUploadRequest
@@ -27,7 +30,7 @@ public class S3Service
             InputStream = fileStream,
             Key = fileName,
             BucketName = _bucketName,
-            CannedACL = S3CannedACL.Private // ✅ שמירה על פרטיות הקובץ افتراضي
+            CannedACL = S3CannedACL.PublicRead
         };
 
         var transferUtility = new TransferUtility(_s3Client);
@@ -36,7 +39,6 @@ public class S3Service
         return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
     }
 
-    // ✅ פונקציה להורדת קובץ מ-S3
     public async Task<Stream> DownloadFileAsync(string fileName)
     {
         var request = new GetObjectRequest
@@ -49,28 +51,6 @@ public class S3Service
         return response.ResponseStream;
     }
 
-
-    public async Task<bool> DeleteFileAsync(string fileName)
-    {
-        try
-        {
-            var request = new DeleteObjectRequest
-            {
-                BucketName = _bucketName,
-                Key = fileName
-            };
-
-            var response = await _s3Client.DeleteObjectAsync(request);
-            return response.HttpStatusCode == HttpStatusCode.NoContent; // בדוק אם המחיקה הצליחה
-        }
-        catch (Exception ex)
-        {
-            // אפשר ללוג את השגיאה כאן אם תרצה
-            return false;
-        }
-    }
-
-    // ✅ פונקציה לקבלת רשימת הקבצים ב-S3
     public async Task<List<string>> ListFilesAsync()
     {
         var request = new ListObjectsV2Request
@@ -88,4 +68,22 @@ public class S3Service
 
         return fileNames;
     }
+    public async Task<bool> DeleteFileAsync(string fileName)
+    {
+        try
+        {
+            var request = new DeleteObjectRequest
+            {
+                BucketName = _bucketName,
+                Key = fileName
+            };
+            var response = await _s3Client.DeleteObjectAsync(request);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
 }

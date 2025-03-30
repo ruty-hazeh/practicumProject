@@ -19,7 +19,7 @@ namespace Music.Data.Repositories
 
         public async Task<Singer> GetByIdAsync(int id) => await _context.Singers.FindAsync(id);
 
-        public async Task<Singer> GetByNameAsync(string name) => await _context.Singers.FirstOrDefaultAsync(s => s.Name == name);
+        public async Task<Singer> GetByNameAsync(string name) => await _context.Singers.FirstOrDefaultAsync(s => s.Name.ToLower() == name.ToLower().Trim());
 
         public async Task<Singer> AddAsync(Singer entity) {
 

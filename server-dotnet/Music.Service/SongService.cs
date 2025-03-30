@@ -29,6 +29,8 @@ namespace Music.Service
         public async Task<IEnumerable<Song>> GetAllAsync() => await _songRepository.GetAllAsync();
         public async Task<Song> GetByIdAsync(int id) => await _songRepository.GetByIdAsync(id);
         public async Task<Song> GetByGenreAsync(string genre) => await _songRepository.GetByGenreAsync(genre);
+        public async Task<Song> GetByNameAsync(string name)=> await _songRepository.GetByNameAsync(name);
+            
         public async Task<Song> AddAsync(SongDTO song)
         {
             var songMap = _mapper.Map<Song>(song);

@@ -1,23 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Threading.Tasks;
-
+using Music.Core.Services;
+using Amazon.S3;
+using Amazon.S3.Model;
+using Amazon.S3.Util;
+using Amazon.Runtime;
+using Amazon;
+using Amazon.S3.Transfer;
 [ApiController]
 [Route("api/s3")]
 public class S3Controller : ControllerBase
 {
-    private readonly S3Service _s3Service;
+    
 
-    public S3Controller(S3Service s3Service)
+
+    private readonly IS3Service _s3Service;
+    private readonly IAmazonS3 amazonS3Client;
+
+    public S3Controller(IS3Service s3Service)
     {
         _s3Service = s3Service;
     }
 
-    // ✅ API להעלאת קובץ
     [HttpPost("upload")]
-    [Consumes("multipart/form-data")]
-
-    public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
+    public async Task<IActionResult> UploadFile(IFormFile file)
     {
         if (file == null || file.Length == 0)
             return BadRequest("File is empty.");
@@ -28,33 +35,39 @@ public class S3Controller : ControllerBase
         return Ok(new { Url = url });
     }
 
+    //[HttpGet("download/{fileName}")]
+
+    //public async Task<IActionResult> DownloadFile(string fileName)
+    //{
+    //    var stream = await _s3Service.DownloadFileAsync(fileName);
+    //    return File(stream, "application/octet-stream", fileName);
+    //}
 
 
-
-    // ✅ API להורדת קובץ
     [HttpGet("download/{fileName}")]
     public async Task<IActionResult> DownloadFile(string fileName)
     {
         var stream = await _s3Service.DownloadFileAsync(fileName);
-        return File(stream, "application/octet-stream", fileName);
+        return File(stream, "audio/mpeg", fileName); // ⬅️ "audio/mpeg" מתאים לקובצי MP3
     }
 
-
-    [HttpDelete("delete/{fileName}")]
-    public async Task<IActionResult> DeleteFile(string fileName)
-    {
-        var success = await _s3Service.DeleteFileAsync(fileName);
-        if (!success)
-            return NotFound("File not found.");
-
-        return Ok("File deleted successfully.");
-    }
-
-    // ✅ API לקבלת רשימת קבצים
     [HttpGet("files")]
     public async Task<IActionResult> ListFiles()
     {
         var files = await _s3Service.ListFilesAsync();
         return Ok(files);
     }
+    [HttpDelete("delete/{fileName}")]
+    public async Task<IActionResult> DeleteFile(string fileName)
+    {
+        var success = await _s3Service.DeleteFileAsync(fileName);
+
+        if (!success)
+            return NotFound("File not found.");
+
+        return Ok("File deleted successfully.");
+    }
+
+
 }
+

@@ -26,17 +26,26 @@ namespace Music.Api.Controllers
             return await _songService.GetAllAsync();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("song/{id:int}")]
         public async Task<ActionResult<Song>> GetById(int id)
         {
             var song = await _songService.GetByIdAsync(id);
             if (song == null) return NotFound();
             return song;
         }
-        [HttpGet("{genre}")]
+        [HttpGet("song/{genre}")]
         public async Task<ActionResult<Song>> GetByGenre(string genre)
         {
             var song = await _songService.GetByGenreAsync(genre);
+            if (song == null) return NotFound();
+            return song;
+        }
+
+
+        [HttpGet("by-name/{name}")]
+        public async Task<ActionResult<Song>> GetByName(string name)
+        {
+            var song = await _songService.GetByNameAsync(name);
             if (song == null) return NotFound();
             return song;
         }

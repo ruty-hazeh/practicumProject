@@ -148,12 +148,9 @@ const Login = ({ successLogin, typeAction, close }: { successLogin: Function; ty
         registerModel.password = passwordRef.current?.value || "";
         registerModel.email = emailRef.current?.value || ""; // הוספת מייל
 
-<<<<<<< HEAD
 
         console.log("Sending request:", JSON.stringify(registerModel));
 
-=======
->>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
         res = await apiClient.register(registerModel);
         console.log("Response from server:", res);
 
@@ -170,10 +167,7 @@ const Login = ({ successLogin, typeAction, close }: { successLogin: Function; ty
         loginModel.name = nameRef.current?.value || "";
         loginModel.password = passwordRef.current?.value || "";
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 6c7abeb13d69ecc6d66b374575ad64ce3426adf2
         res = await apiClient.login(loginModel);
         console.log("Response from server:", res);
       }

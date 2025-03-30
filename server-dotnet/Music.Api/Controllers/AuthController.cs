@@ -18,35 +18,19 @@ namespace Music.Api.Controllers
         }
 
 
-        //        [HttpPost("login")]
-        //        public async Task<IActionResult> Login([FromBody] LoginModel model)
-        //        {
-        //            var token = await _authService.GenerateJwtToken(model.Name, model.Password);
+        //[HttpPost("login")]
+        //public async Task<IActionResult> Login([FromBody] LoginModel model)
+        //{
+        //    var token = await _authService.GenerateJwtToken(model.Name, model.Password);
 
-        //            if (token == null)
-        //            {
-        //                return Unauthorized(new { message = "Invalid credentials" });  // שיפור של הודעת השגיאה
-        //            }
-
-        //            return Ok(new { token });  // החזרת ה-token במקום במבנה עם שם המפתח Token
-        //        }
-
-        //        [HttpPost("register")]
-        //        public async Task<IActionResult> Register([FromBody] UserDTO userDto)
-        //        {
-        //            var result = await _authService.RegisterUserAsync(userDto);
-        //            if (!result.Success)
-        //            {
-        //                return BadRequest(new { message = result.Message });
-        //            }
-
-        //            var token = await _authService.GenerateJwtToken(userDto.Name, userDto.Password);
-
-        //            return Ok(new { message = "Registration successful!", token }); // החזרת token עם הודעת הצלחה
-        //        }
+        //    if (token == null)
+        //    {
+        //        return Unauthorized(new { message = "Invalid credentials" });  // שיפור של הודעת השגיאה
         //    }
-        //}
 
+        //    return Ok(new { token });  // החזרת ה-token במקום במבנה עם שם המפתח Token
+
+        //}
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -64,20 +48,8 @@ namespace Music.Api.Controllers
             }
 
             return Ok(new { token });
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
-        {
-            var token = await _authService.GenerateJwtToken(model.Name, model.Password);
-
-            if (token == null)
-            {
-                return Unauthorized(new { message = "Invalid credentials" });  // שיפור של הודעת השגיאה
-            }
-
-            return Ok(new { token });  // החזרת ה-token במקום במבנה עם שם המפתח Token
-
         }
+
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserDTO userDto)
@@ -103,8 +75,5 @@ namespace Music.Api.Controllers
     }
 }
 
-            return Ok(new { message = "Registration successful!", token }); // החזרת token עם הודעת הצלחה
-        }
-    }
-}
+
 

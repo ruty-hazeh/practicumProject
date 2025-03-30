@@ -11,10 +11,11 @@ using Music.Data;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
-
+using Amazon.Runtime;
 using Amazon.S3;
 using Amazon;
-
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Http.Features;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,14 +27,17 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
-builder.Services.AddSingleton<S3Service>();
-builder.Services.AddSingleton<IAmazonS3>(new AmazonS3Client(RegionEndpoint.USEast1));
+//builder.Services.AddSingleton<IAmazonS3>(new AmazonS3Client(RegionEndpoint.USEast1));
 
 
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    
+    
+     options.OperationFilter<FileUploadOperationFilter>();
+    
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Scheme = "Bearer",
@@ -60,6 +64,8 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -78,8 +84,36 @@ builder.Services.AddScoped<ISongRepository, SongRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddSingleton<IAmazonS3>(sp =>
+//{
+//    var config = sp.GetRequiredService<IConfiguration>();
+//    var awsAccessKeyId = config["AWS:AccessKeyId"];
+//    var awsSecretAccessKey = config["AWS:SecretAccessKey"];
+//    var region = RegionEndpoint.USEast1; 
+
+//    var credentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
+//    return new AmazonS3Client(credentials, region);
+//});
+
+
+builder.Services.AddSingleton<IAmazonS3>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var awsAccessKeyId = config["AWS:AccessKey"];
+    var awsSecretAccessKey = config["AWS:SecretKey"];
+    var region = RegionEndpoint.GetBySystemName(config["AWS:Region"]); // קבלת האזור מתוך הקונפיגורציה
+
+    var credentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
+    return new AmazonS3Client(credentials, region);
+});
+
 
 builder.Services.AddScoped<AuthService>();
+
+builder.Services.AddScoped<IS3Service, S3Service>();
+
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -110,11 +144,8 @@ builder.Services.AddAuthorization(options =>
 });
 
 
-builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
-
-
 
 if (app.Environment.IsDevelopment())
 {
@@ -144,6 +175,11 @@ app.Use(async (context, next) =>
         await context.Response.WriteAsync("{\"error\": \"You must be logged in to access this resource!\"}");
     }
 });
+//app.Use(async (context, next) =>
+//{
+//    context.Features.Get<IHttpMaxRequestBodySizeFeature>()!.MaxRequestBodySize = 50 * 1024 * 1024; // 50MB
+//    await next();
+//});
 
 
 

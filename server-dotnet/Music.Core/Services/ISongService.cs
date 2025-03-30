@@ -13,6 +13,7 @@ namespace Music.Core.Services
         public Task<IEnumerable<Song>> GetAllAsync();
         public Task<Song> GetByIdAsync(int id);
         public Task<Song> GetByGenreAsync(string genre);
+        public Task<Song> GetByNameAsync(string name);
 
         public Task<Song> AddAsync(SongDTO song);
         public  Task<Song> UpdateAsync(int id,SongDTO song);

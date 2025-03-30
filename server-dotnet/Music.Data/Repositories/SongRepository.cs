@@ -19,6 +19,7 @@ namespace Music.Data.Repositories
 
         public async Task<Song> GetByIdAsync(int id) => await _context.Songs.FindAsync(id);
         public async Task<Song> GetByGenreAsync(string genre) => await _context.Songs.FindAsync(genre);
+        public async Task<Song> GetByNameAsync(string name) => await _context.Songs.FirstOrDefaultAsync(s => s.Name == name);
 
         public async Task<IEnumerable<Song>> GetSongsByGenreAsync(string genre) => await _context.Songs.Where(s => s.Genre == genre).ToListAsync();
 
