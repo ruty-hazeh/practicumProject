@@ -17,10 +17,30 @@ namespace Music.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.36")
+                .HasAnnotation("ProductVersion", "8.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Music.Core.Models.Playlist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Playlists");
+                });
 
             modelBuilder.Entity("Music.Core.Models.Singer", b =>
                 {
@@ -28,7 +48,7 @@ namespace Music.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -36,7 +56,7 @@ namespace Music.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("singers");
+                    b.ToTable("Singers");
                 });
 
             modelBuilder.Entity("Music.Core.Models.Song", b =>
@@ -45,10 +65,7 @@ namespace Music.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Genre")
                         .IsRequired()
@@ -58,8 +75,8 @@ namespace Music.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("PlaylistId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SingerId")
                         .HasColumnType("int");
@@ -68,11 +85,18 @@ namespace Music.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PlaylistId");
 
                     b.HasIndex("SingerId");
 
-                    b.ToTable("songs");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Songs");
                 });
 
             modelBuilder.Entity("Music.Core.Models.User", b =>
@@ -81,7 +105,7 @@ namespace Music.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -101,51 +125,41 @@ namespace Music.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
-                });
-
-            modelBuilder.Entity("SongUser", b =>
-                {
-                    b.Property<int>("SongsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SongsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("SongUser");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Music.Core.Models.Song", b =>
                 {
+                    b.HasOne("Music.Core.Models.Playlist", "Playlist")
+                        .WithMany("Songs")
+                        .HasForeignKey("PlaylistId");
+
                     b.HasOne("Music.Core.Models.Singer", "Singer")
                         .WithMany("Songs")
                         .HasForeignKey("SingerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Music.Core.Models.User", null)
+                        .WithMany("Songs")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Playlist");
+
                     b.Navigation("Singer");
                 });
 
-            modelBuilder.Entity("SongUser", b =>
+            modelBuilder.Entity("Music.Core.Models.Playlist", b =>
                 {
-                    b.HasOne("Music.Core.Models.Song", null)
-                        .WithMany()
-                        .HasForeignKey("SongsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Music.Core.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Songs");
                 });
 
             modelBuilder.Entity("Music.Core.Models.Singer", b =>
+                {
+                    b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("Music.Core.Models.User", b =>
                 {
                     b.Navigation("Songs");
                 });

@@ -10,7 +10,6 @@ using Music.Service;
 using Music.Data;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.OpenApi.Models;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon;
@@ -19,6 +18,13 @@ using Microsoft.AspNetCore.Http.Features;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+var openAiKey = builder.Configuration["OpenAI:ApiKey"];
+
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = 52428800; // 50MB
+});
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -36,7 +42,6 @@ builder.Services.AddSwaggerGen(options =>
 {
     
     
-     options.OperationFilter<FileUploadOperationFilter>();
     
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -84,6 +89,11 @@ builder.Services.AddScoped<ISongRepository, SongRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IPlaylistService, PlaylistService>();
+builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+
+
 //builder.Services.AddSingleton<IAmazonS3>(sp =>
 //{
 //    var config = sp.GetRequiredService<IConfiguration>();
@@ -106,6 +116,10 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
     var credentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey);
     return new AmazonS3Client(credentials, region);
 });
+
+builder.Services.AddHttpClient();
+//builder.Services.AddSingleton(new OpenAiImageAnalyzer(builder.Configuration["OpenAI:ApiKey"]));
+
 
 
 builder.Services.AddScoped<AuthService>();

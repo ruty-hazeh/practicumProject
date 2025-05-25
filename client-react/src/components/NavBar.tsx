@@ -10,6 +10,7 @@ const NavBar = () => {
                 <Link to='/'>Home</Link>
                 {/* <Link to="/songs">SongsList</Link> */}
                 {context?.user && context.user.id &&  <Link to="/songs">SongsList</Link> }
+                {context?.user && context.user.id &&  <Link to="/playlist">PlayList</Link> }
                
             </nav>
         </>

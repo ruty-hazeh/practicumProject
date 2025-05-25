@@ -1,3 +1,20 @@
 import { Routes } from '@angular/router';
+import { SongListComponent } from '../components/song-list/song-list.component';
+import { SongFormComponent } from '../components/song-form/song-form.component';
+import { AuthComponent } from '../components/auth/auth.component';
+import { EnteranceComponent } from '../components/enterance/enterance.component';
+import { UserListComponent } from '../components/user-list/user-list.component';
+import { UserFormComponent } from '../components/user-form/user-form.component';
+import { authGuard } from '../guards/auth.guard';
 
-export const routes: Routes = [];
+
+
+export const routes: Routes = [
+  { path: 'auth/login', component: AuthComponent },
+  { path: 'songs', component: SongListComponent, canActivate: [authGuard] },
+  { path: 'songs/new', component: SongFormComponent, canActivate: [authGuard] },
+  { path: 'users', component: UserListComponent, canActivate: [authGuard] },
+  { path: 'users/new', component: UserFormComponent, canActivate: [authGuard] },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'auth/login' }
+];

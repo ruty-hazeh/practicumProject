@@ -29,11 +29,12 @@ namespace Music.Service
         public async Task<User> AddAsync(UserDTO user)
         {
             var userMap = _mapper.Map<User>(user);
-           return await _userRepository.AddAsync(userMap);
+            return await _userRepository.AddAsync(userMap);
         }
         public async Task<User> UpdateAsync(int id,UserDTO user)
         {
             var userMap = _mapper.Map<User>(user);
+
             return await _userRepository.UpdateAsync(id,userMap);
         }
         public async Task DeleteAsync(int id) => await _userRepository.DeleteAsync(id);

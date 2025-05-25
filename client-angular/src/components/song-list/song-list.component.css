@@ -1,0 +1,14 @@
+.song-list {
+    max-width: 800px;
+    margin: auto;
+  }
+  .song-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+  .song-item button {
+    margin-left: 10px;
+  }

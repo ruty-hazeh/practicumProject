@@ -1,0 +1,64 @@
+<!-- <div class="auth-container">
+    <p class="title">{{ isLogin ? 'Login' : 'Sign Up' }}</p>
+    <form [formGroup]="SignInForm" (ngSubmit)="Submit()" class="auth-form">
+      
+        <input *ngIf="!isLogin" type="text" placeholder="Emai" formControlName="email">
+        <div class="error" *ngIf="SignInForm.get('email')?.invalid && SignInForm.get('email')?.touched">
+            Email is required.
+        </div>
+
+        <input type="name" placeholder="Name" formControlName="name">
+        <div class="error" *ngIf="SignInForm.get('name')?.invalid && SignInForm.get('name')?.touched">
+            <span *ngIf="SignInForm.get('name')?.errors?.['required']">Name is required.</span>
+            <span *ngIf="SignInForm.get('name')?.errors?.['name']">Invalid name format.</span>
+        </div>
+
+        <input type="password" placeholder="Password" formControlName="password">
+        <div class="error" *ngIf="SignInForm.get('password')?.invalid && SignInForm.get('password')?.touched">
+            <span *ngIf="SignInForm.get('password')?.errors?.['required']">Password is required.</span>
+            <span *ngIf="SignInForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</span>
+        </div>
+
+         <select *ngIf="!isLogin" formControlName="role">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+        </select> -->
+        <!-- <div class="error" *ngIf="SignInForm.get('role')?.invalid && SignInForm.get('role')?.touched">
+            Role is required.
+        </div> 
+
+        <button type="submit" [disabled]="SignInForm.invalid" class="auth-button submit">
+            {{ isLogin ? 'Login' : 'Sign Up' }}
+        </button>
+    </form>
+
+    <button (click)="isLogin = !isLogin" class="auth-button switch">
+        Switch to {{ isLogin ? 'Sign Up' : 'Login' }}
+    </button>
+</div> -->
+
+
+
+
+<div class="auth-container">
+  <p class="title">Login</p>
+
+  <form [formGroup]="SignInForm" (ngSubmit)="Submit()" class="auth-form">
+
+    <input type="text" placeholder="Name" formControlName="name">
+    <div class="error" *ngIf="SignInForm.get('name')?.invalid && SignInForm.get('name')?.touched">
+      Name is required.
+    </div>
+
+    <input type="password" placeholder="Password" formControlName="password">
+    <div class="error" *ngIf="SignInForm.get('password')?.invalid && SignInForm.get('password')?.touched">
+      <span *ngIf="SignInForm.get('password')?.errors?.['required']">Password is required.</span>
+      <span *ngIf="SignInForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</span>
+    </div>
+
+    <button type="submit" [disabled]="SignInForm.invalid" class="auth-button submit">
+      Login
+    </button>
+    
+  </form>
+</div>

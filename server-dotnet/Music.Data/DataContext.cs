@@ -8,6 +8,7 @@ namespace Music.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Singer> Singers { get; set; }
+        public DbSet<Playlist> Playlists { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=music_db");

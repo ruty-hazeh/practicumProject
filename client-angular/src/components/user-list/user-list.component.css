@@ -1,0 +1,10 @@
+.user-list {
+    max-width: 600px;
+    margin: auto;
+  }
+  .user-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }

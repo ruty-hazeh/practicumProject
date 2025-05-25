@@ -10,9 +10,11 @@ namespace Music.Core.Dtos
     {
         public string Name { get; set; }
         public string Genre { get; set; }
-        public TimeSpan Duration { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        //public TimeSpan? Duration { get; set; }
+        //public DateTime? ReleaseDate { get; set; }
         public string SongUrl { get; set; }
         public int SingerId { get; set; }
+        public int? PlaylistId { get; set; } 
+
     }
 }

@@ -1,0 +1,21 @@
+<!-- <h2>🎵 ניהול שירים</h2>
+<app-song-form (refresh)="loadSongs()"></app-song-form>
+<ul>
+
+      <li *ngFor="let song of songs;">
+        <div>{{ song.name }} - {{ song.genre }}</div>
+        <button (click)="download(song.url)">⬇️</button>
+        <button (click)="deleteSong(song.id, song.url)">🗑️</button>
+      </li>
+</ul> -->
+
+<h2>🎵 ניהול שירים</h2>
+<app-song-form [songToEdit]="songToEdit" (refresh)="onRefresh()"></app-song-form>
+<ul>
+  <li *ngFor="let song of songs;">
+    <div>{{ song.name }} - {{ song.genre }}</div>
+    <button (click)="download(song.name)">⬇️</button>
+    <button (click)="deleteSong(song.id, song.name)">🗑️</button>
+    <button (click)="editSong(song)">✏️</button>
+  </li>
+</ul>

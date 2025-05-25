@@ -7,13 +7,10 @@ import { User, userReducer } from "./user";
 
 const AppLayout = () => {
     const initialUser: User = {
-        id: '',
-        firstName: '',
-        lastName: '',
+        id:0,
+        name: '',
         email: '',
         password: '',
-        address: '',
-        phone: ''
     }
     const [user, userDispatch] = useReducer(userReducer, initialUser)
     return (

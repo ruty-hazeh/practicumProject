@@ -23,21 +23,53 @@ public class S3Service: IS3Service
         _s3Client = new AmazonS3Client(accessKey, secretKey, RegionEndpoint.GetBySystemName(region));
     }
 
+    //public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
+    //{
+    //    var request = new TransferUtilityUploadRequest
+    //    {
+    //        InputStream = fileStream,
+    //        Key = fileName,
+    //        BucketName = _bucketName,
+    //        CannedACL = S3CannedACL.PublicRead
+    //    };
+
+    //    var transferUtility = new TransferUtility(_s3Client);
+    //    await transferUtility.UploadAsync(request);
+
+    //    return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
+    //}
+
+
     public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
     {
-        var request = new TransferUtilityUploadRequest
+        try
         {
-            InputStream = fileStream,
-            Key = fileName,
-            BucketName = _bucketName,
-            CannedACL = S3CannedACL.PublicRead
-        };
+            var request = new TransferUtilityUploadRequest
+            {
+                InputStream = fileStream,
+                Key = fileName,
+                BucketName = _bucketName,
+                CannedACL = S3CannedACL.PublicRead
+            };
 
-        var transferUtility = new TransferUtility(_s3Client);
-        await transferUtility.UploadAsync(request);
+            var transferUtility = new TransferUtility(_s3Client);
+            await transferUtility.UploadAsync(request);
 
-        return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
+            return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
+        }
+        catch (AmazonS3Exception s3Ex)
+        {
+            // טיפול בשגיאות ספציפיות של S3
+            // לדוגמה: הרשאות, bucket לא קיים, וכו'
+            throw new Exception($"S3 error occurred: {s3Ex.Message}", s3Ex);
+        }
+        catch (Exception ex)
+        {
+            // טיפול בחריגות כלליות
+            throw new Exception($"Upload failed: {ex.Message}", ex);
+        }
     }
+
 
     public async Task<Stream> DownloadFileAsync(string fileName)
     {

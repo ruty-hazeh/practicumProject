@@ -8,9 +8,10 @@
     ".NETCoreApp,Version=v8.0": {
       "Music.Service/1.0.0": {
         "dependencies": {
-          "AWSSDK.S3": "3.7.415.23",
+          "AWSSDK.S3": "4.0.0.5",
           "Music.Core": "1.0.0",
-          "Music.Data": "1.0.0"
+          "Music.Data": "1.0.0",
+          "OpenAI": "2.2.0-beta.4"
         },
         "runtime": {
           "Music.Service.dll": {}
@@ -27,34 +28,34 @@
           }
         }
       },
-      "AWSSDK.Core/3.7.402.24": {
+      "AWSSDK.Core/4.0.0.5": {
         "runtime": {
           "lib/net8.0/AWSSDK.Core.dll": {
-            "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.7.402.24"
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.5"
           }
         }
       },
-      "AWSSDK.S3/3.7.415.23": {
+      "AWSSDK.S3/4.0.0.5": {
         "dependencies": {
-          "AWSSDK.Core": "3.7.402.24"
+          "AWSSDK.Core": "4.0.0.5"
         },
         "runtime": {
           "lib/net8.0/AWSSDK.S3.dll": {
-            "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.7.415.23"
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.5"
           }
         }
       },
       "Azure.Core/1.38.0": {
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
-          "System.ClientModel": "1.0.0",
+          "System.ClientModel": "1.2.1",
           "System.Diagnostics.DiagnosticSource": "6.0.1",
-          "System.Memory.Data": "1.0.2",
+          "System.Memory.Data": "6.0.0",
           "System.Numerics.Vectors": "4.5.0",
           "System.Text.Encodings.Web": "6.0.0",
-          "System.Text.Json": "4.7.2",
+          "System.Text.Json": "6.0.10",
           "System.Threading.Tasks.Extensions": "4.5.4"
         },
         "runtime": {
@@ -71,7 +72,7 @@
           "Microsoft.Identity.Client.Extensions.Msal": "4.61.3",
           "System.Memory": "4.5.4",
           "System.Security.Cryptography.ProtectedData": "6.0.0",
-          "System.Text.Json": "4.7.2",
+          "System.Text.Json": "6.0.10",
           "System.Threading.Tasks.Extensions": "4.5.4"
         },
         "runtime": {
@@ -318,7 +319,7 @@
           "Microsoft.IdentityModel.Tokens": "6.35.0",
           "System.Text.Encoding": "4.3.0",
           "System.Text.Encodings.Web": "6.0.0",
-          "System.Text.Json": "4.7.2"
+          "System.Text.Json": "6.0.10"
         },
         "runtime": {
           "lib/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
@@ -409,6 +410,18 @@
           }
         }
       },
+      "OpenAI/2.2.0-beta.4": {
+        "dependencies": {
+          "System.ClientModel": "1.2.1",
+          "System.Diagnostics.DiagnosticSource": "6.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/OpenAI.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/8.0.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -447,15 +460,15 @@
           }
         }
       },
-      "System.ClientModel/1.0.0": {
+      "System.ClientModel/1.2.1": {
         "dependencies": {
-          "System.Memory.Data": "1.0.2",
-          "System.Text.Json": "4.7.2"
+          "System.Memory.Data": "6.0.0",
+          "System.Text.Json": "6.0.10"
         },
         "runtime": {
           "lib/net6.0/System.ClientModel.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.24.5302"
+            "assemblyVersion": "1.2.1.0",
+            "fileVersion": "1.200.124.50905"
           }
         }
       },
@@ -515,15 +528,14 @@
         }
       },
       "System.Memory/4.5.4": {},
-      "System.Memory.Data/1.0.2": {
+      "System.Memory.Data/6.0.0": {
         "dependencies": {
-          "System.Text.Encodings.Web": "6.0.0",
-          "System.Text.Json": "4.7.2"
+          "System.Text.Json": "6.0.10"
         },
         "runtime": {
-          "lib/netstandard2.0/System.Memory.Data.dll": {
-            "assemblyVersion": "1.0.2.0",
-            "fileVersion": "1.0.221.20802"
+          "lib/net6.0/System.Memory.Data.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           }
         }
       },
@@ -606,7 +618,12 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
-      "System.Text.Json/4.7.2": {},
+      "System.Text.Json/6.0.10": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.Encodings.Web": "6.0.0"
+        }
+      },
       "System.Threading.Tasks.Extensions/4.5.4": {},
       "System.Windows.Extensions/6.0.0": {
         "dependencies": {
@@ -635,7 +652,7 @@
         },
         "runtime": {
           "Music.Core.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -647,7 +664,7 @@
         },
         "runtime": {
           "Music.Data.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -667,19 +684,19 @@
       "path": "automapper/14.0.0",
       "hashPath": "automapper.14.0.0.nupkg.sha512"
     },
-    "AWSSDK.Core/3.7.402.24": {
+    "AWSSDK.Core/4.0.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xcUx7ntQE7DYcdlL0/IPb4DXPpQfH/OL11M9Swcm6iDPhX1S/Hu0neWVf5gBuRe58Sei0cX24qKjol+mDhcNwA==",
-      "path": "awssdk.core/3.7.402.24",
-      "hashPath": "awssdk.core.3.7.402.24.nupkg.sha512"
+      "sha512": "sha512-NG31J9azTmY1GKOZd+MFGLUsuD472AGz4BUceTiw0pdYkexD+xJ8kA87hDp/OTk2b6xgrhkQIpnttzIekkMSvw==",
+      "path": "awssdk.core/4.0.0.5",
+      "hashPath": "awssdk.core.4.0.0.5.nupkg.sha512"
     },
-    "AWSSDK.S3/3.7.415.23": {
+    "AWSSDK.S3/4.0.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ME1KxEwaxO5HMzjJSADVWl1oyfnEjqU3vOkVwot5jJZNQiz9Fhlbv8itpRmcoI23UCkDC3FDzzlrHvSjLewNaQ==",
-      "path": "awssdk.s3/3.7.415.23",
-      "hashPath": "awssdk.s3.3.7.415.23.nupkg.sha512"
+      "sha512": "sha512-YZXbhTfrix+504RMDF3CKXufvKQkScMtwLZReFRBYSuEWwkJavStaex9GAY2jJuzIbZvBi5DoMEI0LAhmRZTLA==",
+      "path": "awssdk.s3/4.0.0.5",
+      "hashPath": "awssdk.s3.4.0.0.5.nupkg.sha512"
     },
     "Azure.Core/1.38.0": {
       "type": "package",
@@ -919,6 +936,13 @@
       "path": "microsoft.win32.systemevents/6.0.0",
       "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
     },
+    "OpenAI/2.2.0-beta.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JZ4/mlVXLaXDIZuC4Ddu0KCAA23z4Ax1AQTS26mpJRuSShjXik7DU8a3basY3ddD51W04F7jeX5eAXamKA6rHw==",
+      "path": "openai/2.2.0-beta.4",
+      "hashPath": "openai.2.2.0-beta.4.nupkg.sha512"
+    },
     "Swashbuckle.AspNetCore/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -947,12 +971,12 @@
       "path": "swashbuckle.aspnetcore.swaggerui/8.0.0",
       "hashPath": "swashbuckle.aspnetcore.swaggerui.8.0.0.nupkg.sha512"
     },
-    "System.ClientModel/1.0.0": {
+    "System.ClientModel/1.2.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-I3CVkvxeqFYjIVEP59DnjbeoGNfo/+SZrCLpRz2v/g0gpCHaEMPtWSY0s9k/7jR1rAsLNg2z2u1JRB76tPjnIw==",
-      "path": "system.clientmodel/1.0.0",
-      "hashPath": "system.clientmodel.1.0.0.nupkg.sha512"
+      "sha512": "sha512-s9+M5El+DXdCRRLzxak8uGBKWT8H/eIssGpFtpaMKdJULrQbBDPH/zFbVyHX+NDczhS5EvjHFbBH9/L+0UhmcA==",
+      "path": "system.clientmodel/1.2.1",
+      "hashPath": "system.clientmodel.1.2.1.nupkg.sha512"
     },
     "System.Configuration.ConfigurationManager/6.0.1": {
       "type": "package",
@@ -996,12 +1020,12 @@
       "path": "system.memory/4.5.4",
       "hashPath": "system.memory.4.5.4.nupkg.sha512"
     },
-    "System.Memory.Data/1.0.2": {
+    "System.Memory.Data/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-JGkzeqgBsiZwKJZ1IxPNsDFZDhUvuEdX8L8BDC8N3KOj+6zMcNU28CNN59TpZE/VJYy9cP+5M+sbxtWJx3/xtw==",
-      "path": "system.memory.data/1.0.2",
-      "hashPath": "system.memory.data.1.0.2.nupkg.sha512"
+      "sha512": "sha512-ntFHArH3I4Lpjf5m4DCXQHJuGwWPNVJPaAvM95Jy/u+2Yzt2ryiyIN04LAogkjP9DeRcEOiviAjQotfmPq/FrQ==",
+      "path": "system.memory.data/6.0.0",
+      "hashPath": "system.memory.data.6.0.0.nupkg.sha512"
     },
     "System.Numerics.Vectors/4.5.0": {
       "type": "package",
@@ -1087,12 +1111,12 @@
       "path": "system.text.encodings.web/6.0.0",
       "hashPath": "system.text.encodings.web.6.0.0.nupkg.sha512"
     },
-    "System.Text.Json/4.7.2": {
+    "System.Text.Json/6.0.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-TcMd95wcrubm9nHvJEQs70rC0H/8omiSGGpU4FQ/ZA1URIqD4pjmFJh2Mfv1yH1eHgJDWTi2hMDXwTET+zOOyg==",
-      "path": "system.text.json/4.7.2",
-      "hashPath": "system.text.json.4.7.2.nupkg.sha512"
+      "sha512": "sha512-NSB0kDipxn2ychp88NXWfFRFlmi1bst/xynOutbnpEfRCT9JZkZ7KOmF/I/hNKo2dILiMGnqblm+j1sggdLB9g==",
+      "path": "system.text.json/6.0.10",
+      "hashPath": "system.text.json.6.0.10.nupkg.sha512"
     },
     "System.Threading.Tasks.Extensions/4.5.4": {
       "type": "package",

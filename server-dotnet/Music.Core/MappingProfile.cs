@@ -15,7 +15,8 @@ namespace Music.Service
         {
             CreateMap<Singer,SingerDTO >().ReverseMap();
             CreateMap<Song,SongDTO >().ReverseMap();
-            CreateMap<User,UserDTO >().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<Playlist, PlaylistDTO>().ReverseMap();
 
         }
     }

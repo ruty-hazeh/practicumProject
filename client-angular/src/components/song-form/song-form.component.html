@@ -1,0 +1,21 @@
+<!-- <form (ngSubmit)="submit()">
+    <input [(ngModel)]="name" name="name" placeholder="שם שיר" required />
+    <input [(ngModel)]="genre" name="genre" placeholder="ז'אנר" required />
+    <input type="file" (change)="onFileChange($event)" />
+    <button type="submit">הוסף שיר</button>
+  </form> -->
+  
+
+  <form (ngSubmit)="submit()" #songForm="ngForm">
+    <!-- <input [(ngModel)]="name" name="name" placeholder="שם שיר" required /> -->
+    <input [(ngModel)]="genre" name="genre" placeholder="ז'אנר" required />
+    <input [(ngModel)]="singerId" name="singerId" placeholder="זמר" required />
+    
+    <input 
+      type="file" 
+      (change)="onFileChange($event)" 
+      [required]="!songToEdit" 
+    />
+  
+    <button type="submit" [disabled]="songForm.invalid">שמור</button>
+  </form>

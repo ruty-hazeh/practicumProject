@@ -33,12 +33,14 @@ namespace Music.Api.Controllers
             if (song == null) return NotFound();
             return song;
         }
-        [HttpGet("song/{genre}")]
-        public async Task<ActionResult<Song>> GetByGenre(string genre)
+        [HttpGet("by-genre/{genre}")]
+        public async Task<ActionResult<IEnumerable<Song>>> GetByGenre(string genre)
         {
-            var song = await _songService.GetByGenreAsync(genre);
-            if (song == null) return NotFound();
-            return song;
+            var songs = await _songService.GetByGenreAsync(genre);
+            if (songs == null || !songs.Any())
+                return NotFound();
+
+            return Ok(songs);
         }
 
 
@@ -49,8 +51,15 @@ namespace Music.Api.Controllers
             if (song == null) return NotFound();
             return song;
         }
+        [HttpGet("genres")]
+        public async Task<IActionResult> GetAllGenres()
+        {
+            var genres = await _songService.GetAllGenresAsync();
+            return Ok(genres);
+        }
 
-        [Authorize(Roles = "Admin")]
+
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Song>> Add([FromBody] SongDTO song)
         {
@@ -77,5 +86,17 @@ namespace Music.Api.Controllers
             await _songService.DeleteAsync(id);
             return NoContent();
         }
+
+
+
+        //[HttpPost("create-ai")]
+        //public async Task<ActionResult<IEnumerable<SongAIResponseDto>>> CreateSongAI([FromBody] CreateSongAIRequest request)
+        //{
+        //    if (string.IsNullOrWhiteSpace(request.Prompt))
+        //        return BadRequest("Prompt is required.");
+
+        //    var songs = await _songService.GenerateSongsByAIAsync(request.Prompt);
+        //    return Ok(songs);
+        //}
     }
 }

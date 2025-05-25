@@ -55,24 +55,48 @@ export class ApiClient {
     //     }
     //     return Promise.resolve<void>(null as any);
     // }
-    login(body: LoginModel | undefined): Promise<{ token: string }> {
-        let url_ = this.baseUrl + "/api/Auth/login";
-        url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
 
-        let options_: RequestInit = {
-            body: content_,
+    // login(body: LoginModel | undefined): Promise<{ token: string }> {
+    //     let url_ = this.baseUrl + "/api/Auth/login";
+    //     url_ = url_.replace(/[?&]$/, "");
+
+    //     const content_ = JSON.stringify(body);
+
+    //     let options_: RequestInit = {
+    //         body: content_,
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         }
+    //     };
+
+    //     return this.http.fetch(url_, options_).then((_response: Response) => {
+    //         return this.processLogin(_response);
+    //     });
+    // }
+   
+   
+    async login(body: LoginModel): Promise<{ token: string }> {
+        const url = `${this.baseUrl}/api/Auth/login`;
+    
+        const response = await fetch(url, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processLogin(_response);
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
         });
+    
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Login failed: ${errorText}`);
+        }
+    
+        const result = await response.json();
+        return result;
     }
+    
     protected async processLogin(response: Response): Promise<{ token: string }> {
         const status = response.status;
         let _headers: any = {};
@@ -93,6 +117,41 @@ export class ApiClient {
      * @param body (optional) 
      * @return OK
      */
+
+
+
+    async register(body: UserDTO): Promise<RegisterResponse> {
+        const url = `${this.baseUrl}/api/Auth/register`;
+      
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(body)
+        });
+      
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Registration failed: ${errorText}`);
+        }
+      
+        const result: RegisterResponse = await response.json();
+        return result;
+      }
+      
+      // פונקציית עזר לעיבוד התגובה, גם היא מחזירה RegisterResponse
+      protected async processRegister(response: Response): Promise<RegisterResponse> {
+        const status = response.status;
+      
+        if (status === 200) {
+          const responseText = await response.text();
+          return responseText ? JSON.parse(responseText) : { token: "" };
+        } else {
+          const responseText = await response.text();
+          throw new Error(`Registration failed: ${responseText}`);
+        }
+      }
     // register(body: UserDTO | undefined): Promise<void> {
     //     let url_ = this.baseUrl + "/api/Auth/register";
     //     url_ = url_.replace(/[?&]$/, "");
@@ -126,40 +185,64 @@ export class ApiClient {
     //     }
     //     return Promise.resolve<void>(null as any);
     // }
-    register(body: UserDTO | undefined): Promise<{ token: string }> {
-        let url_ = this.baseUrl + "/api/Auth/register";
-        url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
+    // register(body: UserDTO | undefined): Promise<{ token: string }> {
+    //     let url_ = this.baseUrl + "/api/Auth/register";
+    //     url_ = url_.replace(/[?&]$/, "");
 
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        };
+    //     const content_ = JSON.stringify(body);
 
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRegister(_response);
-        });
-    }
-    protected async processRegister(response: Response): Promise<{ token: string }> {
-        const status = response.status;
-        let _headers: any = {};
+    //     let options_: RequestInit = {
+    //         body: content_,
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         }
+    //     };
 
-        if (response.headers && response.headers.forEach) {
-            response.headers.forEach((v: any, k: any) => _headers[k] = v);
-        }
+    //     return this.http.fetch(url_, options_).then((_response: Response) => {
+    //         return this.processRegister(_response);
+    //     });
+    // }
+    // async register(body: UserDTO): Promise<{ token: string }> {
+    //     const url = `${this.baseUrl}/api/Auth/register`;
+    
+    //     const response = await fetch(url, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(body)
+    //     });
+    
+    //     if (!response.ok) {
+    //         const errorText = await response.text();
+    //         throw new Error(`Registration failed: ${errorText}`);
+    //     }
+    
+    //     const result = await response.json();
+    //     return result;
+    // }
+    // protected async processRegister(response: Response): Promise<{ token: string }> {
+    //     const status = response.status;
+    //     let _headers: any = {};
 
-        if (status === 200) {
-            const _responseText = await response.text();
-            return _responseText ? JSON.parse(_responseText) : { token: "" };
-        } else {
-            const _responseText = await response.text();
-            throw new Error(`Registration failed: ${_responseText}`);
-        }
-    }
+    //     if (response.headers && response.headers.forEach) {
+    //         response.headers.forEach((v: any, k: any) => _headers[k] = v);
+    //     }
+
+    //     if (status === 200) {
+    //         const _responseText = await response.text();
+    //         return _responseText ? JSON.parse(_responseText) : { token: "" };
+    //     } else {
+    //         const _responseText = await response.text();
+    //         throw new Error(`Registration failed: ${_responseText}`);
+    //     }
+    // }
+
+
+
+    
     /**
      * @param file (optional) 
      * @return OK
@@ -1150,7 +1233,35 @@ export class ApiClient {
         }
         return Promise.resolve<void>(null as any);
     }
-}
+
+
+    // async createSongsAI(prompt: string): Promise<SongAIResponseDto[]> {
+    //     const requestBody: CreateSongAIRequest = { prompt };
+
+    //     let url_ = this.baseUrl + "/api/song/create-ai";
+    //     url_ = url_.replace(/[?&]$/, "");
+
+    
+    //     const response = await fetch(url_, {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify(requestBody),
+    //     });
+    
+    //     if (!response.ok) {
+    //       throw new Error('Failed to generate songs');
+    //     }
+    
+    //     const data = await response.json();
+    //     return data as SongAIResponseDto[];
+    //   }
+
+
+    }
+      
+
 
 export class LoginModel implements ILoginModel {
     name?: string | undefined;
@@ -1555,3 +1666,26 @@ function throwException(message: string, status: number, response: string, heade
     else
         throw new SwaggerException(message, status, response, headers, null);
 }
+
+
+
+// export interface SongAIResponseDto {
+//     id: number;
+//     name: string;
+//     songUrl: string;
+//     genre: string;
+//     singerName: string;
+//   }
+  
+//   export interface CreateSongAIRequest {
+//     prompt: string;
+//   }
+
+export interface RegisterResponse {
+    token: string;
+    message?: string;
+    user?: {
+      id: number;
+      name: string;
+      email: string;
+    };}

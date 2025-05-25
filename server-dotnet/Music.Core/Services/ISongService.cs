@@ -12,11 +12,15 @@ namespace Music.Core.Services
     {
         public Task<IEnumerable<Song>> GetAllAsync();
         public Task<Song> GetByIdAsync(int id);
-        public Task<Song> GetByGenreAsync(string genre);
+        public Task<IEnumerable<Song>> GetByGenreAsync(string genre);
+        Task<List<string>> GetAllGenresAsync();
+
         public Task<Song> GetByNameAsync(string name);
 
         public Task<Song> AddAsync(SongDTO song);
         public  Task<Song> UpdateAsync(int id,SongDTO song);
         public Task DeleteAsync(int id);
+
+        //public Task<IEnumerable<SongAIResponseDto>> GenerateSongsByAIAsync(string prompt);
     }
 }

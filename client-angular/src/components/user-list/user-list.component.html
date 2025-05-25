@@ -1,0 +1,23 @@
+<!-- <h2>👤 ניהול משתמשים</h2>
+<app-user-form (refresh)="loadUsers()"></app-user-form>
+
+<ul>
+  @for (let user of users; track user.id) {
+    <li>
+      {{ user.name }} ({{ user.email }})
+      <button (click)="deleteUser(user.id)">🗑️</button>
+    </li>
+  }
+</ul> -->
+
+
+
+<h2>👤 ניהול משתמשים</h2>
+<app-user-form (refresh)="loadUsers()"></app-user-form>
+
+<ul>
+  <li *ngFor="let user of users;">
+    {{ user.name }} ({{ user.email }})
+    <button (click)="deleteUser(user.id)">🗑️</button>
+  </li>
+</ul>

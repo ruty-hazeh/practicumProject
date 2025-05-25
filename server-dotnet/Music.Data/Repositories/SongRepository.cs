@@ -15,18 +15,25 @@ namespace Music.Data.Repositories
         private readonly DataContext _context;
         public SongRepository(DataContext context) { _context = context; }
 
-        public async Task<IEnumerable<Song>> GetAllAsync() => await _context.Songs.Include(s=>s.Singer).Include(s=>s.Users).ToListAsync();
+        public async Task<IEnumerable<Song>> GetAllAsync() => await _context.Songs.Include(s=>s.Singer).ToListAsync();
 
         public async Task<Song> GetByIdAsync(int id) => await _context.Songs.FindAsync(id);
-        public async Task<Song> GetByGenreAsync(string genre) => await _context.Songs.FindAsync(genre);
+     
         public async Task<Song> GetByNameAsync(string name) => await _context.Songs.FirstOrDefaultAsync(s => s.Name == name);
 
-        public async Task<IEnumerable<Song>> GetSongsByGenreAsync(string genre) => await _context.Songs.Where(s => s.Genre == genre).ToListAsync();
+        public async Task<IEnumerable<Song>> GetByGenreAsync(string genre) => await _context.Songs.Where(s => s.Genre == genre).ToListAsync();
 
         public async Task<Song> AddAsync(Song song) {
             await _context.Songs.AddAsync(song); 
             await _context.SaveChangesAsync();
             return song;
+        }
+        public async Task<List<string>> GetAllGenresAsync()
+        {
+            return await _context.Songs
+                                 .Select(s => s.Genre)
+                                 .Distinct()
+                                 .ToListAsync();
         }
 
         public async Task<Song> UpdateAsync(int id,Song song) {
@@ -37,12 +44,12 @@ namespace Music.Data.Repositories
                
                 s.Name = song.Name;
                 s.Genre = song.Genre;
-                s.Duration = song.Duration;
+                //s.Duration = song.Duration;
                 s.SongUrl = song.SongUrl;
-                s.ReleaseDate = song.ReleaseDate;
+                //s.ReleaseDate = song.ReleaseDate;
                 s.Singer = song.Singer;
                 s.SingerId = song.SingerId;
-                s.Users = song.Users;
+              
 
             }
             await _context.SaveChangesAsync();

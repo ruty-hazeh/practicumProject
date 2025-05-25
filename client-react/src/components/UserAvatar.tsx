@@ -19,16 +19,16 @@ const style = {
 }
 const UserAvatar = () => {
   const context = useContext(UserContext);
-  console.log("User context: ", context?.user.firstName);
+  console.log("User context: ", context?.user.name);
   const [open, setOpen] = useState(false)
   if (!context)
     return null;
   return (<>
     <Box sx={style}>
       <Typography sx={{ fontWeight: "bold", color: "#333", marginBottom: 1, }}
-      >Hello {context?.user.firstName}</Typography>
+      >Hello {context?.user.name}</Typography>
       <Avatar sx={{ bgcolor: pink[600], width: 56, height: 56, fontSize: 24, fontWeight: "bold", }}
-      >{context?.user.firstName.charAt(0).toLocaleUpperCase()}</Avatar>
+      >{context?.user.name?.charAt(0).toLocaleUpperCase()}</Avatar>
 
       <Button color="primary" variant="contained"
         sx={{
