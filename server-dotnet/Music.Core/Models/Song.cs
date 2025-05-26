@@ -19,6 +19,6 @@ namespace Music.Core.Models
         public int SingerId { get; set; }
         public Singer Singer { get; set; }
         public int? PlaylistId { get; set; } // הוסף את זה
-        public Playlist Playlist { get; set; } 
+        public Playlist Playlist { get; set; }
     }
 }

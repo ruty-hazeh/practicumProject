@@ -14,7 +14,7 @@ namespace Music.Core.Dtos
         //public DateTime? ReleaseDate { get; set; }
         public string SongUrl { get; set; }
         public int SingerId { get; set; }
-        public int? PlaylistId { get; set; } 
+        public int? PlaylistId { get; set; }
 
     }
 }

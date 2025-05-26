@@ -21,9 +21,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 var openAiKey = builder.Configuration["OpenAI:ApiKey"];
 
-builder.WebHost.ConfigureKestrel(serverOptions =>
+//builder.WebHost.ConfigureKestrel(serverOptions =>
+//{
+//    serverOptions.Limits.MaxRequestBodySize = 52428800; // 50MB
+//});
+
+builder.Services.Configure<FormOptions>(options =>
 {
-    serverOptions.Limits.MaxRequestBodySize = 52428800; // 50MB
+    options.MultipartBodyLengthLimit = 20 * 1024 * 1024; // 20MB
 });
 
 builder.Services.AddControllers()

@@ -82,9 +82,16 @@ namespace Music.Api.Controllers
         [HttpPost("smart")]
         public async Task<IActionResult> GenerateSmart(int userId,[FromBody] SmartPlaylistRequest req)
         {
-            var playlist = await _playlistService.GenerateSmartPlaylistAsync(userId,req.MoodText);
-            if (playlist == null) return BadRequest("לא ניתן ליצור פלייליסט חכם");
-            return Ok(playlist);
+            try
+            {
+                var playlist = await _playlistService.GenerateSmartPlaylistAsync(userId, req.MoodText);
+                return Ok(playlist);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("שגיאה ביצירת פלייליסט חכם: " + ex.Message);
+                return StatusCode(500, "שגיאה פנימית בשרת: " + ex.Message);
+            }
         }
     }
 }
