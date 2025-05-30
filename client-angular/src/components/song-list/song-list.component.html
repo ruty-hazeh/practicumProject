@@ -1,16 +1,7 @@
-<!-- <h2>🎵 ניהול שירים</h2>
-<app-song-form (refresh)="loadSongs()"></app-song-form>
-<ul>
-
-      <li *ngFor="let song of songs;">
-        <div>{{ song.name }} - {{ song.genre }}</div>
-        <button (click)="download(song.url)">⬇️</button>
-        <button (click)="deleteSong(song.id, song.url)">🗑️</button>
-      </li>
-</ul> -->
+<!-- 
 
 <h2>🎵 ניהול שירים</h2>
-<app-song-form [songToEdit]="songToEdit" (refresh)="onRefresh()"></app-song-form>
+<app-song-form [selectedSong]="selectedSong" (refresh)="onRefresh()"></app-song-form>
 <ul>
   <li *ngFor="let song of songs;">
     <div>{{ song.name }} - {{ song.genre }}</div>
@@ -18,4 +9,62 @@
     <button (click)="deleteSong(song.id, song.name)">🗑️</button>
     <button (click)="editSong(song)">✏️</button>
   </li>
-</ul>
+</ul> -->
+
+<div class="management-container">
+  <!-- כרטיס הוספת שיר -->
+  <div class="management-card header-card">
+    <div class="card-header">
+      <div class="header-content">
+        <div class="header-icon">🎵</div>
+        <h2 class="header-title">🎵 ניהול שירים</h2>
+      </div>
+    </div>
+    <div class="card-content">
+      <app-song-form [selectedSong]="selectedSong" (refresh)="onRefresh()"></app-song-form>
+    </div>
+  </div>
+
+  <!-- כרטיס רשימת שירים -->
+  <div class="management-card">
+    <div class="card-header">
+      <div class="list-header">
+        <h3 class="list-title">רשימת שירים ({{songs.length}})</h3>
+        <button class="add-button" (click)="selectedSong = null">
+          <span class="button-icon">➕</span>
+          שיר חדש
+        </button>
+      </div>
+    </div>
+    <div class="card-content">
+      <div class="empty-state" *ngIf="songs.length === 0">
+        <div class="empty-icon">🎵</div>
+        <p class="empty-title">אין שירים במערכת</p>
+        <p class="empty-subtitle">הוסף שיר ראשון כדי להתחיל</p>
+      </div>
+
+      <div class="songs-grid" *ngIf="songs.length > 0">
+        <div class="song-item" *ngFor="let song of songs">
+          <div class="song-info">
+            <div class="song-icon">🎵</div>
+            <div class="song-details">
+              <h4 class="song-name">{{ song.name }}</h4>
+              <span class="song-genre">{{ song.genre }}</span>
+            </div>
+          </div>
+          <div class="song-actions">
+            <button class="action-button download" (click)="download(song.name)" title="הורד">
+              ⬇️
+            </button>
+            <button class="action-button edit" (click)="editSong(song)" title="ערוך">
+              ✏️
+            </button>
+            <button class="action-button delete" (click)="deleteSong(song.id, song.name)" title="מחק">
+              🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

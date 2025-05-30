@@ -99,6 +99,10 @@ builder.Services.AddScoped<IPlaylistService, PlaylistService>();
 builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 
 
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 52428800; // 50MB
+});
 //builder.Services.AddSingleton<IAmazonS3>(sp =>
 //{
 //    var config = sp.GetRequiredService<IConfiguration>();

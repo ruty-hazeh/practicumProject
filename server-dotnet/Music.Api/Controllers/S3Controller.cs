@@ -17,12 +17,13 @@ public class S3Controller : ControllerBase
 
 
     private readonly IS3Service _s3Service;
-    private readonly IAmazonS3 amazonS3Client;
+    //private readonly IAmazonS3 amazonS3Client;
 
     public S3Controller(IS3Service s3Service)
     {
         _s3Service = s3Service;
     }
+
 
     //[HttpPost("upload")]
     //public async Task<IActionResult> UploadFile(IFormFile file)

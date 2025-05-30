@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule],
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
 })

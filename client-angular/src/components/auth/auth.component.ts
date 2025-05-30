@@ -106,6 +106,7 @@ export class AuthComponent implements OnInit {
       this.authService.login({ name, password }).subscribe({
         next: () => {
           alert('Login successful!');
+          this.router.navigate(['/dashboard']);
           // sessionStorage.setItem('token', res.token);
           // sessionStorage.setItem('userId', res.userId);
         },

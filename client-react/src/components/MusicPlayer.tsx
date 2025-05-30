@@ -1,5 +1,3 @@
-
-
 const MusicPlayer = ({ songUrl }: { songUrl: string }) => {
     if (!songUrl) return null;
     console.log("Trying to play song:", songUrl);
@@ -14,17 +12,3 @@ const MusicPlayer = ({ songUrl }: { songUrl: string }) => {
 
 export default MusicPlayer;
 
-// const MusicPlayer = ({ songUrl }: { songUrl: string }) => {
-//     if (!songUrl) return null;
-//     console.log("Trying to play song:", songUrl);
-
-//     return (
-//         <div>
-//             <h3>🎵 מתנגן עכשיו</h3>
-//             <audio controls>
-//                 <source src={songUrl} type="audio/mpeg" />
-//             </audio>
-//         </div>
-//     );
-// };  
-// export default MusicPlayer;

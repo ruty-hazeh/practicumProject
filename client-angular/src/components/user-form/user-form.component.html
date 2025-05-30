@@ -1,7 +1,71 @@
-<form (ngSubmit)="submit()">
+<!-- <form (ngSubmit)="submit()">
     <input [(ngModel)]="name" name="name" placeholder="שם" required />
     <input [(ngModel)]="email" name="email" placeholder="אימייל" required />
     <input [(ngModel)]="password" name="password" placeholder="סיסמה" type="password" required />
     <button type="submit">הוסף משתמש</button>
   </form>
+   -->
+
+   <div class="form-card">
+    <div class="form-header">
+      <h3 class="form-title">הוספת משתמש חדש</h3>
+    </div>
   
+    <form (ngSubmit)="submit()" class="user-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name" class="form-label">שם מלא *</label>
+          <div class="input-container">
+            <span class="input-icon">👤</span>
+            <input 
+              id="name"
+              [(ngModel)]="name" 
+              name="name" 
+              placeholder="הזן שם מלא" 
+              class="form-input"
+              required 
+            />
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="email" class="form-label">כתובת אימייל *</label>
+          <div class="input-container">
+            <span class="input-icon">📧</span>
+            <input 
+              id="email"
+              [(ngModel)]="email" 
+              name="email" 
+              type="email"
+              placeholder="הזן כתובת אימייל" 
+              class="form-input"
+              required 
+            />
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password" class="form-label">סיסמה *</label>
+        <div class="input-container">
+          <span class="input-icon">🔒</span>
+          <input 
+            id="password"
+            [(ngModel)]="password" 
+            name="password" 
+            type="password"
+            placeholder="הזן סיסמה" 
+            class="form-input"
+            required 
+          />
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="submit-button">
+          <span class="button-icon">👤➕</span>
+          הוסף משתמש
+        </button>
+      </div>
+    </form>
+  </div>

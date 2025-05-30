@@ -12,15 +12,16 @@ public class S3Service: IS3Service
 {
     private readonly AmazonS3Client _s3Client;
     private readonly string _bucketName;
+    private readonly string _region;
 
     public S3Service(IConfiguration configuration)
     {
         _bucketName = configuration["AWS:S3:BucketName"];
+        _region = configuration["AWS:Region"];
         string accessKey = configuration["AWS:AccessKey"];
         string secretKey = configuration["AWS:SecretKey"];
-        string region = configuration["AWS:Region"];
 
-        _s3Client = new AmazonS3Client(accessKey, secretKey, RegionEndpoint.GetBySystemName(region));
+        _s3Client = new AmazonS3Client(accessKey, secretKey, RegionEndpoint.GetBySystemName(_region));
     }
 
     //public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
@@ -49,13 +50,14 @@ public class S3Service: IS3Service
                 InputStream = fileStream,
                 Key = fileName,
                 BucketName = _bucketName,
-                CannedACL = S3CannedACL.PublicRead
+                //CannedACL = S3CannedACL.PublicRead
             };
 
             var transferUtility = new TransferUtility(_s3Client);
             await transferUtility.UploadAsync(request);
 
-            return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
+            //return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
+            return $"https://{_bucketName}.s3.{_region}.amazonaws.com/{fileName}";
         }
         catch (AmazonS3Exception s3Ex)
         {

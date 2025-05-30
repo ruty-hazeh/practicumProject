@@ -1,16 +1,4 @@
-<!-- <h2>👤 ניהול משתמשים</h2>
-<app-user-form (refresh)="loadUsers()"></app-user-form>
-
-<ul>
-  @for (let user of users; track user.id) {
-    <li>
-      {{ user.name }} ({{ user.email }})
-      <button (click)="deleteUser(user.id)">🗑️</button>
-    </li>
-  }
-</ul> -->
-
-
+<!-- 
 
 <h2>👤 ניהול משתמשים</h2>
 <app-user-form (refresh)="loadUsers()"></app-user-form>
@@ -20,4 +8,61 @@
     {{ user.name }} ({{ user.email }})
     <button (click)="deleteUser(user.id)">🗑️</button>
   </li>
-</ul>
+</ul> -->
+
+<div class="management-container">
+  <!-- כרטיס הוספת משתמש -->
+  <div class="management-card header-card">
+    <div class="card-header">
+      <div class="header-content">
+        <div class="header-icon">👤</div>
+        <h2 class="header-title">👤 ניהול משתמשים</h2>
+      </div>
+    </div>
+    <div class="card-content">
+      <app-user-form (refresh)="loadUsers()"></app-user-form>
+    </div>
+  </div>
+
+  <!-- כרטיס רשימת משתמשים -->
+  <div class="management-card">
+    <div class="card-header">
+      <div class="list-header">
+        <h3 class="list-title">רשימת משתמשים ({{users.length}})</h3>
+        <button class="add-button">
+          <span class="button-icon">👤➕</span>
+          משתמש חדש
+        </button>
+      </div>
+    </div>
+    <div class="card-content">
+      <div class="empty-state" *ngIf="users.length === 0">
+        <div class="empty-icon">👥</div>
+        <p class="empty-title">אין משתמשים במערכת</p>
+        <p class="empty-subtitle">הוסף משתמש ראשון כדי להתחיל</p>
+      </div>
+
+      <div class="users-grid" *ngIf="users.length > 0">
+        <div class="user-item" *ngFor="let user of users">
+          <div class="user-info">
+            <div class="user-avatar">
+              {{ getInitials(user.name) }}
+            </div>
+            <div class="user-details">
+              <h4 class="user-name">{{ user.name }}</h4>
+              <div class="user-email">
+                <span class="email-icon">📧</span>
+                {{ user.email }}
+              </div>
+            </div>
+          </div>
+          <div class="user-actions">
+            <button class="action-button delete" (click)="deleteUser(user.id)" title="מחק משתמש">
+              🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

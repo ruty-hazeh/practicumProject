@@ -1,9 +1,3 @@
-C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.csproj.AssemblyReference.cache
-C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.AssemblyInfoInputs.cache
-C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.AssemblyInfo.cs
-C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.sourcelink.json
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\bin\Debug\net8.0\Music.Service.deps.json
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\bin\Debug\net8.0\Music.Service.dll
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\bin\Debug\net8.0\Music.Service.pdb
@@ -11,6 +5,12 @@ C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\bin\Debug\net
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\bin\Debug\net8.0\Music.Data.dll
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\bin\Debug\net8.0\Music.Core.pdb
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\bin\Debug\net8.0\Music.Data.pdb
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.AssemblyInfo.cs
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.sourcelink.json
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Se.42AB87D0.Up2Date
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\Music.Service.dll
 C:\Users\User\Desktop\practicumProject\server-dotnet\Music.Service\obj\Debug\net8.0\refint\Music.Service.dll

@@ -56,7 +56,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SongListComponent implements OnInit {
   songs: Song[] = [];
-  songToEdit: Song | null = null;
+  selectedSong: Song | null = null;
 
   constructor(private songService: SongService) {}
 
@@ -88,11 +88,11 @@ export class SongListComponent implements OnInit {
   }
 
   editSong(song: Song) {
-    this.songToEdit = { ...song }; // יוצרים עותק כדי לערוך מבלי להשפיע מיידית
+    this.selectedSong = { ...song }; // יוצרים עותק כדי לערוך מבלי להשפיע מיידית
   }
 
   onRefresh() {
-    this.songToEdit = null; // מאפסים את העריכה
+    this.selectedSong = null; // מאפסים את העריכה
     this.loadSongs();
   }
 }

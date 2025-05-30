@@ -1,13 +1,6 @@
-<!-- <form (ngSubmit)="submit()">
-    <input [(ngModel)]="name" name="name" placeholder="שם שיר" required />
-    <input [(ngModel)]="genre" name="genre" placeholder="ז'אנר" required />
-    <input type="file" (change)="onFileChange($event)" />
-    <button type="submit">הוסף שיר</button>
-  </form> -->
-  
+<!-- 
 
   <form (ngSubmit)="submit()" #songForm="ngForm">
-    <!-- <input [(ngModel)]="name" name="name" placeholder="שם שיר" required /> -->
     <input [(ngModel)]="genre" name="genre" placeholder="ז'אנר" required />
     <input [(ngModel)]="singerId" name="singerId" placeholder="זמר" required />
     
@@ -18,4 +11,129 @@
     />
   
     <button type="submit" [disabled]="songForm.invalid">שמור</button>
-  </form>
+  </form> -->
+
+
+  <!-- <div class="form-card">
+    <div class="form-header">
+      <div class="form-title-container">
+        <h3 class="form-title">{{ isEditing ? 'עריכת שיר' : 'הוספת שיר חדש' }}</h3>
+        <button *ngIf="isEditing" class="cancel-edit-button" (click)="resetForm()">
+          <span class="button-icon">✖️</span>
+          ביטול עריכה
+        </button>
+      </div>
+    </div>
+  
+    <form (ngSubmit)="submit()" #songForm="ngForm" class="song-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="genre" class="form-label">ז'אנר *</label>
+          <input 
+            id="genre"
+            [(ngModel)]="genre" 
+            name="genre" 
+            placeholder="הזן ז'אנר מוזיקלי" 
+            class="form-input"
+            required 
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="singerId" class="form-label">זמר *</label>
+          <input 
+            id="singerId"
+            [(ngModel)]="singerId" 
+            name="singerId" 
+            type="number"
+            placeholder="הזן מזהה זמר" 
+            class="form-input"
+            required 
+          />
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="file" class="form-label">
+          קובץ שיר {{ isFileRequired ? '*' : '' }}
+        </label>
+        <div class="file-input-container">
+          <span class="file-icon">📁</span>
+          <input 
+            id="file"
+            type="file" 
+            (change)="onFileChange($event)" 
+            class="file-input"
+            accept="audio/*"
+            [required]="isFileRequired"
+          />
+        </div>
+        <p *ngIf="hasSelectedFile" class="file-selected">נבחר: {{ selectedFileName }}</p>
+      </div>
+  
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          [disabled]="!isFormValid()" 
+          class="submit-button"
+        >
+          <span class="button-icon">💾</span>
+          {{ isEditing ? 'עדכן שיר' : 'שמור שיר' }}
+        </button>
+      </div>
+    </form>
+  </div> -->
+
+  <div class="song-form">
+    <h2>{{ isEditing ? 'עריכת שיר' : 'הוספת שיר חדש' }}</h2>
+  
+    <form (ngSubmit)="onSubmit()">
+      <!-- <div>
+        <label for="name">שם השיר:</label>
+        <input type="text" id="name" [(ngModel)]="name" name="name" required />
+      </div> -->
+  
+      <div>
+        <label for="genre">ז׳אנר:</label>
+        <input type="text" id="genre" [(ngModel)]="genre" name="genre" required />
+      </div>
+  
+      <div>
+        <label for="singerName">שם הזמר:</label>
+        <select id="singerName" [(ngModel)]="singerName" name="singerName" required >
+        <option *ngFor="let singer of singers" [value]="singer.name">
+          {{ singer.name }}
+        </option>
+      </select>
+      </div>
+
+<!--  <div>
+        <label for="singerName">שם הזמר:</label>
+        <input type="text" id="singerName" [(ngModel)]="singerName" name="singerName" required list="singers" />
+        <datalist id="singers">
+          <option *ngFor="let singer of singers" [value]="singer.name"></option>
+        </datalist>
+      </div>
+
+      <div>
+        <label for="singerId">בחרי זמר:</label>
+        <select id="singerId" [(ngModel)]="selectedSingerId" name="singerId" required>
+          <option *ngFor="let singer of singers" [value]="singer.id">
+            {{ singer.name }}
+          </option>
+        </select>
+      </div> -->
+  
+      <div>
+        <label for="file">קובץ שיר:</label>
+        <input type="file" id="file" (change)="onFileChange($event)" [required]="isFileRequired" />
+        <span *ngIf="hasSelectedFile">נבחר: {{ selectedFileName }}</span>
+      </div>
+  
+      <div class="actions">
+        <button type="submit" [disabled]="!name || !genre || !singerName">שמירה</button>
+        <button type="button" (click)="onCancel()">ביטול</button>
+      </div>
+    </form>
+  </div>
+  

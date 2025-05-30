@@ -31,6 +31,7 @@ namespace Music.Service
             _mapper = mapper;
             _config = config;
             _openAiKey = config["OpenAI:ApiKey"];
+            Console.WriteLine(  _openAiKey);
             if (string.IsNullOrEmpty(_openAiKey))
             {
                 throw new Exception("OpenAI API key is missing in configuration.");

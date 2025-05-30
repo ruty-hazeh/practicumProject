@@ -1,7 +1,171 @@
-<nav>
+<!-- <nav>
   <a routerLink="/auth/login" routerLinkActive="active" appHighlightOnHover>Login</a>
   <a routerLink="/songs" routerLinkActive="active" appHighlightOnHover>Songs</a>
   <a routerLink="/users" routerLinkActive="active" appHighlightOnHover>Users</a>
 </nav>
 
 <router-outlet></router-outlet>
+
+
+<div class="dashboard-container" *ngIf="isLoggedIn">
+  <div class="dashboard-header">
+    <h1 class="main-title">מערכת ניהול נגן מוזיקה</h1>
+    <p class="main-subtitle">ממשק ניהול מתקדם לשירים ומשתמשים</p>
+  </div>
+
+  <div class="tabs-container">
+    <div class="tabs-list">
+      <button 
+        class="tab-button" 
+        [class.active]="activeTab === 'songs'"
+        (click)="activeTab = 'songs'"
+      >
+        <span class="tab-icon">🎵</span>
+        ניהול שירים
+      </button>
+      <button 
+        class="tab-button" 
+        [class.active]="activeTab === 'users'"
+        (click)="activeTab = 'users'"
+      >
+        <span class="tab-icon">👥</span>
+        ניהול משתמשים
+      </button>
+    </div>
+
+    <div class="tab-content">
+      <app-song-management *ngIf="activeTab === 'songs'"></app-song-management>
+      <app-user-management *ngIf="activeTab === 'users'"></app-user-management>
+    </div>
+  </div>
+</div>
+
+<app-auth *ngIf="!isLoggedIn" (loginSuccess)="isLoggedIn = true"></app-auth> -->
+
+
+<!-- 
+ניווט עליון (מוסתר כשמחובר)
+<nav class="top-nav" *ngIf="!isLoggedIn">
+  <div class="nav-container">
+    <div class="nav-brand">🎵 מערכת ניהול נגן</div>
+    <div class="nav-links">
+      <a routerLink="/auth/login" routerLinkActive="active" class="nav-link">התחברות</a>
+      <a routerLink="/songs" routerLinkActive="active" class="nav-link">שירים</a>
+      <a routerLink="/users" routerLinkActive="active" class="nav-link">משתמשים</a>
+    </div>
+  </div>
+</nav>
+
+ תוכן הדף -->
+<!-- <main class="main-content"> -->
+  <!-- דשבורד ראשי כשמחובר -->
+  <!-- <div class="dashboard-container" *ngIf="isLoggedIn">
+    <div class="dashboard-header">
+      <div class="header-content">
+        <h1 class="main-title">מערכת ניהול נגן מוזיקה</h1>
+        <p class="main-subtitle">ממשק ניהול מתקדם לשירים ומשתמשים</p>
+      </div>
+      <button class="logout-button" (click)="logout()">
+        <span class="logout-icon">🚪</span>
+        התנתק
+      </button>
+    </div>
+
+    <div class="tabs-container">
+      <div class="tabs-list">
+        <button 
+          class="tab-button" 
+          [class.active]="activeTab === 'songs'"
+          (click)="setActiveTab('songs')"
+        >
+          <span class="tab-icon">🎵</span>
+          ניהול שירים
+        </button>
+        <button 
+          class="tab-button" 
+          [class.active]="activeTab === 'users'"
+          (click)="setActiveTab('users')"
+        >
+          <span class="tab-icon">👥</span>
+          ניהול משתמשים
+        </button>
+      </div>
+
+      <div class="tab-content">
+        <app-song-list *ngIf="activeTab === 'songs'"></app-song-list>
+        <app-user-list *ngIf="activeTab === 'users'"></app-user-list>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- דף התחברות כשלא מחובר -->
+  <!-- <app-auth *ngIf="!isLoggedIn" (loginSuccess)="onLoginSuccess()"></app-auth> -->
+
+  <!-- Router outlet לניווט (אופציונלי) -->
+  <!-- <router-outlet *ngIf="!isLoggedIn"></router-outlet>
+</main> --> 
+<!-- 
+<app-dashboard></app-dashboard>
+<router-outlet></router-outlet> -->
+
+
+<!-- ניווט קטן למעלה שיופיע בכל דף חוץ מהלוגין -->
+<nav *ngIf="!isLoginPage()" class="top-navigation">
+  <div class="nav-container">
+    <!-- לוגו ושם המערכת -->
+    <div class="nav-brand">
+      <div class="brand-icon">🎵</div>
+      <span class="brand-text">מערכת ניהול נגן</span>
+    </div>
+
+    <!-- תפריט ניווט -->
+    <div class="nav-menu">
+      <button 
+        class="nav-button" 
+        [class.active]="isCurrentRoute('/dashboard')"
+        (click)="navigateTo('/dashboard')"
+      >
+        <span class="nav-icon">🏠</span>
+        דף הבית
+      </button>
+      
+      <button 
+        class="nav-button" 
+        [class.active]="isCurrentRoute('/songs')"
+        (click)="navigateTo('/songs')"
+      >
+        <span class="nav-icon">🎵</span>
+        ניהול שירים
+      </button>
+      
+      <button 
+        class="nav-button" 
+        [class.active]="isCurrentRoute('/users')"
+        (click)="navigateTo('/users')"
+      >
+        <span class="nav-icon">👥</span>
+        ניהול משתמשים
+      </button>
+
+      <button 
+      class="nav-button" 
+      [class.active]="isCurrentRoute('/singers')"
+      (click)="navigateTo('/singers')"
+    >
+      <span class="nav-icon">🎤</span>
+      ניהול זמרים
+    </button>
+    </div>
+
+    <!-- כפתור התנתקות -->
+    <button class="logout-button" (click)="logout()">
+      <span class="logout-icon">🚪</span>
+      התנתק
+    </button>
+  </div>
+</nav>
+
+<!-- תוכן הדפים -->
+<main class="main-content" [class.with-nav]="!isLoginPage()">
+  <router-outlet></router-outlet>
+</main>

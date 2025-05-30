@@ -1,0 +1,22 @@
+
+<div>
+    <h2>ניהול זמרים</h2>
+  
+    <input [(ngModel)]="newName" placeholder="שם זמר חדש" />
+    <button (click)="addSinger()">הוסף זמר</button>
+  
+    <ul>
+      <li *ngFor="let singer of singers">
+        <span *ngIf="editId !== singer.id">{{ singer.name }}</span>
+  
+        <input *ngIf="editId === singer.id" [(ngModel)]="editName" />
+  
+        <button *ngIf="editId !== singer.id" (click)="startEdit(singer)">ערוך</button>
+        <button *ngIf="editId === singer.id" (click)="saveEdit()">שמור</button>
+        <button *ngIf="editId === singer.id" (click)="cancelEdit()">ביטול</button>
+  
+        <button (click)="deleteSinger(singer.id)">מחק</button>
+      </li>
+    </ul>
+  </div>
+  
