@@ -1,20 +1,21 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Security.Claims;
-using Music.Core.Services;
-using Music.Core.Models;
-using Music.Core.Repositories;
-using Music.Data.Repositories;
-using Music.Service;
-using Music.Data;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Authentication;
+﻿using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
-using Amazon;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Music.Core.Models;
+using Music.Core.Repositories;
+using Music.Core.Services;
+using Music.Data;
+using Music.Data.Repositories;
+using Music.Service;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -84,7 +85,17 @@ builder.Services.AddCors(options =>
                         .AllowAnyHeader());
 });
 
-builder.Services.AddDbContext<DataContext>();
+//builder.Services.AddDbContext<DataContext>();
+
+//builder.Services.AddDbContext<DataContext>(options =>
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+    ));
 
 builder.Services.AddScoped<ISingerService, SingerService>();
 builder.Services.AddScoped<ISingerRepository, SingerRepository>();
