@@ -218,5 +218,6 @@ app.Use(async (context, next) =>
 
 
 app.MapControllers();
+app.MapGet("/", () => "Welcome to the Music API!"); 
 
 app.Run();
