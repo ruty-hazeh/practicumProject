@@ -97,6 +97,7 @@ builder.Services.AddDbContext<DataContext>(options =>
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     ));
 
+
 builder.Services.AddScoped<ISingerService, SingerService>();
 builder.Services.AddScoped<ISingerRepository, SingerRepository>();
 
