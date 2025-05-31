@@ -49,8 +49,6 @@
 //         this.authService.login({ name, password }).subscribe({
 //           next: (res) => {
 //             alert('Login successful!');
-//             sessionStorage.setItem('token', res.token);
-//             sessionStorage.setItem('userId', res.userId);
 //             this.router.navigate(['/home']);
 //           },
 //           error: (err) => {
@@ -62,8 +60,6 @@
 //         this.authService.register(newUser).subscribe({
 //           next: (res) => {
 //             alert('Registration successful!');
-//             sessionStorage.setItem('token', res.token);
-//             sessionStorage.setItem('userId', res.userId);
 //             this.router.navigate(['/home']);
 //           },
 //           error: (err) => {
@@ -107,8 +103,7 @@ export class AuthComponent implements OnInit {
         next: () => {
           alert('Login successful!');
           this.router.navigate(['/dashboard']);
-          // sessionStorage.setItem('token', res.token);
-          // sessionStorage.setItem('userId', res.userId);
+        
         },
         error: (err) => {
           alert('Login failed: ' + (err.error?.message || 'Unknown error'));

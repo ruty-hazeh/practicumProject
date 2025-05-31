@@ -20,7 +20,8 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = sessionStorage.getItem('token');
+  // const token = sessionStorage.getItem('token');
+  const token = (typeof window !== 'undefined' && sessionStorage.getItem('token')) || '';
 
   if (token) {
     try {
