@@ -141,16 +141,6 @@
 "use client"
 
 import { type FormEvent, useContext, useRef, useState } from "react"
-import {
-  Button,
-  Input,
-  Card,
-  CardContent,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-} from "@mui/material"
-import { Music, User, Mail, Lock } from "lucide-react"
 import { UserContext } from "./userContext"
 import { ApiClient, LoginModel, UserDTO } from "../api/client"
 
@@ -162,7 +152,7 @@ function parseJwt(token: string) {
       atob(base64)
         .split("")
         .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join("")
+        .join(""),
     )
     return JSON.parse(jsonPayload)
   } catch {
@@ -174,11 +164,7 @@ const Login = ({
   successLogin,
   typeAction,
   close,
-}: {
-  successLogin: () => void
-  typeAction: string
-  close: () => void
-}) => {
+}: { successLogin: Function; typeAction: string; close: Function }) => {
   const context = useContext(UserContext)
   const nameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -193,9 +179,10 @@ const Login = ({
 
     try {
       let res: any
-      const name = nameRef.current?.value ?? ""
-      const password = passwordRef.current?.value ?? ""
-      const email = emailRef.current?.value ?? ""
+
+      const name = nameRef.current?.value || ""
+      const password = passwordRef.current?.value || ""
+      const email = emailRef.current?.value || ""
 
       if (typeAction === "Sign") {
         const registerModel = new UserDTO()
@@ -203,28 +190,43 @@ const Login = ({
         registerModel.password = password
         registerModel.email = email
 
+        console.log("Sending register request:", JSON.stringify(registerModel))
         res = await apiClient.register(registerModel)
+        console.log("Register response:", res)
+
+        if (!res || !res.token) {
+          console.error("Response missing token or message:", res)
+        } else {
+          console.log("Registration successful:", res)
+        }
       } else {
         const loginModel = new LoginModel()
         loginModel.name = name
         loginModel.password = password
 
+        console.log("Sending login request:", JSON.stringify(loginModel))
         res = await apiClient.login(loginModel)
+        console.log("Login response:", res)
       }
 
       const payload = parseJwt(res.token)
       if (!payload?.id) {
         console.error("User ID not found in token payload!")
-        alert("Invalid token received")
-        setIsLoading(false)
         return
       }
+      const userId = payload.id
 
+      console.log(userId)
       if (res && res.token) {
         context?.userDispatch({
           type: "CREATE",
-          data: { id: payload.id, name, password },
+          data: {
+            id: userId,
+            name: name,
+            password: password,
+          },
         })
+
         setOpen(false)
         successLogin()
       } else {
@@ -238,112 +240,441 @@ const Login = ({
     }
   }
 
-  return (
-    <Dialog open={open} onClose={() => close()}>
-      <DialogContent className="sm:max-w-md bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 border-purple-500/20 text-white">
-        <div className="relative">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
-              <Music className="w-8 h-8 text-white" />
-            </div>
-          </div>
-          <DialogTitle className="text-2xl font-bold text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            {typeAction === "Sign" ? "Join SoundWave" : "Welcome Back"}
-          </DialogTitle>
-          <div className="text-center text-gray-300">
-            {typeAction === "Sign"
-              ? "Create your account and start your musical journey"
-              : "Sign in to access your music library"}
-          </div>
-        </div>
+  if (!open) return null
 
-        <Card className="border-0 bg-transparent shadow-none">
-          <CardContent className="p-0">
-            <form onSubmit={handleSubmitLogin} className="space-y-4" noValidate>
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-gray-200 flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  Username
-                </label>
-                <Input
-                  id="name"
-                  inputRef={nameRef}
-                  placeholder="Enter your username"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+  return (
+    <>
+      <style>{`
+        @keyframes modalSlideIn {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -60%) scale(0.8);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+          }
+        }
+        
+        @keyframes backdropFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        
+        @keyframes glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.4); }
+          50% { box-shadow: 0 0 40px rgba(72, 202, 228, 0.6); }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+
+      {/* Modal Backdrop */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: "rgba(0, 0, 0, 0.8)",
+          backdropFilter: "blur(10px)",
+          zIndex: 1000,
+          animation: "backdropFadeIn 0.3s ease-out",
+        }}
+        onClick={() => close()}
+      >
+        {/* Modal Container */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "90%",
+            maxWidth: "450px",
+            background:
+              "linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 25%, rgba(240, 147, 251, 0.95) 50%, rgba(245, 87, 108, 0.95) 75%, rgba(79, 172, 254, 0.95) 100%)",
+            borderRadius: "25px",
+            padding: "0",
+            border: "2px solid rgba(255, 255, 255, 0.3)",
+            boxShadow: "0 25px 80px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)",
+            animation: "modalSlideIn 0.4s ease-out",
+            overflow: "hidden",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Floating Decorative Elements */}
+          <div
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              width: "60px",
+              height: "60px",
+              background: "linear-gradient(45deg, #ff6b6b, #feca57)",
+              borderRadius: "50%",
+              opacity: 0.3,
+              animation: "float 3s ease-in-out infinite",
+            }}
+          ></div>
+
+          <div
+            style={{
+              position: "absolute",
+              bottom: "30px",
+              left: "30px",
+              width: "40px",
+              height: "40px",
+              background: "linear-gradient(45deg, #48cae4, #a8e6cf)",
+              borderRadius: "50%",
+              opacity: 0.4,
+              animation: "float 4s ease-in-out infinite reverse",
+            }}
+          ></div>
+
+          {/* Header */}
+          <div
+            style={{
+              textAlign: "center",
+              padding: "40px 40px 20px",
+              position: "relative",
+            }}
+          >
+            {/* Close Button */}
+            <button
+              style={{
+                position: "absolute",
+                top: "20px",
+                right: "20px",
+                background: "rgba(255, 255, 255, 0.2)",
+                border: "none",
+                borderRadius: "50%",
+                width: "35px",
+                height: "35px",
+                color: "white",
+                fontSize: "18px",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.background = "rgba(255, 255, 255, 0.3)"
+                target.style.transform = "scale(1.1)"
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.background = "rgba(255, 255, 255, 0.2)"
+                target.style.transform = "scale(1)"
+              }}
+              onClick={() => close()}
+            >
+              ✕
+            </button>
+
+            {/* Logo */}
+            <div
+              style={{
+                width: "80px",
+                height: "80px",
+                background: "linear-gradient(45deg, #ff6b6b, #feca57, #48cae4, #a8e6cf)",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 20px",
+                animation: "pulse 3s ease-in-out infinite",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
+              }}
+            >
+              <span style={{ fontSize: "40px" }}>🎵</span>
+            </div>
+
+            {/* Title */}
+            <h2
+              style={{
+                fontSize: "32px",
+                fontWeight: "900",
+                color: "white",
+                margin: "0 0 10px",
+                textShadow: "0 2px 10px rgba(0, 0, 0, 0.3)",
+              }}
+            >
+              {typeAction === "Sign" ? "Join MusicFlow" : "Welcome Back"}
+            </h2>
+
+            <p
+              style={{
+                fontSize: "16px",
+                color: "rgba(255, 255, 255, 0.8)",
+                margin: "0",
+                textShadow: "0 1px 5px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              {typeAction === "Sign"
+                ? "Create your account and start your musical journey"
+                : "Sign in to access your music library"}
+            </p>
+          </div>
+
+          {/* Form */}
+          <div style={{ padding: "0 40px 40px" }}>
+            <form onSubmit={handleSubmitLogin} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              {/* Username Field */}
+              <div style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "15px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    fontSize: "20px",
+                    zIndex: 1,
+                  }}
+                >
+                  👤
+                </div>
+                <input
+                  ref={nameRef}
+                  type="text"
+                  placeholder="Username"
                   required
-                  autoComplete="username"
+                  style={{
+                    width: "100%",
+                    padding: "15px 15px 15px 50px",
+                    border: "2px solid rgba(255, 255, 255, 0.3)",
+                    borderRadius: "15px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(10px)",
+                    color: "white",
+                    fontSize: "16px",
+                    outline: "none",
+                    transition: "all 0.3s ease",
+                    boxSizing: "border-box",
+                  }}
+                  onFocus={(e) => {
+                    const target = e.target as HTMLInputElement
+                    target.style.border = "2px solid rgba(255, 255, 255, 0.6)"
+                    target.style.background = "rgba(255, 255, 255, 0.2)"
+                    target.style.transform = "scale(1.02)"
+                  }}
+                  onBlur={(e) => {
+                    const target = e.target as HTMLInputElement
+                    target.style.border = "2px solid rgba(255, 255, 255, 0.3)"
+                    target.style.background = "rgba(255, 255, 255, 0.1)"
+                    target.style.transform = "scale(1)"
+                  }}
                 />
               </div>
 
+              {/* Email Field (only for Sign up) */}
               {typeAction === "Sign" && (
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-gray-200 flex items-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    inputRef={emailRef}
+                <div style={{ position: "relative" }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: "15px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      fontSize: "20px",
+                      zIndex: 1,
+                    }}
+                  >
+                    📧
+                  </div>
+                  <input
+                    ref={emailRef}
                     type="email"
-                    placeholder="Enter your email"
-                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                    placeholder="Email"
                     required
-                    autoComplete="email"
+                    style={{
+                      width: "100%",
+                      padding: "15px 15px 15px 50px",
+                      border: "2px solid rgba(255, 255, 255, 0.3)",
+                      borderRadius: "15px",
+                      background: "rgba(255, 255, 255, 0.1)",
+                      backdropFilter: "blur(10px)",
+                      color: "white",
+                      fontSize: "16px",
+                      outline: "none",
+                      transition: "all 0.3s ease",
+                      boxSizing: "border-box",
+                    }}
+                    onFocus={(e) => {
+                      const target = e.target as HTMLInputElement
+                      target.style.border = "2px solid rgba(255, 255, 255, 0.6)"
+                      target.style.background = "rgba(255, 255, 255, 0.2)"
+                      target.style.transform = "scale(1.02)"
+                    }}
+                    onBlur={(e) => {
+                      const target = e.target as HTMLInputElement
+                      target.style.border = "2px solid rgba(255, 255, 255, 0.3)"
+                      target.style.background = "rgba(255, 255, 255, 0.1)"
+                      target.style.transform = "scale(1)"
+                    }}
                   />
                 </div>
               )}
 
-              <div className="space-y-2">
-                <label htmlFor="password" className="text-gray-200 flex items-center gap-2">
-                  <Lock className="w-4 h-4" />
-                  Password
-                </label>
-                <Input
-                  id="password"
-                  inputRef={passwordRef}
+              {/* Password Field */}
+              <div style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "15px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    fontSize: "20px",
+                    zIndex: 1,
+                  }}
+                >
+                  🔒
+                </div>
+                <input
+                  ref={passwordRef}
                   type="password"
-                  placeholder="Enter your password"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                  placeholder="Password"
                   required
-                  autoComplete={typeAction === "Sign" ? "new-password" : "current-password"}
+                  style={{
+                    width: "100%",
+                    padding: "15px 15px 15px 50px",
+                    border: "2px solid rgba(255, 255, 255, 0.3)",
+                    borderRadius: "15px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(10px)",
+                    color: "white",
+                    fontSize: "16px",
+                    outline: "none",
+                    transition: "all 0.3s ease",
+                    boxSizing: "border-box",
+                  }}
+                  onFocus={(e) => {
+                    const target = e.target as HTMLInputElement
+                    target.style.border = "2px solid rgba(255, 255, 255, 0.6)"
+                    target.style.background = "rgba(255, 255, 255, 0.2)"
+                    target.style.transform = "scale(1.02)"
+                  }}
+                  onBlur={(e) => {
+                    const target = e.target as HTMLInputElement
+                    target.style.border = "2px solid rgba(255, 255, 255, 0.3)"
+                    target.style.background = "rgba(255, 255, 255, 0.1)"
+                    target.style.transform = "scale(1)"
+                  }}
                 />
               </div>
 
-              <Button
+              {/* Submit Button */}
+              <button
                 type="submit"
                 disabled={isLoading}
-                fullWidth
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  width: "100%",
+                  padding: "18px",
+                  background: isLoading ? "rgba(255, 255, 255, 0.3)" : "linear-gradient(45deg, #ff6b6b, #feca57)",
+                  color: "white",
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  border: "none",
+                  borderRadius: "15px",
+                  cursor: isLoading ? "not-allowed" : "pointer",
+                  transition: "all 0.4s ease",
+                  boxShadow: "0 8px 25px rgba(0, 0, 0, 0.2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  animation: isLoading ? "none" : "glow 3s ease-in-out infinite",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isLoading) {
+                    const target = e.target as HTMLButtonElement
+                    target.style.transform = "translateY(-2px) scale(1.02)"
+                    target.style.boxShadow = "0 12px 35px rgba(0, 0, 0, 0.3)"
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isLoading) {
+                    const target = e.target as HTMLButtonElement
+                    target.style.transform = "translateY(0) scale(1)"
+                    target.style.boxShadow = "0 8px 25px rgba(0, 0, 0, 0.2)"
+                  }
+                }}
               >
                 {isLoading ? (
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <>
+                    <div
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        border: "2px solid rgba(255, 255, 255, 0.3)",
+                        borderTop: "2px solid white",
+                        borderRadius: "50%",
+                        animation: "spin 1s linear infinite",
+                      }}
+                    ></div>
                     {typeAction === "Sign" ? "Creating Account..." : "Signing In..."}
-                  </div>
-                ) : typeAction === "Sign" ? (
-                  "Create Account"
+                  </>
                 ) : (
-                  "Sign In"
+                  <>
+                    <span style={{ fontSize: "20px" }}>{typeAction === "Sign" ? "🚀" : "🎵"}</span>
+                    {typeAction === "Sign" ? "Create Account" : "Sign In"}
+                  </>
                 )}
-              </Button>
+              </button>
             </form>
 
-            <div className="mt-6 text-center">
-              <p className="text-gray-400 text-sm">
+            {/* Footer */}
+            <div style={{ textAlign: "center", marginTop: "25px" }}>
+              <p style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "14px", margin: "0" }}>
                 {typeAction === "Sign" ? "Already have an account?" : "Don't have an account?"}
                 <button
-                  className="text-purple-400 hover:text-purple-300 p-0 ml-1 h-auto font-normal underline bg-transparent border-none"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: "#feca57",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                    marginLeft: "5px",
+                    textDecoration: "underline",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    const target = e.target as HTMLButtonElement
+                    target.style.color = "#ff6b6b"
+                    target.style.transform = "scale(1.05)"
+                  }}
+                  onMouseLeave={(e) => {
+                    const target = e.target as HTMLButtonElement
+                    target.style.color = "#feca57"
+                    target.style.transform = "scale(1)"
+                  }}
                   onClick={() => close()}
-                  type="button"
                 >
                   {typeAction === "Sign" ? "Sign in here" : "Sign up here"}
                 </button>
               </p>
             </div>
-          </CardContent>
-        </Card>
-      </DialogContent>
-    </Dialog>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
