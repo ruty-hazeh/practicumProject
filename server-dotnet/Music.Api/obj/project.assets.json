@@ -1754,7 +1754,8 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.14",
-          "Music.Core": "1.0.0"
+          "Music.Core": "1.0.0",
+          "Pomelo.EntityFrameworkCore.MySql": "9.0.0-preview.3.efcore.9.0.0"
         },
         "compile": {
           "bin/placeholder/Music.Data.dll": {}
