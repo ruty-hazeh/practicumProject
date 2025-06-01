@@ -1,14 +1,18 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AlertService } from '../services/alert.service';
+
+
+
 
 export const authGuard: CanActivateFn = (route, state) => {
-
   const router = inject(Router);
-  // const isLoggedIn = !!sessionStorage.getItem('token'); 
-  const isLoggedIn = (typeof window !== 'undefined' && !!sessionStorage.getItem('token')) || false;
+  const isLoggedIn = !!localStorage.getItem('token'); 
+  const alertService = inject(AlertService);
 
+  
   if (!isLoggedIn) {
-    alert('you need to login!!!!!!!!')
+    alertService.show('you need to login!!!!!!!!')
     router.navigate(['/']);  
     return false;
   }

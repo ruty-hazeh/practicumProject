@@ -15,7 +15,7 @@ export class AuthService {
       .pipe(
         tap(response => {
           if (response.token) {
-            sessionStorage.setItem('token', response.token);
+            localStorage.setItem('token', response.token);
             const payload = this.decodeToken(response.token);
             // const role = payload?.role || 'User';
             const role =
@@ -25,12 +25,12 @@ export class AuthService {
             console.log(response.token)
             if (role !== 'Admin') {
               // לא מנהל – נזרוק שגיאה ונמחק את הטוקן
-              sessionStorage.clear();
+              localStorage.clear();
               throw new Error('גישה מותרת למנהלים בלבד');
             }
   
             // שמירת פרטים אם עבר את הבדיקה
-            sessionStorage.setItem('role', role);
+            localStorage.setItem('role', role);
             // sessionStorage.setItem('name', payload?.unique_name || '');
           }
         })
@@ -43,11 +43,11 @@ export class AuthService {
   }
 
   get isAdmin(): boolean {
-    return sessionStorage.getItem('role') === 'Admin';
+    return localStorage.getItem('role') === 'Admin';
   }
 
   get isLoggedIn(): boolean {
-    return !!sessionStorage.getItem('token');
+    return !!localStorage.getItem('token');
   }
 
   decodeToken(token: string): any {
@@ -60,6 +60,6 @@ export class AuthService {
   }
 
   logout(): void {
-    sessionStorage.clear();
+    localStorage.clear();
   }
 }

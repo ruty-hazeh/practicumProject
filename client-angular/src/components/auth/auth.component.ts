@@ -77,6 +77,7 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-auth',
@@ -91,8 +92,7 @@ export class AuthComponent implements OnInit {
     password: new FormControl<string | null>(null, [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
-
+  constructor(private authService: AuthService, private router: Router,private alertService: AlertService) {}
   ngOnInit(): void {}
 
   Submit() {
@@ -105,9 +105,7 @@ export class AuthComponent implements OnInit {
         
         },
         error: (err) => {
-          if (typeof window !== 'undefined') {
-          alert('Login failed: ' + (err.error?.message || 'Unknown error'));
-          }
+          this.alertService.show('Login failed: ' + (err.error?.message || 'Unknown error'));
         }
       });
     }

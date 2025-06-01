@@ -191,6 +191,7 @@ import { SingerService } from '../../services/singer.service';
 import { Singer } from '../../models/singer';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AlertService } from '../../services/alert.service';
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
@@ -212,7 +213,8 @@ export class SongFormComponent implements OnChanges {
 
   constructor(
     private songService: SongService,
-    private singerService: SingerService
+    private singerService: SingerService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -247,7 +249,7 @@ export class SongFormComponent implements OnChanges {
 
     const singer = this.singers.find(s => s.name.trim().toLowerCase() === this.singerName.trim().toLowerCase());
     if (!singer) {
-      alert("הזמר שהוזן לא נמצא ברשימת הזמרים");
+      this.alertService.show("הזמר שהוזן לא נמצא ברשימת הזמרים");
       return;
     }
 
@@ -289,7 +291,7 @@ export class SongFormComponent implements OnChanges {
     } else {
       // הוספה
       if (!this.file) {
-        alert('יש לבחור קובץ לפני הוספת שיר חדש!');
+        this.alertService.show('יש לבחור קובץ לפני הוספת שיר חדש!');
         return;
       }
       this.songService.uploadFile(this.file).subscribe(res => {
