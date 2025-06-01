@@ -1,39 +1,181 @@
 
-import Login from "./Login";
-import { useState } from "react";
-import Username_avatar from "./UserAvatar";
-import { Box, Button } from "@mui/material";
+// import Login from "./Login";
+// import { useState } from "react";
+// import Username_avatar from "./UserAvatar";
+// import { Box, Button } from "@mui/material";
+
+// const HomePage = () => {
+//     const [isLogin, setIsLogin] = useState(false);
+//     const [isLoginOpen, setIsLoginOpen] = useState(false);
+//     const [type, setType] = useState('Login');
+
+//     const handleLoginSuccess = () => {
+//         setIsLogin((prev) => {
+//             if (!prev) setIsLoginOpen(false);
+//             return !prev;
+//         });
+//     }
+//     return (<>
+//         {!isLogin && (
+//             <Box
+//                 sx={{ position: "absolute", top: 10, left: 10, display: "flex", gap: 2 }}>
+//                 <Button variant="contained" color="error" onClick={() => { setIsLoginOpen(true); setType('Sign'); }}>
+//                     Sign
+//                 </Button>
+
+//                 <Button variant="contained" color="error" onClick={() => { setIsLoginOpen(true); setType('Login'); }}>
+//                     Login
+//                 </Button>
+//             </Box>
+//         )
+//         }
+//         {isLoginOpen && <Login successLogin={handleLoginSuccess} typeAction={type} close={() => setIsLoginOpen(false)} />}
+//         {isLogin && <Username_avatar />}
+//     </>)
+// }
+// export default HomePage;
+
+
+"use client"
+
+import { useState } from "react"
+import { Button } from "@mui/material"
+import { Music, Play, Users, Headphones } from "lucide-react"
+import Login from "./Login"
+import UsernameAvatar from "./UserAvatar"
 
 const HomePage = () => {
-    const [isLogin, setIsLogin] = useState(false);
-    const [isLoginOpen, setIsLoginOpen] = useState(false);
-    const [type, setType] = useState('Login');
+  const [isLogin, setIsLogin] = useState(false)
+  const [isLoginOpen, setIsLoginOpen] = useState(false)
+  const [type, setType] = useState("Login")
 
-    const handleLoginSuccess = () => {
-        setIsLogin((prev) => {
-            if (!prev) setIsLoginOpen(false);
-            return !prev;
-        });
-    }
-    return (<>
-        {!isLogin && (
-            <Box
-                sx={{ position: "absolute", top: 10, left: 10, display: "flex", gap: 2 }}>
-                <Button variant="contained" color="error" onClick={() => { setIsLoginOpen(true); setType('Sign'); }}>
-                    Sign
-                </Button>
+  const handleLoginSuccess = () => {
+    setIsLogin((prev) => {
+      if (!prev) setIsLoginOpen(false)
+      return !prev
+    })
+  }
 
-                <Button variant="contained" color="error" onClick={() => { setIsLoginOpen(true); setType('Login'); }}>
-                    Login
-                </Button>
-            </Box>
-        )
-        }
-        {isLoginOpen && <Login successLogin={handleLoginSuccess} typeAction={type} close={() => setIsLoginOpen(false)} />}
-        {isLogin && <Username_avatar />}
-    </>)
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
+
+      {/* Header */}
+      {!isLogin && (
+        <div className="absolute top-6 left-6 z-10 flex gap-3">
+          <Button
+            className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-105"
+            onClick={() => {
+              setIsLoginOpen(true)
+              setType("Sign")
+            }}
+          >
+            <Users className="w-4 h-4 mr-2" />
+            Sign Up
+          </Button>
+          <Button
+            className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-105"
+            onClick={() => {
+              setIsLoginOpen(true)
+              setType("Login")
+            }}
+          >
+            <Play className="w-4 h-4 mr-2" />
+            Login
+          </Button>
+        </div>
+      )}
+
+      {/* Main Content */}
+      {!isLogin && (
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
+          <div className="mb-8 relative">
+            <div className="w-32 h-32 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto shadow-2xl animate-bounce">
+              <Music className="w-16 h-16 text-white" />
+            </div>
+            <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-ping" />
+            <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-pink-400 rounded-full animate-pulse" />
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+              SoundWave
+            </span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-2xl leading-relaxed">
+            Your ultimate music companion. Stream, download, and create playlists with millions of songs at your
+            fingertips.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <Button
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-purple-500/25"
+              onClick={() => {
+                setIsLoginOpen(true)
+                setType("Sign")
+              }}
+            >
+              <Headphones className="w-5 h-5 mr-2" />
+              Start Listening
+            </Button>
+            <Button
+              className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105"
+              onClick={() => {
+                setIsLoginOpen(true)
+                setType("Login")
+              }}
+            >
+              <Play className="w-5 h-5 mr-2" />
+              Sign In
+            </Button>
+          </div>
+
+          {/* Features */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <Music className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Stream Music</h3>
+              <p className="text-white/70 text-sm">Listen to millions of songs in high quality</p>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <Play className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Create Playlists</h3>
+              <p className="text-white/70 text-sm">Organize your favorite tracks</p>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-indigo-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <Headphones className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Download</h3>
+              <p className="text-white/70 text-sm">Save songs for offline listening</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modals and User Components */}
+      {isLoginOpen && <Login successLogin={handleLoginSuccess} typeAction={type} close={() => setIsLoginOpen(false)} />}
+      {isLogin && <UsernameAvatar />}
+    </div>
+  )
 }
-export default HomePage;
+
+export default HomePage
+
+
 
 // import Login from "./Login";
 // import { useState } from "react";
