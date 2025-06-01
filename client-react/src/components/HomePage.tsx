@@ -5,7 +5,6 @@ import Username_avatar from "./UserAvatar";
 import { Box, Button } from "@mui/material";
 
 const HomePage = () => {
-
     const [isLogin, setIsLogin] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [type, setType] = useState('Login');

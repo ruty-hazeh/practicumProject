@@ -141,7 +141,15 @@
 "use client"
 
 import { type FormEvent, useContext, useRef, useState } from "react"
-import { Button, Input, Card, CardContent, Dialog, DialogTitle, DialogContent } from '@mui/material'
+import {
+  Button,
+  Input,
+  Card,
+  CardContent,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material"
 import { Music, User, Mail, Lock } from "lucide-react"
 import { UserContext } from "./userContext"
 import { ApiClient, LoginModel, UserDTO } from "../api/client"
@@ -166,7 +174,11 @@ const Login = ({
   successLogin,
   typeAction,
   close,
-}: { successLogin: Function; typeAction: string; close: Function }) => {
+}: {
+  successLogin: () => void
+  typeAction: string
+  close: () => void
+}) => {
   const context = useContext(UserContext)
   const nameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -181,9 +193,9 @@ const Login = ({
 
     try {
       let res: any
-      const name = nameRef.current?.value || ""
-      const password = passwordRef.current?.value || ""
-      const email = emailRef.current?.value || ""
+      const name = nameRef.current?.value ?? ""
+      const password = passwordRef.current?.value ?? ""
+      const email = emailRef.current?.value ?? ""
 
       if (typeAction === "Sign") {
         const registerModel = new UserDTO()
@@ -203,6 +215,8 @@ const Login = ({
       const payload = parseJwt(res.token)
       if (!payload?.id) {
         console.error("User ID not found in token payload!")
+        alert("Invalid token received")
+        setIsLoading(false)
         return
       }
 
@@ -245,7 +259,7 @@ const Login = ({
 
         <Card className="border-0 bg-transparent shadow-none">
           <CardContent className="p-0">
-            <form onSubmit={handleSubmitLogin} className="space-y-4">
+            <form onSubmit={handleSubmitLogin} className="space-y-4" noValidate>
               <div className="space-y-2">
                 <label htmlFor="name" className="text-gray-200 flex items-center gap-2">
                   <User className="w-4 h-4" />
@@ -257,6 +271,7 @@ const Login = ({
                   placeholder="Enter your username"
                   className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                   required
+                  autoComplete="username"
                 />
               </div>
 
@@ -273,6 +288,7 @@ const Login = ({
                     placeholder="Enter your email"
                     className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                     required
+                    autoComplete="email"
                   />
                 </div>
               )}
@@ -289,6 +305,7 @@ const Login = ({
                   placeholder="Enter your password"
                   className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                   required
+                  autoComplete={typeAction === "Sign" ? "new-password" : "current-password"}
                 />
               </div>
 
@@ -317,6 +334,7 @@ const Login = ({
                 <button
                   className="text-purple-400 hover:text-purple-300 p-0 ml-1 h-auto font-normal underline bg-transparent border-none"
                   onClick={() => close()}
+                  type="button"
                 >
                   {typeAction === "Sign" ? "Sign in here" : "Sign up here"}
                 </button>
