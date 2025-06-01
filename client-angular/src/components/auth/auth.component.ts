@@ -101,12 +101,13 @@ export class AuthComponent implements OnInit {
 
       this.authService.login({ name, password }).subscribe({
         next: () => {
-          alert('Login successful!');
           this.router.navigate(['/dashboard']);
         
         },
         error: (err) => {
+          if (typeof window !== 'undefined') {
           alert('Login failed: ' + (err.error?.message || 'Unknown error'));
+          }
         }
       });
     }
