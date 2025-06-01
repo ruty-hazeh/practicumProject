@@ -138,7 +138,6 @@
 
 // export default Login;
 
-
 "use client"
 
 import { type FormEvent, useContext, useRef, useState } from "react"
@@ -146,7 +145,6 @@ import { Button, Input, Card, CardContent, Dialog, DialogTitle, DialogContent } 
 import { Music, User, Mail, Lock } from "lucide-react"
 import { UserContext } from "./userContext"
 import { ApiClient, LoginModel, UserDTO } from "../api/client"
-import { Label } from "@headlessui/react"
 
 function parseJwt(token: string) {
   try {
@@ -156,7 +154,7 @@ function parseJwt(token: string) {
       atob(base64)
         .split("")
         .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join(""),
+        .join("")
     )
     return JSON.parse(jsonPayload)
   } catch {
@@ -249,10 +247,10 @@ const Login = ({
           <CardContent className="p-0">
             <form onSubmit={handleSubmitLogin} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-gray-200 flex items-center gap-2">
+                <label htmlFor="name" className="text-gray-200 flex items-center gap-2">
                   <User className="w-4 h-4" />
                   Username
-                </Label>
+                </label>
                 <Input
                   id="name"
                   inputRef={nameRef}
@@ -264,10 +262,10 @@ const Login = ({
 
               {typeAction === "Sign" && (
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-gray-200 flex items-center gap-2">
+                  <label htmlFor="email" className="text-gray-200 flex items-center gap-2">
                     <Mail className="w-4 h-4" />
                     Email
-                  </Label>
+                  </label>
                   <Input
                     id="email"
                     inputRef={emailRef}
@@ -280,10 +278,10 @@ const Login = ({
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-gray-200 flex items-center gap-2">
+                <label htmlFor="password" className="text-gray-200 flex items-center gap-2">
                   <Lock className="w-4 h-4" />
                   Password
-                </Label>
+                </label>
                 <Input
                   id="password"
                   inputRef={passwordRef}
