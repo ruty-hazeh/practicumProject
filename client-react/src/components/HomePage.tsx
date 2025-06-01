@@ -34,7 +34,6 @@
 //     </>)
 // }
 // export default HomePage;
-
 "use client"
 
 import Login from "./Login"
@@ -54,445 +53,23 @@ const HomePage = () => {
   }
 
   return (
-    <div style={{ minHeight: "100vh", position: "relative", overflow: "hidden" }}>
-      {/* Animated Background */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: "linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)",
-          animation: "gradientShift 8s ease infinite",
-        }}
-      >
-        {/* Floating Circles */}
-        <div
-          style={{
-            position: "absolute",
-            top: "10%",
-            left: "10%",
-            width: "200px",
-            height: "200px",
-            background: "linear-gradient(45deg, #ff6b6b, #feca57)",
-            borderRadius: "50%",
-            opacity: 0.3,
-            animation: "float 6s ease-in-out infinite",
-          }}
-        ></div>
-
-        <div
-          style={{
-            position: "absolute",
-            top: "60%",
-            right: "15%",
-            width: "150px",
-            height: "150px",
-            background: "linear-gradient(45deg, #48cae4, #023e8a)",
-            borderRadius: "50%",
-            opacity: 0.4,
-            animation: "float 8s ease-in-out infinite reverse",
-          }}
-        ></div>
-
-        <div
-          style={{
-            position: "absolute",
-            bottom: "20%",
-            left: "20%",
-            width: "100px",
-            height: "100px",
-            background: "linear-gradient(45deg, #a8e6cf, #88d8c0)",
-            borderRadius: "50%",
-            opacity: 0.5,
-            animation: "float 4s ease-in-out infinite",
-          }}
-        ></div>
-
-        {/* Music Wave Lines */}
-        <div
-          style={{
-            position: "absolute",
-            top: "30%",
-            left: "5%",
-            width: "4px",
-            height: "60px",
-            background: "#ff6b6b",
-            borderRadius: "2px",
-            animation: "wave 1s ease-in-out infinite",
-          }}
-        ></div>
-        <div
-          style={{
-            position: "absolute",
-            top: "25%",
-            left: "7%",
-            width: "4px",
-            height: "80px",
-            background: "#feca57",
-            borderRadius: "2px",
-            animation: "wave 1s ease-in-out infinite 0.2s",
-          }}
-        ></div>
-        <div
-          style={{
-            position: "absolute",
-            top: "20%",
-            left: "9%",
-            width: "4px",
-            height: "100px",
-            background: "#48cae4",
-            borderRadius: "2px",
-            animation: "wave 1s ease-in-out infinite 0.4s",
-          }}
-        ></div>
-        <div
-          style={{
-            position: "absolute",
-            top: "35%",
-            left: "11%",
-            width: "4px",
-            height: "50px",
-            background: "#a8e6cf",
-            borderRadius: "2px",
-            animation: "wave 1s ease-in-out infinite 0.6s",
-          }}
-        ></div>
-      </div>
-
-      {/* Login Buttons */}
-      {!isLogin && (
-        <div style={{ position: "absolute", top: "20px", left: "20px", zIndex: 20, display: "flex", gap: "15px" }}>
-          <button
-            style={{
-              padding: "12px 24px",
-              background: "linear-gradient(45deg, #ff6b6b, #feca57)",
-              color: "white",
-              fontWeight: "bold",
-              border: "none",
-              borderRadius: "25px",
-              cursor: "pointer",
-              fontSize: "16px",
-              boxShadow: "0 8px 32px rgba(255, 107, 107, 0.4)",
-              transition: "all 0.3s ease",
-              transform: "scale(1)",
-            }}
-            onMouseEnter={(e) => {
-              const target = e.target as HTMLButtonElement
-              target.style.transform = "scale(1.1) translateY(-2px)"
-              target.style.boxShadow = "0 12px 40px rgba(255, 107, 107, 0.6)"
-            }}
-            onMouseLeave={(e) => {
-              const target = e.target as HTMLButtonElement
-              target.style.transform = "scale(1) translateY(0)"
-              target.style.boxShadow = "0 8px 32px rgba(255, 107, 107, 0.4)"
-            }}
-            onClick={() => {
-              setIsLoginOpen(true)
-              setType("Sign")
-            }}
-          >
-            🎵 Sign Up
-          </button>
-
-          <button
-            style={{
-              padding: "12px 24px",
-              background: "linear-gradient(45deg, #48cae4, #023e8a)",
-              color: "white",
-              fontWeight: "bold",
-              border: "none",
-              borderRadius: "25px",
-              cursor: "pointer",
-              fontSize: "16px",
-              boxShadow: "0 8px 32px rgba(72, 202, 228, 0.4)",
-              transition: "all 0.3s ease",
-              transform: "scale(1)",
-            }}
-            onMouseEnter={(e) => {
-              const target = e.target as HTMLButtonElement
-              target.style.transform = "scale(1.1) translateY(-2px)"
-              target.style.boxShadow = "0 12px 40px rgba(72, 202, 228, 0.6)"
-            }}
-            onMouseLeave={(e) => {
-              const target = e.target as HTMLButtonElement
-              target.style.transform = "scale(1) translateY(0)"
-              target.style.boxShadow = "0 8px 32px rgba(72, 202, 228, 0.4)"
-            }}
-            onClick={() => {
-              setIsLoginOpen(true)
-              setType("Login")
-            }}
-          >
-            🎧 Login
-          </button>
-        </div>
-      )}
-
-      {/* Main Content */}
-      {!isLogin && (
-        <div
-          style={{
-            position: "relative",
-            zIndex: 10,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: "100vh",
-            textAlign: "center",
-            padding: "0 20px",
-          }}
-        >
-          {/* Logo */}
-          <div style={{ marginBottom: "40px", position: "relative" }}>
-            <div
-              style={{
-                width: "180px",
-                height: "180px",
-                background: "linear-gradient(45deg, #ff6b6b, #feca57, #48cae4, #a8e6cf)",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "0 auto 30px",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
-                animation: "pulse 3s ease-in-out infinite",
-              }}
-            >
-              <span style={{ fontSize: "80px", animation: "bounce 2s ease-in-out infinite" }}>🎵</span>
-            </div>
-
-            {/* Decorative elements */}
-            <div
-              style={{
-                position: "absolute",
-                top: "-10px",
-                right: "20px",
-                width: "30px",
-                height: "30px",
-                background: "#feca57",
-                borderRadius: "50%",
-                animation: "ping 2s ease-in-out infinite",
-              }}
-            ></div>
-            <div
-              style={{
-                position: "absolute",
-                bottom: "10px",
-                left: "10px",
-                width: "20px",
-                height: "20px",
-                background: "#ff6b6b",
-                borderRadius: "50%",
-                animation: "pulse 2s ease-in-out infinite",
-              }}
-            ></div>
-          </div>
-
-          {/* Title */}
-          <h1
-            style={{
-              fontSize: "80px",
-              fontWeight: "900",
-              background: "linear-gradient(45deg, #ff6b6b, #feca57, #48cae4, #a8e6cf)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              marginBottom: "30px",
-              animation: "glow 3s ease-in-out infinite alternate",
-              textShadow: "0 0 30px rgba(255, 255, 255, 0.5)",
-            }}
-          >
-            MusicFlow
-          </h1>
-
-          {/* Subtitle */}
-          <p
-            style={{
-              fontSize: "24px",
-              color: "white",
-              marginBottom: "50px",
-              maxWidth: "600px",
-              lineHeight: "1.6",
-              textShadow: "0 2px 10px rgba(0,0,0,0.3)",
-            }}
-          >
-            Experience Music Like Never Before
-            <br />
-            <span style={{ fontSize: "18px", color: "#feca57" }}>Stream • Download • Create • Share</span>
-          </p>
-
-          {/* CTA Buttons */}
-          <div
-            style={{ display: "flex", gap: "30px", marginBottom: "60px", flexWrap: "wrap", justifyContent: "center" }}
-          >
-            <button
-              style={{
-                padding: "18px 40px",
-                background: "linear-gradient(45deg, #ff6b6b, #feca57)",
-                color: "white",
-                fontSize: "20px",
-                fontWeight: "bold",
-                border: "none",
-                borderRadius: "30px",
-                cursor: "pointer",
-                boxShadow: "0 15px 50px rgba(255, 107, 107, 0.4)",
-                transition: "all 0.4s ease",
-                transform: "scale(1)",
-              }}
-              onMouseEnter={(e) => {
-                const target = e.target as HTMLButtonElement
-                target.style.transform = "scale(1.15) translateY(-5px)"
-                target.style.boxShadow = "0 20px 60px rgba(255, 107, 107, 0.6)"
-              }}
-              onMouseLeave={(e) => {
-                const target = e.target as HTMLButtonElement
-                target.style.transform = "scale(1) translateY(0)"
-                target.style.boxShadow = "0 15px 50px rgba(255, 107, 107, 0.4)"
-              }}
-              onClick={() => {
-                setIsLoginOpen(true)
-                setType("Sign")
-              }}
-            >
-              🚀 Start Your Journey
-            </button>
-
-            <button
-              style={{
-                padding: "18px 40px",
-                background: "rgba(255, 255, 255, 0.2)",
-                color: "white",
-                fontSize: "20px",
-                fontWeight: "bold",
-                border: "2px solid rgba(255, 255, 255, 0.3)",
-                borderRadius: "30px",
-                cursor: "pointer",
-                backdropFilter: "blur(10px)",
-                transition: "all 0.4s ease",
-                transform: "scale(1)",
-              }}
-              onMouseEnter={(e) => {
-                const target = e.target as HTMLButtonElement
-                target.style.transform = "scale(1.15) translateY(-5px)"
-                target.style.background = "rgba(255, 255, 255, 0.3)"
-              }}
-              onMouseLeave={(e) => {
-                const target = e.target as HTMLButtonElement
-                target.style.transform = "scale(1) translateY(0)"
-                target.style.background = "rgba(255, 255, 255, 0.2)"
-              }}
-              onClick={() => {
-                setIsLoginOpen(true)
-                setType("Login")
-              }}
-            >
-              🎶 Continue Listening
-            </button>
-          </div>
-
-          {/* Features */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-              gap: "30px",
-              maxWidth: "900px",
-              width: "100%",
-            }}
-          >
-            <div
-              style={{
-                background: "rgba(255, 255, 255, 0.15)",
-                backdropFilter: "blur(10px)",
-                borderRadius: "20px",
-                padding: "30px",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                transition: "all 0.3s ease",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => {
-                const target = e.target as HTMLDivElement
-                target.style.transform = "translateY(-10px) scale(1.05)"
-                target.style.background = "rgba(255, 255, 255, 0.25)"
-              }}
-              onMouseLeave={(e) => {
-                const target = e.target as HTMLDivElement
-                target.style.transform = "translateY(0) scale(1)"
-                target.style.background = "rgba(255, 255, 255, 0.15)"
-              }}
-            >
-              <div style={{ fontSize: "50px", marginBottom: "15px" }}>🎵</div>
-              <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>
-                Stream Music
-              </h3>
-              <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Millions of songs in high quality</p>
-            </div>
-
-            <div
-              style={{
-                background: "rgba(255, 255, 255, 0.15)",
-                backdropFilter: "blur(10px)",
-                borderRadius: "20px",
-                padding: "30px",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                transition: "all 0.3s ease",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => {
-                const target = e.target as HTMLDivElement
-                target.style.transform = "translateY(-10px) scale(1.05)"
-                target.style.background = "rgba(255, 255, 255, 0.25)"
-              }}
-              onMouseLeave={(e) => {
-                const target = e.target as HTMLDivElement
-                target.style.transform = "translateY(0) scale(1)"
-                target.style.background = "rgba(255, 255, 255, 0.15)"
-              }}
-            >
-              <div style={{ fontSize: "50px", marginBottom: "15px" }}>📱</div>
-              <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>
-                Create Playlists
-              </h3>
-              <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Organize your favorite tracks</p>
-            </div>
-
-            <div
-              style={{
-                background: "rgba(255, 255, 255, 0.15)",
-                backdropFilter: "blur(10px)",
-                borderRadius: "20px",
-                padding: "30px",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                transition: "all 0.3s ease",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => {
-                const target = e.target as HTMLDivElement
-                target.style.transform = "translateY(-10px) scale(1.05)"
-                target.style.background = "rgba(255, 255, 255, 0.25)"
-              }}
-              onMouseLeave={(e) => {
-                const target = e.target as HTMLDivElement
-                target.style.transform = "translateY(0) scale(1)"
-                target.style.background = "rgba(255, 255, 255, 0.15)"
-              }}
-            >
-              <div style={{ fontSize: "50px", marginBottom: "15px" }}>⬇️</div>
-              <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>Download</h3>
-              <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Listen offline anytime</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Modals */}
-      {isLoginOpen && <Login successLogin={handleLoginSuccess} typeAction={type} close={() => setIsLoginOpen(false)} />}
-      {isLogin && <Username_avatar />}
-
+    <>
+      {/* Global Styles */}
       <style>{`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        html, body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+          overflow-x: hidden;
+        }
+        
         @keyframes gradientShift {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
@@ -528,7 +105,471 @@ const HomePage = () => {
           100% { text-shadow: 0 0 40px rgba(72, 202, 228, 0.8), 0 0 60px rgba(254, 202, 87, 0.6); }
         }
       `}</style>
-    </div>
+
+      <div
+        style={{
+          minHeight: "100vh",
+          width: "100vw",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          overflow: "hidden",
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        {/* Animated Background */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)",
+            backgroundSize: "400% 400%",
+            animation: "gradientShift 8s ease infinite",
+          }}
+        >
+          {/* Floating Circles */}
+          <div
+            style={{
+              position: "absolute",
+              top: "10%",
+              left: "10%",
+              width: "200px",
+              height: "200px",
+              background: "linear-gradient(45deg, #ff6b6b, #feca57)",
+              borderRadius: "50%",
+              opacity: 0.3,
+              animation: "float 6s ease-in-out infinite",
+            }}
+          ></div>
+
+          <div
+            style={{
+              position: "absolute",
+              top: "60%",
+              right: "15%",
+              width: "150px",
+              height: "150px",
+              background: "linear-gradient(45deg, #48cae4, #023e8a)",
+              borderRadius: "50%",
+              opacity: 0.4,
+              animation: "float 8s ease-in-out infinite reverse",
+            }}
+          ></div>
+
+          <div
+            style={{
+              position: "absolute",
+              bottom: "20%",
+              left: "20%",
+              width: "100px",
+              height: "100px",
+              background: "linear-gradient(45deg, #a8e6cf, #88d8c0)",
+              borderRadius: "50%",
+              opacity: 0.5,
+              animation: "float 4s ease-in-out infinite",
+            }}
+          ></div>
+
+          {/* Music Wave Lines */}
+          <div
+            style={{
+              position: "absolute",
+              top: "30%",
+              left: "5%",
+              width: "4px",
+              height: "60px",
+              background: "#ff6b6b",
+              borderRadius: "2px",
+              animation: "wave 1s ease-in-out infinite",
+            }}
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+              top: "25%",
+              left: "7%",
+              width: "4px",
+              height: "80px",
+              background: "#feca57",
+              borderRadius: "2px",
+              animation: "wave 1s ease-in-out infinite 0.2s",
+            }}
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+              top: "20%",
+              left: "9%",
+              width: "4px",
+              height: "100px",
+              background: "#48cae4",
+              borderRadius: "2px",
+              animation: "wave 1s ease-in-out infinite 0.4s",
+            }}
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+              top: "35%",
+              left: "11%",
+              width: "4px",
+              height: "50px",
+              background: "#a8e6cf",
+              borderRadius: "2px",
+              animation: "wave 1s ease-in-out infinite 0.6s",
+            }}
+          ></div>
+        </div>
+
+        {/* Login Buttons */}
+        {!isLogin && (
+          <div style={{ position: "absolute", top: "20px", left: "20px", zIndex: 20, display: "flex", gap: "15px" }}>
+            <button
+              style={{
+                padding: "12px 24px",
+                background: "linear-gradient(45deg, #ff6b6b, #feca57)",
+                color: "white",
+                fontWeight: "bold",
+                border: "none",
+                borderRadius: "25px",
+                cursor: "pointer",
+                fontSize: "16px",
+                boxShadow: "0 8px 32px rgba(255, 107, 107, 0.4)",
+                transition: "all 0.3s ease",
+                transform: "scale(1)",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.transform = "scale(1.1) translateY(-2px)"
+                target.style.boxShadow = "0 12px 40px rgba(255, 107, 107, 0.6)"
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.transform = "scale(1) translateY(0)"
+                target.style.boxShadow = "0 8px 32px rgba(255, 107, 107, 0.4)"
+              }}
+              onClick={() => {
+                setIsLoginOpen(true)
+                setType("Sign")
+              }}
+            >
+              🎵 Sign Up
+            </button>
+
+            <button
+              style={{
+                padding: "12px 24px",
+                background: "linear-gradient(45deg, #48cae4, #023e8a)",
+                color: "white",
+                fontWeight: "bold",
+                border: "none",
+                borderRadius: "25px",
+                cursor: "pointer",
+                fontSize: "16px",
+                boxShadow: "0 8px 32px rgba(72, 202, 228, 0.4)",
+                transition: "all 0.3s ease",
+                transform: "scale(1)",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.transform = "scale(1.1) translateY(-2px)"
+                target.style.boxShadow = "0 12px 40px rgba(72, 202, 228, 0.6)"
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.transform = "scale(1) translateY(0)"
+                target.style.boxShadow = "0 8px 32px rgba(72, 202, 228, 0.4)"
+              }}
+              onClick={() => {
+                setIsLoginOpen(true)
+                setType("Login")
+              }}
+            >
+              🎧 Login
+            </button>
+          </div>
+        )}
+
+        {/* Main Content */}
+        {!isLogin && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 10,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              padding: "20px",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            {/* Logo */}
+            <div style={{ marginBottom: "40px", position: "relative" }}>
+              <div
+                style={{
+                  width: "180px",
+                  height: "180px",
+                  background: "linear-gradient(45deg, #ff6b6b, #feca57, #48cae4, #a8e6cf)",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 auto 30px",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+                  animation: "pulse 3s ease-in-out infinite",
+                }}
+              >
+                <span style={{ fontSize: "80px", animation: "bounce 2s ease-in-out infinite" }}>🎵</span>
+              </div>
+
+              {/* Decorative elements */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "-10px",
+                  right: "20px",
+                  width: "30px",
+                  height: "30px",
+                  background: "#feca57",
+                  borderRadius: "50%",
+                  animation: "ping 2s ease-in-out infinite",
+                }}
+              ></div>
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "10px",
+                  left: "10px",
+                  width: "20px",
+                  height: "20px",
+                  background: "#ff6b6b",
+                  borderRadius: "50%",
+                  animation: "pulse 2s ease-in-out infinite",
+                }}
+              ></div>
+            </div>
+
+            {/* Title */}
+            <h1
+              style={{
+                fontSize: "clamp(40px, 8vw, 80px)",
+                fontWeight: "900",
+                background: "linear-gradient(45deg, #ff6b6b, #feca57, #48cae4, #a8e6cf)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                marginBottom: "30px",
+                animation: "glow 3s ease-in-out infinite alternate",
+                textShadow: "0 0 30px rgba(255, 255, 255, 0.5)",
+              }}
+            >
+              MusicFlow
+            </h1>
+
+            {/* Subtitle */}
+            <p
+              style={{
+                fontSize: "clamp(16px, 3vw, 24px)",
+                color: "white",
+                marginBottom: "50px",
+                maxWidth: "600px",
+                lineHeight: "1.6",
+                textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+              }}
+            >
+              Experience Music Like Never Before
+              <br />
+              <span style={{ fontSize: "clamp(14px, 2.5vw, 18px)", color: "#feca57" }}>
+                Stream • Download • Create • Share
+              </span>
+            </p>
+
+            {/* CTA Buttons */}
+            <div
+              style={{ display: "flex", gap: "30px", marginBottom: "60px", flexWrap: "wrap", justifyContent: "center" }}
+            >
+              <button
+                style={{
+                  padding: "18px 40px",
+                  background: "linear-gradient(45deg, #ff6b6b, #feca57)",
+                  color: "white",
+                  fontSize: "clamp(16px, 2.5vw, 20px)",
+                  fontWeight: "bold",
+                  border: "none",
+                  borderRadius: "30px",
+                  cursor: "pointer",
+                  boxShadow: "0 15px 50px rgba(255, 107, 107, 0.4)",
+                  transition: "all 0.4s ease",
+                  transform: "scale(1)",
+                }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLButtonElement
+                  target.style.transform = "scale(1.15) translateY(-5px)"
+                  target.style.boxShadow = "0 20px 60px rgba(255, 107, 107, 0.6)"
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLButtonElement
+                  target.style.transform = "scale(1) translateY(0)"
+                  target.style.boxShadow = "0 15px 50px rgba(255, 107, 107, 0.4)"
+                }}
+                onClick={() => {
+                  setIsLoginOpen(true)
+                  setType("Sign")
+                }}
+              >
+                🚀 Start Your Journey
+              </button>
+
+              <button
+                style={{
+                  padding: "18px 40px",
+                  background: "rgba(255, 255, 255, 0.2)",
+                  color: "white",
+                  fontSize: "clamp(16px, 2.5vw, 20px)",
+                  fontWeight: "bold",
+                  border: "2px solid rgba(255, 255, 255, 0.3)",
+                  borderRadius: "30px",
+                  cursor: "pointer",
+                  backdropFilter: "blur(10px)",
+                  transition: "all 0.4s ease",
+                  transform: "scale(1)",
+                }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLButtonElement
+                  target.style.transform = "scale(1.15) translateY(-5px)"
+                  target.style.background = "rgba(255, 255, 255, 0.3)"
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLButtonElement
+                  target.style.transform = "scale(1) translateY(0)"
+                  target.style.background = "rgba(255, 255, 255, 0.2)"
+                }}
+                onClick={() => {
+                  setIsLoginOpen(true)
+                  setType("Login")
+                }}
+              >
+                🎶 Continue Listening
+              </button>
+            </div>
+
+            {/* Features */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                gap: "30px",
+                maxWidth: "900px",
+                width: "100%",
+              }}
+            >
+              <div
+                style={{
+                  background: "rgba(255, 255, 255, 0.15)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: "20px",
+                  padding: "30px",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLDivElement
+                  target.style.transform = "translateY(-10px) scale(1.05)"
+                  target.style.background = "rgba(255, 255, 255, 0.25)"
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLDivElement
+                  target.style.transform = "translateY(0) scale(1)"
+                  target.style.background = "rgba(255, 255, 255, 0.15)"
+                }}
+              >
+                <div style={{ fontSize: "50px", marginBottom: "15px" }}>🎵</div>
+                <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>
+                  Stream Music
+                </h3>
+                <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Millions of songs in high quality</p>
+              </div>
+
+              <div
+                style={{
+                  background: "rgba(255, 255, 255, 0.15)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: "20px",
+                  padding: "30px",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLDivElement
+                  target.style.transform = "translateY(-10px) scale(1.05)"
+                  target.style.background = "rgba(255, 255, 255, 0.25)"
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLDivElement
+                  target.style.transform = "translateY(0) scale(1)"
+                  target.style.background = "rgba(255, 255, 255, 0.15)"
+                }}
+              >
+                <div style={{ fontSize: "50px", marginBottom: "15px" }}>📱</div>
+                <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>
+                  Create Playlists
+                </h3>
+                <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Organize your favorite tracks</p>
+              </div>
+
+              <div
+                style={{
+                  background: "rgba(255, 255, 255, 0.15)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: "20px",
+                  padding: "30px",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLDivElement
+                  target.style.transform = "translateY(-10px) scale(1.05)"
+                  target.style.background = "rgba(255, 255, 255, 0.25)"
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLDivElement
+                  target.style.transform = "translateY(0) scale(1)"
+                  target.style.background = "rgba(255, 255, 255, 0.15)"
+                }}
+              >
+                <div style={{ fontSize: "50px", marginBottom: "15px" }}>⬇️</div>
+                <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>Download</h3>
+                <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Listen offline anytime</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modals */}
+        {isLoginOpen && (
+          <Login successLogin={handleLoginSuccess} typeAction={type} close={() => setIsLoginOpen(false)} />
+        )}
+        {isLogin && <Username_avatar />}
+      </div>
+    </>
   )
 }
 
