@@ -7,7 +7,7 @@ const SongsList = ({ songs, onPlay }: { songs: Song[], onPlay: (url: string) => 
    
 
     const [loading, setLoading] = useState<boolean>(false);
-    const apiClient = new ApiClient("https://localhost:7208");
+    const apiClient = new ApiClient("https://server-dotnet.onrender.com");
 
 
     const removeExtension = (fileName: string) => {

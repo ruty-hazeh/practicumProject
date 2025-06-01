@@ -10,7 +10,7 @@ import { Singer, SingerDTO } from '../models/singer';
   providedIn: 'root'
 })
 export class SingerService {
-  private baseUrl = 'https://localhost:7208/api/singer'; // תעדכני ל-URL של ה-API שלך
+  private baseUrl = 'https://server-dotnet.onrender.com/api/singer'; // תעדכני ל-URL של ה-API שלך
 
   constructor(private http: HttpClient) {}
 

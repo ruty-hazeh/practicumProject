@@ -32,7 +32,7 @@ export default function PlaylistPage() {
 
   const fetchPlaylists = async () => {
     try {
-      const res = await axios.get('https://localhost:7208/api/playlists');
+      const res = await axios.get('https://server-dotnet.onrender.com/api/playlists');
       if (Array.isArray(res.data)) setPlaylists(res.data);
       else setError('שגיאה בטעינת פלייליסטים');
     } catch {
@@ -42,7 +42,7 @@ export default function PlaylistPage() {
 
   const fetchSongs = async () => {
     try {
-      const res = await axios.get('https://localhost:7208/api/song');
+      const res = await axios.get('https://server-dotnet.onrender.com/api/song');
       if (Array.isArray(res.data)) setSongs(res.data);
       else setError('שגיאה בטעינת שירים');
     } catch {
@@ -54,7 +54,7 @@ export default function PlaylistPage() {
     if (!newName.trim()) return;
     if (!context?.user?.id) return setError('משתמש לא מחובר');
     try {
-      await axios.post('https://localhost:7208/api/playlists', {
+      await axios.post('https://server-dotnet.onrender.com/api/playlists', {
         name: newName,
         userId: context.user.id,
         songIds: [],
@@ -71,7 +71,7 @@ export default function PlaylistPage() {
     if (!context?.user?.id) return setError('משתמש לא מחובר');
     try {
       const res = await axios.post(
-        `https://localhost:7208/api/playlists/smart?userId=${context.user.id}`,
+        `https://server-dotnet.onrender.com/api/playlists/smart?userId=${context.user.id}`,
         { moodText }
       );
       console.log('פלייליסט חכם נוצר:', res.data);
@@ -87,10 +87,10 @@ export default function PlaylistPage() {
     const songId = songSelections[playlistId];
     if (!songId) return;
     try {
-      await axios.post(`https://localhost:7208/api/playlists/${playlistId}/songs`, {
+      await axios.post(`https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs`, {
         songId,
       });
-      const res = await axios.get(`https://localhost:7208/api/playlists/${playlistId}`);
+      const res = await axios.get(`https://server-dotnet.onrender.com/api/playlists/${playlistId}`);
       setSelectedPlaylist(res.data);
       fetchPlaylists();
       setSongSelections((prev) => ({ ...prev, [playlistId]: null }));
@@ -101,7 +101,7 @@ export default function PlaylistPage() {
 
   const deleteSongFromPlaylist = async (playlistId: number, songId: number) => {
     try {
-      await axios.delete(`https://localhost:7208/api/playlists/${playlistId}/songs/${songId}`);
+      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs/${songId}`);
       setSelectedPlaylist((prev) =>
         prev ? { ...prev, songs: prev.songs.filter((s) => s.id !== songId) } : prev
       );
@@ -113,7 +113,7 @@ export default function PlaylistPage() {
 
   const deletePlaylist = async (id: number) => {
     try {
-      await axios.delete(`https://localhost:7208/api/playlists/${id}`);
+      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${id}`);
       fetchPlaylists();
     } catch {
       setError('שגיאה במחיקת פלייליסט');

@@ -7,8 +7,8 @@ import { Song } from '../models/song';
   providedIn: 'root' 
 })
 export class SongService {
-  private apiUrl = 'https://localhost:7208/api/song';
-  private s3Url = 'https://localhost:7208/api/s3';
+  private apiUrl = 'https://server-dotnet.onrender.com/api/song';
+  private s3Url = 'https://server-dotnet.onrender.com/api/s3';
 
   constructor(private http: HttpClient) {}
 

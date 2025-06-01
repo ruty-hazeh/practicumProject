@@ -5,7 +5,7 @@ import MusicPlayer from "./MusicPlayer";
 import { ApiClient, Song, Singer } from "../api/client";
 
 const SongsPage = () => {
-    const apiClient = new ApiClient("https://localhost:7208");
+    const apiClient = new ApiClient("https://server-dotnet.onrender.com");
 
     const [songs, setSongs] = useState<Song[]>([]);
     const [filteredSongs, setFilteredSongs] = useState<Song[]>([]);
@@ -19,12 +19,12 @@ const SongsPage = () => {
         const fetchSongsAndSingers = async () => {
             try {
                 setLoading(true);
-                const res = await fetch("https://localhost:7208/api/s3/files");
+                const res = await fetch("https://server-dotnet.onrender.com/api/s3/files");
                 if (!res.ok) throw new Error("Failed to fetch files.");
                 const fileNames: string[] = await res.json();
 
                 const songRequests = fileNames.map(fileName =>
-                    fetch(`https://localhost:7208/api/song/by-name/${encodeURIComponent(fileName)}`)
+                    fetch(`https://server-dotnet.onrender.com/api/song/by-name/${encodeURIComponent(fileName)}`)
                         .then(res => (res.ok ? res.json() : null))
                         .catch(() => null)
                 );

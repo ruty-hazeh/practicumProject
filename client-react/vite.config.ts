@@ -6,7 +6,7 @@ export default defineConfig({
   // server: {
   //   proxy: {
   //     '/api': {
-  //       target: 'https://localhost:7208',
+  //       target: 'https://server-dotnet.onrender.com',
   //       changeOrigin: true,
   //       secure: false
   //     }

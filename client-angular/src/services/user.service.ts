@@ -5,7 +5,7 @@ import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private apiUrl = 'https://localhost:7208/api/user';
+  private apiUrl = 'https://server-dotnet.onrender.com/api/user';
 
   constructor(private http: HttpClient) {}
 

@@ -16,7 +16,7 @@ const style = {
 };
 
 const Update = ({ setUpdate }: { setUpdate: () => void }) => {
-  const apiClient = new ApiClient("https://localhost:7208");
+  const apiClient = new ApiClient("https://server-dotnet.onrender.com");
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
