@@ -14,11 +14,15 @@ namespace Music.Data
         public DbSet<Playlist> Playlists { get; set; }
 
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-            
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Singer>()
+                .Property(s => s.Name)
+                .HasColumnType("varchar(255)")  // מגדיר במפורש סוג עמודה ל-MySQL
+                .HasMaxLength(255)
+                .IsRequired();
+        }
+
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
