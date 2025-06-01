@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import SongsList from "./SongsList";
 import SongFilters from "./SongFilters";
 import MusicPlayer from "./MusicPlayer";
-import { ApiClient, Song, Singer } from "../api/client";
+import { Song, Singer } from "../api/client";
 
 const SongsPage = () => {
-    const apiClient = new ApiClient("https://server-dotnet.onrender.com");
+    // const apiClient = new ApiClient("https://server-dotnet.onrender.com");
 
     const [songs, setSongs] = useState<Song[]>([]);
     const [filteredSongs, setFilteredSongs] = useState<Song[]>([]);
@@ -45,8 +45,15 @@ const SongsPage = () => {
                 );
 
                 // שליפת שמות זמרים לפי ID
+                // const singerFetches = singerIds.map(id =>
+                //     apiClient.singerGET(id).catch(() => null)
+                // );
+
+
                 const singerFetches = singerIds.map(id =>
-                    apiClient.singerGET(id).catch(() => null)
+                    fetch(`https://server-dotnet.onrender.com/api/singer/${id}`)
+                        .then(res => res.ok ? res.json() : null)
+                        .catch(() => null)
                 );
                 const singerResults = await Promise.all(singerFetches);
                 const singers = singerResults
@@ -70,7 +77,10 @@ const SongsPage = () => {
 
         if (singerName) {
             try {
-                const singerData = await apiClient.singerGET2(encodeURIComponent(singerName));
+                // const singerData = await apiClient.singerGET2(encodeURIComponent(singerName));
+                const response = await fetch(`https://server-dotnet.onrender.com/api/singer/by-name/${encodeURIComponent(singerName)}`);
+                if (!response.ok) throw new Error("Failed to fetch singer data");
+                const singerData = await response.json();
                 if (singerData) singerId = singerData.id||0;
             } catch (error) {
                 console.error("Error fetching singer ID:", error);
