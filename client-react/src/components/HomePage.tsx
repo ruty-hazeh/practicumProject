@@ -35,7 +35,6 @@
 // }
 // export default HomePage;
 
-
 "use client"
 
 import Login from "./Login"
@@ -55,160 +54,437 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div style={{ minHeight: "100vh", position: "relative", overflow: "hidden" }}>
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-900 to-pink-900">
-        <div className="absolute inset-0 bg-black/30"></div>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)",
+          animation: "gradientShift 8s ease infinite",
+        }}
+      >
+        {/* Floating Circles */}
+        <div
+          style={{
+            position: "absolute",
+            top: "10%",
+            left: "10%",
+            width: "200px",
+            height: "200px",
+            background: "linear-gradient(45deg, #ff6b6b, #feca57)",
+            borderRadius: "50%",
+            opacity: 0.3,
+            animation: "float 6s ease-in-out infinite",
+          }}
+        ></div>
 
-        {/* Floating Music Notes Animation */}
-        <div className="absolute top-20 left-20 text-purple-300 text-4xl animate-bounce opacity-60">♪</div>
-        <div className="absolute top-40 right-32 text-pink-300 text-3xl animate-pulse opacity-50">♫</div>
         <div
-          className="absolute bottom-32 left-40 text-blue-300 text-5xl animate-bounce opacity-40"
-          style={{ animationDelay: "1s" }}
-        >
-          ♪
-        </div>
-        <div
-          className="absolute top-60 left-1/2 text-purple-400 text-2xl animate-pulse opacity-60"
-          style={{ animationDelay: "2s" }}
-        >
-          ♬
-        </div>
-        <div
-          className="absolute bottom-20 right-20 text-indigo-300 text-4xl animate-bounce opacity-50"
-          style={{ animationDelay: "0.5s" }}
-        >
-          ♫
-        </div>
+          style={{
+            position: "absolute",
+            top: "60%",
+            right: "15%",
+            width: "150px",
+            height: "150px",
+            background: "linear-gradient(45deg, #48cae4, #023e8a)",
+            borderRadius: "50%",
+            opacity: 0.4,
+            animation: "float 8s ease-in-out infinite reverse",
+          }}
+        ></div>
 
-        {/* Glowing Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500/20 rounded-full blur-xl animate-pulse"></div>
         <div
-          className="absolute top-3/4 right-1/4 w-40 h-40 bg-pink-500/20 rounded-full blur-xl animate-pulse"
-          style={{ animationDelay: "1s" }}
+          style={{
+            position: "absolute",
+            bottom: "20%",
+            left: "20%",
+            width: "100px",
+            height: "100px",
+            background: "linear-gradient(45deg, #a8e6cf, #88d8c0)",
+            borderRadius: "50%",
+            opacity: 0.5,
+            animation: "float 4s ease-in-out infinite",
+          }}
+        ></div>
+
+        {/* Music Wave Lines */}
+        <div
+          style={{
+            position: "absolute",
+            top: "30%",
+            left: "5%",
+            width: "4px",
+            height: "60px",
+            background: "#ff6b6b",
+            borderRadius: "2px",
+            animation: "wave 1s ease-in-out infinite",
+          }}
         ></div>
         <div
-          className="absolute top-1/2 left-1/2 w-24 h-24 bg-blue-500/20 rounded-full blur-xl animate-pulse"
-          style={{ animationDelay: "2s" }}
+          style={{
+            position: "absolute",
+            top: "25%",
+            left: "7%",
+            width: "4px",
+            height: "80px",
+            background: "#feca57",
+            borderRadius: "2px",
+            animation: "wave 1s ease-in-out infinite 0.2s",
+          }}
+        ></div>
+        <div
+          style={{
+            position: "absolute",
+            top: "20%",
+            left: "9%",
+            width: "4px",
+            height: "100px",
+            background: "#48cae4",
+            borderRadius: "2px",
+            animation: "wave 1s ease-in-out infinite 0.4s",
+          }}
+        ></div>
+        <div
+          style={{
+            position: "absolute",
+            top: "35%",
+            left: "11%",
+            width: "4px",
+            height: "50px",
+            background: "#a8e6cf",
+            borderRadius: "2px",
+            animation: "wave 1s ease-in-out infinite 0.6s",
+          }}
         ></div>
       </div>
 
       {/* Login Buttons */}
       {!isLogin && (
-        <div className="absolute top-6 left-6 z-20 flex gap-4">
+        <div style={{ position: "absolute", top: "20px", left: "20px", zIndex: 20, display: "flex", gap: "15px" }}>
           <button
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full shadow-lg hover:shadow-purple-500/50 transform hover:scale-105 transition-all duration-300 hover:from-purple-700 hover:to-pink-700 border-2 border-purple-400/30"
+            style={{
+              padding: "12px 24px",
+              background: "linear-gradient(45deg, #ff6b6b, #feca57)",
+              color: "white",
+              fontWeight: "bold",
+              border: "none",
+              borderRadius: "25px",
+              cursor: "pointer",
+              fontSize: "16px",
+              boxShadow: "0 8px 32px rgba(255, 107, 107, 0.4)",
+              transition: "all 0.3s ease",
+              transform: "scale(1)",
+            }}
+            onMouseEnter={(e) => {
+              const target = e.target as HTMLButtonElement
+              target.style.transform = "scale(1.1) translateY(-2px)"
+              target.style.boxShadow = "0 12px 40px rgba(255, 107, 107, 0.6)"
+            }}
+            onMouseLeave={(e) => {
+              const target = e.target as HTMLButtonElement
+              target.style.transform = "scale(1) translateY(0)"
+              target.style.boxShadow = "0 8px 32px rgba(255, 107, 107, 0.4)"
+            }}
             onClick={() => {
               setIsLoginOpen(true)
               setType("Sign")
             }}
           >
-            <span className="flex items-center gap-2">
-              <span className="text-lg">🎵</span>
-              Sign Up
-            </span>
+            🎵 Sign Up
           </button>
 
           <button
-            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-bold rounded-full shadow-lg hover:shadow-blue-500/50 transform hover:scale-105 transition-all duration-300 hover:from-indigo-700 hover:to-blue-700 border-2 border-blue-400/30"
+            style={{
+              padding: "12px 24px",
+              background: "linear-gradient(45deg, #48cae4, #023e8a)",
+              color: "white",
+              fontWeight: "bold",
+              border: "none",
+              borderRadius: "25px",
+              cursor: "pointer",
+              fontSize: "16px",
+              boxShadow: "0 8px 32px rgba(72, 202, 228, 0.4)",
+              transition: "all 0.3s ease",
+              transform: "scale(1)",
+            }}
+            onMouseEnter={(e) => {
+              const target = e.target as HTMLButtonElement
+              target.style.transform = "scale(1.1) translateY(-2px)"
+              target.style.boxShadow = "0 12px 40px rgba(72, 202, 228, 0.6)"
+            }}
+            onMouseLeave={(e) => {
+              const target = e.target as HTMLButtonElement
+              target.style.transform = "scale(1) translateY(0)"
+              target.style.boxShadow = "0 8px 32px rgba(72, 202, 228, 0.4)"
+            }}
             onClick={() => {
               setIsLoginOpen(true)
               setType("Login")
             }}
           >
-            <span className="flex items-center gap-2">
-              <span className="text-lg">🎧</span>
-              Login
-            </span>
+            🎧 Login
           </button>
         </div>
       )}
 
       {/* Main Content */}
       {!isLogin && (
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
-          {/* Logo/Icon */}
-          <div className="mb-8 relative">
-            <div className="w-40 h-40 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-full flex items-center justify-center shadow-2xl animate-pulse mb-6">
-              <div className="text-6xl text-white animate-bounce">🎵</div>
+        <div
+          style={{
+            position: "relative",
+            zIndex: 10,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "100vh",
+            textAlign: "center",
+            padding: "0 20px",
+          }}
+        >
+          {/* Logo */}
+          <div style={{ marginBottom: "40px", position: "relative" }}>
+            <div
+              style={{
+                width: "180px",
+                height: "180px",
+                background: "linear-gradient(45deg, #ff6b6b, #feca57, #48cae4, #a8e6cf)",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 30px",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+                animation: "pulse 3s ease-in-out infinite",
+              }}
+            >
+              <span style={{ fontSize: "80px", animation: "bounce 2s ease-in-out infinite" }}>🎵</span>
             </div>
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-ping"></div>
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-pink-400 rounded-full animate-pulse"></div>
+
+            {/* Decorative elements */}
+            <div
+              style={{
+                position: "absolute",
+                top: "-10px",
+                right: "20px",
+                width: "30px",
+                height: "30px",
+                background: "#feca57",
+                borderRadius: "50%",
+                animation: "ping 2s ease-in-out infinite",
+              }}
+            ></div>
+            <div
+              style={{
+                position: "absolute",
+                bottom: "10px",
+                left: "10px",
+                width: "20px",
+                height: "20px",
+                background: "#ff6b6b",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite",
+              }}
+            ></div>
           </div>
 
           {/* Title */}
-          <h1 className="text-7xl md:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 mb-6 animate-pulse">
-            SoundWave
+          <h1
+            style={{
+              fontSize: "80px",
+              fontWeight: "900",
+              background: "linear-gradient(45deg, #ff6b6b, #feca57, #48cae4, #a8e6cf)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              marginBottom: "30px",
+              animation: "glow 3s ease-in-out infinite alternate",
+              textShadow: "0 0 30px rgba(255, 255, 255, 0.5)",
+            }}
+          >
+            MusicFlow
           </h1>
 
           {/* Subtitle */}
-          <p className="text-2xl md:text-3xl text-white/90 mb-8 max-w-3xl leading-relaxed font-light">
-            Your Ultimate Music Experience
+          <p
+            style={{
+              fontSize: "24px",
+              color: "white",
+              marginBottom: "50px",
+              maxWidth: "600px",
+              lineHeight: "1.6",
+              textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+            }}
+          >
+            Experience Music Like Never Before
             <br />
-            <span className="text-lg text-purple-300">Stream • Download • Create • Enjoy</span>
+            <span style={{ fontSize: "18px", color: "#feca57" }}>Stream • Download • Create • Share</span>
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 mb-12">
+          <div
+            style={{ display: "flex", gap: "30px", marginBottom: "60px", flexWrap: "wrap", justifyContent: "center" }}
+          >
             <button
-              className="px-10 py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white text-xl font-bold rounded-full shadow-2xl hover:shadow-purple-500/50 transform hover:scale-110 transition-all duration-500 hover:rotate-1 border-2 border-white/20"
+              style={{
+                padding: "18px 40px",
+                background: "linear-gradient(45deg, #ff6b6b, #feca57)",
+                color: "white",
+                fontSize: "20px",
+                fontWeight: "bold",
+                border: "none",
+                borderRadius: "30px",
+                cursor: "pointer",
+                boxShadow: "0 15px 50px rgba(255, 107, 107, 0.4)",
+                transition: "all 0.4s ease",
+                transform: "scale(1)",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.transform = "scale(1.15) translateY(-5px)"
+                target.style.boxShadow = "0 20px 60px rgba(255, 107, 107, 0.6)"
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.transform = "scale(1) translateY(0)"
+                target.style.boxShadow = "0 15px 50px rgba(255, 107, 107, 0.4)"
+              }}
               onClick={() => {
                 setIsLoginOpen(true)
                 setType("Sign")
               }}
             >
-              <span className="flex items-center gap-3">
-                <span className="text-2xl animate-bounce">🚀</span>
-                Start Your Journey
-              </span>
+              🚀 Start Your Journey
             </button>
 
             <button
-              className="px-10 py-4 bg-white/10 backdrop-blur-sm text-white text-xl font-bold rounded-full border-2 border-white/30 hover:bg-white/20 transform hover:scale-110 transition-all duration-500 hover:-rotate-1 shadow-lg"
+              style={{
+                padding: "18px 40px",
+                background: "rgba(255, 255, 255, 0.2)",
+                color: "white",
+                fontSize: "20px",
+                fontWeight: "bold",
+                border: "2px solid rgba(255, 255, 255, 0.3)",
+                borderRadius: "30px",
+                cursor: "pointer",
+                backdropFilter: "blur(10px)",
+                transition: "all 0.4s ease",
+                transform: "scale(1)",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.transform = "scale(1.15) translateY(-5px)"
+                target.style.background = "rgba(255, 255, 255, 0.3)"
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLButtonElement
+                target.style.transform = "scale(1) translateY(0)"
+                target.style.background = "rgba(255, 255, 255, 0.2)"
+              }}
               onClick={() => {
                 setIsLoginOpen(true)
                 setType("Login")
               }}
             >
-              <span className="flex items-center gap-3">
-                <span className="text-2xl animate-pulse">🎶</span>
-                Continue Listening
-              </span>
+              🎶 Continue Listening
             </button>
           </div>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transform hover:scale-105 transition-all duration-300 hover:rotate-1">
-              <div className="text-4xl mb-4 animate-bounce">🎵</div>
-              <h3 className="text-xl font-bold text-white mb-3">Stream Music</h3>
-              <p className="text-white/80">Millions of songs at your fingertips</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transform hover:scale-105 transition-all duration-300 hover:-rotate-1">
-              <div className="text-4xl mb-4 animate-pulse">📱</div>
-              <h3 className="text-xl font-bold text-white mb-3">Create Playlists</h3>
-              <p className="text-white/80">Organize your favorite tracks</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transform hover:scale-105 transition-all duration-300 hover:rotate-1">
-              <div className="text-4xl mb-4 animate-bounce" style={{ animationDelay: "0.5s" }}>
-                ⬇️
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">Download</h3>
-              <p className="text-white/80">Listen offline anytime</p>
-            </div>
-          </div>
-
-          {/* Floating Elements */}
+          {/* Features */}
           <div
-            className="absolute top-1/4 right-10 text-6xl animate-spin opacity-20"
-            style={{ animationDuration: "10s" }}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "30px",
+              maxWidth: "900px",
+              width: "100%",
+            }}
           >
-            🎧
+            <div
+              style={{
+                background: "rgba(255, 255, 255, 0.15)",
+                backdropFilter: "blur(10px)",
+                borderRadius: "20px",
+                padding: "30px",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLDivElement
+                target.style.transform = "translateY(-10px) scale(1.05)"
+                target.style.background = "rgba(255, 255, 255, 0.25)"
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLDivElement
+                target.style.transform = "translateY(0) scale(1)"
+                target.style.background = "rgba(255, 255, 255, 0.15)"
+              }}
+            >
+              <div style={{ fontSize: "50px", marginBottom: "15px" }}>🎵</div>
+              <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>
+                Stream Music
+              </h3>
+              <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Millions of songs in high quality</p>
+            </div>
+
+            <div
+              style={{
+                background: "rgba(255, 255, 255, 0.15)",
+                backdropFilter: "blur(10px)",
+                borderRadius: "20px",
+                padding: "30px",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLDivElement
+                target.style.transform = "translateY(-10px) scale(1.05)"
+                target.style.background = "rgba(255, 255, 255, 0.25)"
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLDivElement
+                target.style.transform = "translateY(0) scale(1)"
+                target.style.background = "rgba(255, 255, 255, 0.15)"
+              }}
+            >
+              <div style={{ fontSize: "50px", marginBottom: "15px" }}>📱</div>
+              <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>
+                Create Playlists
+              </h3>
+              <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Organize your favorite tracks</p>
+            </div>
+
+            <div
+              style={{
+                background: "rgba(255, 255, 255, 0.15)",
+                backdropFilter: "blur(10px)",
+                borderRadius: "20px",
+                padding: "30px",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLDivElement
+                target.style.transform = "translateY(-10px) scale(1.05)"
+                target.style.background = "rgba(255, 255, 255, 0.25)"
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLDivElement
+                target.style.transform = "translateY(0) scale(1)"
+                target.style.background = "rgba(255, 255, 255, 0.15)"
+              }}
+            >
+              <div style={{ fontSize: "50px", marginBottom: "15px" }}>⬇️</div>
+              <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>Download</h3>
+              <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "16px" }}>Listen offline anytime</p>
+            </div>
           </div>
-          <div className="absolute bottom-1/4 left-10 text-5xl animate-bounce opacity-30">🎤</div>
         </div>
       )}
 
@@ -217,14 +493,41 @@ const HomePage = () => {
       {isLogin && <Username_avatar />}
 
       <style>{`
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-20px); }
-                }
-                .animate-float {
-                    animation: float 3s ease-in-out infinite;
-                }
-            `}</style>
+        @keyframes gradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-30px) rotate(180deg); }
+        }
+        
+        @keyframes wave {
+          0%, 100% { transform: scaleY(1); }
+          50% { transform: scaleY(1.5); }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+        
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes ping {
+          0% { transform: scale(1); opacity: 1; }
+          75%, 100% { transform: scale(2); opacity: 0; }
+        }
+        
+        @keyframes glow {
+          0% { text-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
+          100% { text-shadow: 0 0 40px rgba(72, 202, 228, 0.8), 0 0 60px rgba(254, 202, 87, 0.6); }
+        }
+      `}</style>
     </div>
   )
 }
