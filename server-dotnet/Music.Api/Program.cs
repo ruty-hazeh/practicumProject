@@ -77,12 +77,30 @@ builder.Services.AddSwaggerGen(options =>
 
 
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAll",
+//        policy => policy.AllowAnyOrigin()
+//                        .AllowAnyMethod()
+//                        .AllowAnyHeader());
+//});
+
+
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        policy => policy.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.WithOrigins(
+            "https://client-react-gu3s.onrender.com",
+            "https://client-angular-1fw9.onrender.com",
+            "http://localhost:3000", // React local dev
+            "http://localhost:4200"  // Angular local dev
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
 });
 
 //builder.Services.AddDbContext<DataContext>();
