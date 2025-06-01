@@ -38,11 +38,9 @@
 
 "use client"
 
-import { useState } from "react"
-import { Button } from "@mui/material"
-import { Music, Play, Users, Headphones } from "lucide-react"
 import Login from "./Login"
-import UsernameAvatar from "./UserAvatar"
+import { useState } from "react"
+import Username_avatar from "./UserAvatar"
 
 const HomePage = () => {
   const [isLogin, setIsLogin] = useState(false)
@@ -57,123 +55,184 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-black/20" />
-      <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl animate-pulse delay-500" />
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-900 to-pink-900">
+        <div className="absolute inset-0 bg-black/30"></div>
+
+        {/* Floating Music Notes Animation */}
+        <div className="absolute top-20 left-20 text-purple-300 text-4xl animate-bounce opacity-60">♪</div>
+        <div className="absolute top-40 right-32 text-pink-300 text-3xl animate-pulse opacity-50">♫</div>
+        <div
+          className="absolute bottom-32 left-40 text-blue-300 text-5xl animate-bounce opacity-40"
+          style={{ animationDelay: "1s" }}
+        >
+          ♪
+        </div>
+        <div
+          className="absolute top-60 left-1/2 text-purple-400 text-2xl animate-pulse opacity-60"
+          style={{ animationDelay: "2s" }}
+        >
+          ♬
+        </div>
+        <div
+          className="absolute bottom-20 right-20 text-indigo-300 text-4xl animate-bounce opacity-50"
+          style={{ animationDelay: "0.5s" }}
+        >
+          ♫
+        </div>
+
+        {/* Glowing Orbs */}
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div
+          className="absolute top-3/4 right-1/4 w-40 h-40 bg-pink-500/20 rounded-full blur-xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute top-1/2 left-1/2 w-24 h-24 bg-blue-500/20 rounded-full blur-xl animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
       </div>
 
-      {/* Header */}
+      {/* Login Buttons */}
       {!isLogin && (
-        <div className="absolute top-6 left-6 z-10 flex gap-3">
-          <Button
-            className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-105"
+        <div className="absolute top-6 left-6 z-20 flex gap-4">
+          <button
+            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full shadow-lg hover:shadow-purple-500/50 transform hover:scale-105 transition-all duration-300 hover:from-purple-700 hover:to-pink-700 border-2 border-purple-400/30"
             onClick={() => {
               setIsLoginOpen(true)
               setType("Sign")
             }}
           >
-            <Users className="w-4 h-4 mr-2" />
-            Sign Up
-          </Button>
-          <Button
-            className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-105"
+            <span className="flex items-center gap-2">
+              <span className="text-lg">🎵</span>
+              Sign Up
+            </span>
+          </button>
+
+          <button
+            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-bold rounded-full shadow-lg hover:shadow-blue-500/50 transform hover:scale-105 transition-all duration-300 hover:from-indigo-700 hover:to-blue-700 border-2 border-blue-400/30"
             onClick={() => {
               setIsLoginOpen(true)
               setType("Login")
             }}
           >
-            <Play className="w-4 h-4 mr-2" />
-            Login
-          </Button>
+            <span className="flex items-center gap-2">
+              <span className="text-lg">🎧</span>
+              Login
+            </span>
+          </button>
         </div>
       )}
 
       {/* Main Content */}
       {!isLogin && (
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
+          {/* Logo/Icon */}
           <div className="mb-8 relative">
-            <div className="w-32 h-32 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto shadow-2xl animate-bounce">
-              <Music className="w-16 h-16 text-white" />
+            <div className="w-40 h-40 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-full flex items-center justify-center shadow-2xl animate-pulse mb-6">
+              <div className="text-6xl text-white animate-bounce">🎵</div>
             </div>
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-ping" />
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-pink-400 rounded-full animate-pulse" />
+            <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-ping"></div>
+            <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-pink-400 rounded-full animate-pulse"></div>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tight">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-              SoundWave
-            </span>
+          {/* Title */}
+          <h1 className="text-7xl md:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 mb-6 animate-pulse">
+            SoundWave
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-2xl leading-relaxed">
-            Your ultimate music companion. Stream, download, and create playlists with millions of songs at your
-            fingertips.
+          {/* Subtitle */}
+          <p className="text-2xl md:text-3xl text-white/90 mb-8 max-w-3xl leading-relaxed font-light">
+            Your Ultimate Music Experience
+            <br />
+            <span className="text-lg text-purple-300">Stream • Download • Create • Enjoy</span>
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Button
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-purple-500/25"
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 mb-12">
+            <button
+              className="px-10 py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white text-xl font-bold rounded-full shadow-2xl hover:shadow-purple-500/50 transform hover:scale-110 transition-all duration-500 hover:rotate-1 border-2 border-white/20"
               onClick={() => {
                 setIsLoginOpen(true)
                 setType("Sign")
               }}
             >
-              <Headphones className="w-5 h-5 mr-2" />
-              Start Listening
-            </Button>
-            <Button
-              className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105"
+              <span className="flex items-center gap-3">
+                <span className="text-2xl animate-bounce">🚀</span>
+                Start Your Journey
+              </span>
+            </button>
+
+            <button
+              className="px-10 py-4 bg-white/10 backdrop-blur-sm text-white text-xl font-bold rounded-full border-2 border-white/30 hover:bg-white/20 transform hover:scale-110 transition-all duration-500 hover:-rotate-1 shadow-lg"
               onClick={() => {
                 setIsLoginOpen(true)
                 setType("Login")
               }}
             >
-              <Play className="w-5 h-5 mr-2" />
-              Sign In
-            </Button>
+              <span className="flex items-center gap-3">
+                <span className="text-2xl animate-pulse">🎶</span>
+                Continue Listening
+              </span>
+            </button>
           </div>
 
-          {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
-              <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Music className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Stream Music</h3>
-              <p className="text-white/70 text-sm">Listen to millions of songs in high quality</p>
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transform hover:scale-105 transition-all duration-300 hover:rotate-1">
+              <div className="text-4xl mb-4 animate-bounce">🎵</div>
+              <h3 className="text-xl font-bold text-white mb-3">Stream Music</h3>
+              <p className="text-white/80">Millions of songs at your fingertips</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Play className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Create Playlists</h3>
-              <p className="text-white/70 text-sm">Organize your favorite tracks</p>
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transform hover:scale-105 transition-all duration-300 hover:-rotate-1">
+              <div className="text-4xl mb-4 animate-pulse">📱</div>
+              <h3 className="text-xl font-bold text-white mb-3">Create Playlists</h3>
+              <p className="text-white/80">Organize your favorite tracks</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105">
-              <div className="w-12 h-12 bg-indigo-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Headphones className="w-6 h-6 text-white" />
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transform hover:scale-105 transition-all duration-300 hover:rotate-1">
+              <div className="text-4xl mb-4 animate-bounce" style={{ animationDelay: "0.5s" }}>
+                ⬇️
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Download</h3>
-              <p className="text-white/70 text-sm">Save songs for offline listening</p>
+              <h3 className="text-xl font-bold text-white mb-3">Download</h3>
+              <p className="text-white/80">Listen offline anytime</p>
             </div>
           </div>
+
+          {/* Floating Elements */}
+          <div
+            className="absolute top-1/4 right-10 text-6xl animate-spin opacity-20"
+            style={{ animationDuration: "10s" }}
+          >
+            🎧
+          </div>
+          <div className="absolute bottom-1/4 left-10 text-5xl animate-bounce opacity-30">🎤</div>
         </div>
       )}
 
-      {/* Modals and User Components */}
+      {/* Modals */}
       {isLoginOpen && <Login successLogin={handleLoginSuccess} typeAction={type} close={() => setIsLoginOpen(false)} />}
-      {isLogin && <UsernameAvatar />}
+      {isLogin && <Username_avatar />}
+
+      <style>{`
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-20px); }
+                }
+                .animate-float {
+                    animation: float 3s ease-in-out infinite;
+                }
+            `}</style>
     </div>
   )
 }
 
 export default HomePage
+
+
+
 
 
 
