@@ -24,7 +24,9 @@ namespace Music.Api.Controllers
         {
             return await _singerService.GetAllAsync();
         }
-        [HttpGet("id/{id:int}")]
+        //[HttpGet("id/{id:int}")]
+
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Singer>> GetById(int id)
         {
             var singer = await _singerService.GetByIdAsync(id);
@@ -33,7 +35,8 @@ namespace Music.Api.Controllers
         }
 
 
-        [HttpGet("name/{name}")] 
+        //[HttpGet("name/{name}")] 
+        [HttpGet("by-name/{name}")]
         public async Task<ActionResult<Singer>> GetByName(string name)
         {
             var decodedName = Uri.UnescapeDataString(name); // פענוח השם
