@@ -328,7 +328,8 @@ export default function PlaylistPage() {
         name: newName,
         userId: context.user.id,
         songIds: [],
-      })
+      },
+       { withCredentials: true })
       setNewName("")
       fetchPlaylists()
     } catch {
@@ -345,7 +346,7 @@ export default function PlaylistPage() {
     try {
       const res = await axios.post(`https://server-dotnet.onrender.com/api/playlists/smart?userId=${context.user.id}`, {
         moodText,
-      })
+      }, { withCredentials: true })
       console.log("פלייליסט חכם נוצר:", res.data)
       setMoodText("")
       fetchPlaylists()
@@ -361,10 +362,14 @@ export default function PlaylistPage() {
     const songId = songSelections[playlistId]
     if (!songId) return
     try {
-      await axios.post(`https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs`, {
-        songId,
-      })
-      const res = await axios.get(`https://server-dotnet.onrender.com/api/playlists/${playlistId}`)
+      await axios.post(
+        `https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs`,
+        { songId }, { withCredentials: true }
+          );
+         
+      const res = await axios.get(`https://server-dotnet.onrender.com/api/playlists/${playlistId}`,
+        { withCredentials: true }
+      )
       setSelectedPlaylist(res.data)
       fetchPlaylists()
       setSongSelections((prev) => ({ ...prev, [playlistId]: null }))
@@ -375,7 +380,7 @@ export default function PlaylistPage() {
 
   const deleteSongFromPlaylist = async (playlistId: number, songId: number) => {
     try {
-      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs/${songId}`)
+      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs/${songId}`, { withCredentials: true })
       setSelectedPlaylist((prev) => (prev ? { ...prev, songs: prev.songs.filter((s) => s.id !== songId) } : prev))
       fetchPlaylists()
     } catch {
@@ -385,7 +390,7 @@ export default function PlaylistPage() {
 
   const deletePlaylist = async (id: number) => {
     try {
-      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${id}`)
+      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${id}`, { withCredentials: true })
       fetchPlaylists()
       setSelectedPlaylist(null)
     } catch {

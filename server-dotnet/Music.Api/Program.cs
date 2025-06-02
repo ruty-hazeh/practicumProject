@@ -46,9 +46,9 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    
-    
-    
+
+
+
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Scheme = "Bearer",
@@ -79,10 +79,12 @@ builder.Services.AddSwaggerGen(options =>
 
 //builder.Services.AddCors(options =>
 //{
-//    options.AddPolicy("AllowAll",
-//        policy => policy.AllowAnyOrigin()
+//    options.AddPolicy("AllowAll",policy =>
+//                  policy.AllowAnyOrigin()
 //                        .AllowAnyMethod()
 //                        .AllowAnyHeader());
+//                        .AllowCredentials()
+
 //});
 
 
@@ -92,14 +94,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll", policy =>
     {
         policy.WithOrigins(
-            "https://client-react-gu3s.onrender.com", 
+            "https://client-react-gu3s.onrender.com",
             "https://client-angular-1fw9.onrender.com",
             "http://localhost:3000", // React local dev
             "http://localhost:4200"  // Angular local dev
         )
+        .AllowCredentials()
         .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowCredentials();
+        .AllowAnyMethod();
     });
 });
 
@@ -171,7 +173,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
 .AddJwtBearer(options =>
 {
@@ -202,8 +204,8 @@ var app = builder.Build();
 
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}
 app.UseRouting();
 app.UseCors("AllowAll");
@@ -237,6 +239,6 @@ app.Use(async (context, next) =>
 
 
 app.MapControllers();
-app.MapGet("/", () => "Welcome to the Music API!"); 
+app.MapGet("/", () => "Welcome to the Music API!");
 
 app.Run();
