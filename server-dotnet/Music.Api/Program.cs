@@ -236,7 +236,12 @@ app.Use(async (context, next) =>
 //    await next();
 //});
 
-
+app.Use(async (context, next) =>
+{
+    var origin = context.Request.Headers["Origin"].ToString();
+    Console.WriteLine($"Origin: {origin}");
+    await next();
+});
 
 app.MapControllers();
 app.MapGet("/", () => "Welcome to the Music API!");
