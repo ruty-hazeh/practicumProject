@@ -90,14 +90,13 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        //policy.WithOrigins(
-        //    "https://client-react-gu3s.onrender.com",
-        //    "https://client-angular-1fw9.onrender.com",
-        //    "http://localhost:3000", // React local dev
-        //    "http://localhost:4200"  // Angular local dev
-        //)
-        policy.SetIsOriginAllowed(_ => true)
-              
+        policy.WithOrigins(
+            "https://client-react-gu3s.onrender.com",
+            "https://client-angular-1fw9.onrender.com",
+            "http://localhost:3000", // React local dev
+            "http://localhost:4200"  // Angular local dev
+        )
+
        .AllowCredentials()
         .AllowAnyHeader()
         .AllowAnyMethod();
