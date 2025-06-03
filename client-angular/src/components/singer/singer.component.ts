@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-singer',
+  standalone: true,
   templateUrl: './singer.component.html',
     imports: [FormsModule, CommonModule],
   styleUrls: ['./singer.component.css']

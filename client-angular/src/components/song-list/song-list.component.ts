@@ -53,6 +53,7 @@ import { CommonModule } from '@angular/common';
   imports: [SongFormComponent, CommonModule],
   selector: 'app-song-list',
   templateUrl: './song-list.component.html',
+  styleUrls: ['./song-list.component.css']
 })
 export class SongListComponent implements OnInit {
   songs: Song[] = [];
