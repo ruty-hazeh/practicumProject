@@ -27,10 +27,7 @@ var openAiKey = builder.Configuration["OpenAI:ApiKey"];
 //    serverOptions.Limits.MaxRequestBodySize = 52428800; // 50MB
 //});
 
-builder.Services.Configure<FormOptions>(options =>
-{
-    options.MultipartBodyLengthLimit = 20 * 1024 * 1024; // 20MB
-});
+
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -93,13 +90,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins(
-            "https://client-react-gu3s.onrender.com",
-            "https://client-angular-1fw9.onrender.com",
-            "http://localhost:3000", // React local dev
-            "http://localhost:4200"  // Angular local dev
-        )
-        .AllowCredentials()
+        //policy.WithOrigins(
+        //    "https://client-react-gu3s.onrender.com",
+        //    "https://client-angular-1fw9.onrender.com",
+        //    "http://localhost:3000", // React local dev
+        //    "http://localhost:4200"  // Angular local dev
+        //)
+        policy.SetIsOriginAllowed(_ => true)
+              
+       .AllowCredentials()
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
