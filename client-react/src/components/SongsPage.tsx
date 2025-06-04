@@ -151,9 +151,7 @@ const SongsPage = () => {
         const fileNames: string[] = await res.json()
 
         const songRequests = fileNames.map((fileName) =>
-          fetch(`https://server-dotnet.onrender.com/api/song/by-name/${encodeURIComponent(fileName)}`,{
-            credentials: "include"
-          })
+          fetch(`https://server-dotnet.onrender.com/api/song/by-name/${encodeURIComponent(fileName)}`)
             .then((res) => (res.ok ? res.json() : null))
             .catch(() => null),
         )
@@ -171,9 +169,7 @@ const SongsPage = () => {
 
         // שליפת שמות זמרים לפי ID
         const singerFetches = singerIds.map((id) =>
-          fetch(`https://server-dotnet.onrender.com/api/singer/${id}`,{
-            credentials: "include"
-          })
+          fetch(`https://server-dotnet.onrender.com/api/singer/${id}`)
             .then((res) => (res.ok ? res.json() : null))
             .catch(() => null),
         )
@@ -198,9 +194,7 @@ const SongsPage = () => {
     if (singerName) {
       try {
         const response = await fetch(
-          `https://server-dotnet.onrender.com/api/singer/by-name/${encodeURIComponent(singerName)}`,{
-            credentials: "include"
-          }
+          `https://server-dotnet.onrender.com/api/singer/by-name/${encodeURIComponent(singerName)}`
         )
         if (!response.ok) throw new Error("Failed to fetch singer data")
         const singerData = await response.json()

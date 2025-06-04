@@ -328,8 +328,7 @@ export default function PlaylistPage() {
         name: newName,
         userId: context.user.id,
         songIds: [],
-      },
-       { withCredentials: true })
+      })
       setNewName("")
       fetchPlaylists()
     } catch {
@@ -346,7 +345,7 @@ export default function PlaylistPage() {
     try {
       const res = await axios.post(`https://server-dotnet.onrender.com/api/playlists/smart?userId=${context.user.id}`, {
         moodText,
-      }, { withCredentials: true })
+      })
       console.log("פלייליסט חכם נוצר:", res.data)
       setMoodText("")
       fetchPlaylists()
@@ -364,11 +363,11 @@ export default function PlaylistPage() {
     try {
       await axios.post(
         `https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs`,
-        { songId }, { withCredentials: true }
+        { songId }
           );
          
-      const res = await axios.get(`https://server-dotnet.onrender.com/api/playlists/${playlistId}`,
-        { withCredentials: true }
+      const res = await axios.get(`https://server-dotnet.onrender.com/api/playlists/${playlistId}`
+       
       )
       setSelectedPlaylist(res.data)
       fetchPlaylists()
@@ -380,7 +379,7 @@ export default function PlaylistPage() {
 
   const deleteSongFromPlaylist = async (playlistId: number, songId: number) => {
     try {
-      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs/${songId}`, { withCredentials: true })
+      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${playlistId}/songs/${songId}`)
       setSelectedPlaylist((prev) => (prev ? { ...prev, songs: prev.songs.filter((s) => s.id !== songId) } : prev))
       fetchPlaylists()
     } catch {
@@ -390,7 +389,7 @@ export default function PlaylistPage() {
 
   const deletePlaylist = async (id: number) => {
     try {
-      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${id}`, { withCredentials: true })
+      await axios.delete(`https://server-dotnet.onrender.com/api/playlists/${id}`)
       fetchPlaylists()
       setSelectedPlaylist(null)
     } catch {
