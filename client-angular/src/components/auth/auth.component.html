@@ -44,19 +44,19 @@
 
       <form [formGroup]="SignInForm" (ngSubmit)="Submit()" class="auth-form">
         <div class="form-group">
-          <label for="username" class="form-label">שם משתמש</label>
+          <label for="name" class="form-label">שם משתמש</label>
           <div class="input-container">
             <span class="input-icon">👤</span>
             <input 
-              id="username"
+              id="name"
               type="text" 
               placeholder="הזן שם משתמש" 
-              formControlName="username"
+              formControlName="name"
               class="form-input"
-              [class.error]="SignInForm.get('username')?.invalid && SignInForm.get('username')?.touched"
+              [class.error]="SignInForm.get('name')?.invalid && SignInForm.get('name')?.touched"
             >
           </div>
-          <div class="error-message" *ngIf="SignInForm.get('username')?.invalid && SignInForm.get('username')?.touched">
+          <div class="error-message" *ngIf="SignInForm.get('name')?.invalid && SignInForm.get('name')?.touched">
             שם משתמש הוא שדה חובה
           </div>
         </div>

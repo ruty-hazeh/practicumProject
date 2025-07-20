@@ -97,9 +97,9 @@ export class AuthComponent implements OnInit {
 
   Submit() {
     if (this.SignInForm.valid) {
-      const { username, password } = this.SignInForm.value as { username: string; password: string };
+      const { name, password } = this.SignInForm.value as { name: string; password: string };
 
-      this.authService.login({ username, password }).subscribe({
+      this.authService.login({ name, password }).subscribe({
         next: () => {
           this.router.navigate(['/dashboard']);
         
