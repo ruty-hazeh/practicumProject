@@ -81,7 +81,7 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object // ✅ שימוש נכון ב-PLATFORM_ID
   ) {}
 
-  login(credentials: { name: string, password: string }): Observable<any> {
+  login(credentials: { username: string, password: string }): Observable<any> {
     return this.http.post<{ token: string }>(`${this.baseUrl}/login`, credentials).pipe(
       tap(response => {
         if (response.token && isPlatformBrowser(this.platformId)) {
